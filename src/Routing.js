@@ -1,13 +1,14 @@
 import React from 'react'
 import {Routes,Route} from 'react-router-dom' 
-import Register from "./Pages/Register";
-import OtpVerification from './Pages/OtpVerification';
-import Login from './Pages/Login';
-import ForgotPassword from './Pages/ForgotPassword';
-import ChangePassword from './Pages/ChangePassword';
+import Register from "./Pages/Authentication/Register";
+import OtpVerification from "./Pages/Authentication/OtpVerification";
+import Login from "./Pages/Authentication/Login";
+import ForgotPassword from "./Pages/Authentication/ForgotPassword";
+import ChangePassword from "./Pages/Authentication/ChangePassword";
+import Home from './Pages/Home';
 
 
-export default function Routing() {
+const Routing=()=> {
   return (
     <Routes>
       <Route exact path="/" element={<Register />} />
@@ -15,6 +16,9 @@ export default function Routing() {
       <Route exact path="/login" element={<Login />} />
       <Route exact path="/forgot-password" element={<ForgotPassword />} />
       <Route exact path="/change-password" element={<ChangePassword />} />
+      <Route exact path="/home" element={<Home />} />
     </Routes>
   );
 }
+
+export default Routing; 

@@ -19,7 +19,9 @@ export default function InputText({
   const [inputType, setinputType] = useState(
     type === "phonenumber" ? "number" : type
   );
-
+  const passwordStyle = type === 'password' ? "placeholder:translate-y-[3px]" : ""
+  // const phoneStyle =
+    // type === "phonenumber" ? "placeholder:translate-y-[0px]" : "";
   const handleEyeClick = () => {
     if (imgSrc === "assets/images/login/Eye.png") {
       setImgSrc("assets/images/login/EyeVisible.png");
@@ -46,21 +48,21 @@ export default function InputText({
         type={inputType}
         placeholder={placeholder}
         disable={disable}
-        className={`border-[2px] opacity-100 rounded-[5px] border-shadeGray active:border-shadeGray hover:border-shadeGray  py-[10px]  bg-white w-full outline-none placeholder-placeholderGray  ${
+        className={`border-[2px] opacity-100 rounded-[5px] border-shadeGray active:border-shadeGray hover:border-shadeGray  py-[10px]  bg-white w-full outline-none placeholder-placeholderGray placeholder:font-BasicSansLight text-[15px] ${passwordStyle}  ${
           noIcon ? "no-icon " : " "
         } ${
           type === "phonenumber" ? "pl-[40px] " : "pl-[15px] "
         } ${customInputStyle}`}
       />
       {type === "phonenumber" && (
-        <span className="text-placeholderGray absolute top-[50%] translate-y-[10%] left-[10px]">
+        <span className="text-placeholderGray absolute top-[50%] translate-y-[0px] left-[10px]">
           +1
         </span>
       )}
       {type === "password" && (
         <span
           onClick={handleEyeClick}
-          className="text-placeholderGray absolute top-[60%] right-[10px]"
+          className="text-placeholderGray absolute top-[65%] right-[10px] "
         >
           <img
             className="w-[15px] h-[10px]"

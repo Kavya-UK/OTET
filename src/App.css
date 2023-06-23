@@ -26,3 +26,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
     -webkit-appearance: none;
 }
+
+ /* input[type=checkbox] {
+  outline: 1px solid #008282;
+   border-radius: 20px;
+  border: 3px solid #008282;
+} */
+input:checked + div {  
+  @apply border-blue-500;  
+}  
+input:checked + div svg {  
+  @apply block;  
+}

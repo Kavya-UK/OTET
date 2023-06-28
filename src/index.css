@@ -14,3 +14,27 @@
   font-family: "BasicSansBold";
   src: url("./assets/fonts/BasicSans-Bold.otf");
 }
+@font-face {
+  font-family: "PoppinsRegular";
+  src: url("./assets/fonts/Poppins-Regular.otf");
+}
+@font-face {
+  font-family: "PoppinsItalic";
+  src: url("./assets/fonts/Poppins-Italic.otf");
+}
+
+@font-face {
+  font-family: "HenrietteBold";
+  src: url("./assets/fonts/Henriette-Bold.otf");
+}
+@font-face {
+  font-family: "BahnschriftRegular";
+  src: url("./assets/fonts/Bahnschrift-Regular.otf");
+}
+@font-face {
+  font-family: "PoppinsMedium";
+  src: url("./assets/fonts/Poppins-Medium.otf");
+}
+
+
+

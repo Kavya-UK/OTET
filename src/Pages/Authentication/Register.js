@@ -19,7 +19,7 @@ export default function Register() {
       <div className="col-span-5 lg:col-span-3 relative h-[100vh]">
         <div className="max-h-[82vh] overflow-y-auto">
           <div className="w-full flex sm:justify-end justify-center">
-            <div className="h-[130px] w-[130px] relative sm:right-[30px] top-[10px]  flex items-center justify-center">
+            <div className="h-[130px] w-[130px] relative sm:right-[30px] top-[10px] flex items-center justify-center">
               <img
                 className="w-[80%]"
                 src={require("../../assets/images/icons/Logo.png")}

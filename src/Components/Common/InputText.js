@@ -55,7 +55,7 @@ export default function InputText({
         } ${customInputStyle}`}
       />
       {type === "phonenumber" && (
-        <span className="text-placeholderGray absolute top-[50%] translate-y-[0px] left-[10px]">
+        <span className="text-placeholderGray absolute top-[56%] translate-y-[0px] left-[10px] ">
           +1
         </span>
       )}

@@ -6,7 +6,7 @@ import Login from "./Pages/Authentication/Login";
 import ForgotPassword from "./Pages/Authentication/ForgotPassword";
 import ChangePassword from "./Pages/Authentication/ChangePassword";
 import Home from './Pages/Home';
-
+import AboutUs from './Components/Common/AboutUs';
 
 const Routing=()=> {
   return (
@@ -17,6 +17,7 @@ const Routing=()=> {
       <Route exact path="/forgot-password" element={<ForgotPassword />} />
       <Route exact path="/change-password" element={<ChangePassword />} />
       <Route exact path="/home" element={<Home />} />
+      <Route exact path="/about-us" element={<AboutUs />} />
     </Routes>
   );
 }

@@ -45,7 +45,7 @@ export default function InputSelect({
       </select>
       <label htmlFor={name} className="">
         <img
-          className="w-[12px] h-[10px] absolute top-[60%] right-[20px]"
+          className="w-[12px] h-[10px] absolute top-[65%] right-[20px]"
           src={require("../../assets/images/login/GrayDropdown.png")}
           alt="drop"
         />

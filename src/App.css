@@ -38,3 +38,20 @@ input:checked + div {
 input:checked + div svg {  
   @apply block;  
 }
+
+.footer-link {
+  min-height: 0px;
+  visibility: hidden;
+  position: absolute;
+  padding: 0px;
+}
+
+.footer-link.expand {
+  min-height: 75px;
+  position: relative;
+  visibility:visible;
+  border-radius: 4px;
+  padding: 10px;
+  padding-left: 30px;
+  transition: all 1s ease;
+}

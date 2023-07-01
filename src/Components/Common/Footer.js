@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { TiSocialFacebook, TiSocialTwitter } from "react-icons/ti";
 import { AiOutlineInstagram } from "react-icons/ai";
 import {TfiYoutube} from "react-icons/tfi"
+import FooterMobile from './FooterMobile';
 
 export default function Footer() {
   return (
     <div className="bg-cyanBlue py-[40px] px-[40px]">
-      <div className="  grid grid-cols-5 gap-9 mt-[40px]">
+      <div className="hidden sm:grid grid-cols-5 gap-9 mt-[40px]">
         <div className="col-span-2 lg:col-span-1">
           <h3 className=" font-BasicSansBold text-[16px] lg:text-[20px] xl:text-[25px] tracking-[0.87px] font-bold mb-[20px]">
             Holmeddoc
@@ -99,6 +100,9 @@ export default function Footer() {
             />
           </div>
         </div>
+      </div>
+      <div className="block sm:hidden">
+        <FooterMobile />
       </div>
       <p className=" font-BasicSansLight text-[14px] lg:text-[18px] xl:text-[20px] tracking-[0.9px] text-black mt-[50px]">
         The content provided here or elsewhere on the Holmeddoc website, mobile

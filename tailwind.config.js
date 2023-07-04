@@ -38,6 +38,9 @@ module.exports = {
         darkGrayish: "#70707091",
         mustardShade: "#C58B36",
       },
+      boxShadow: {
+        "3xl": "0px 3px 6px #00000029",
+      },
     },
   },
   plugins: [],

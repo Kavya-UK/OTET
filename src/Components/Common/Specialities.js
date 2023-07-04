@@ -1,8 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import SpecialityCard from "../Common/SpecialityCard"
 import {useSelector} from "react-redux";
 
 export default function Specialities() {
+  const navigate=useNavigate();
 const speciality = useSelector(
   (state) => state.speciality.featuredSpecialityList
 );
@@ -15,10 +17,13 @@ return (
     <p className="text-[24px] lg:text-[33px] font-BasicSansBold text-codGray tracking-[5.94px] font-bold text-center mt-[20px]">
       15 + Specialities
     </p>
-    <p className="text-mustardYellow text-[18px] sm:text-[24px] lg:text-[33px] font-BasicSans tracking-[5.94px] flex justify-end items-end mr-[30px]">
+    <p
+      className="text-mustardYellow text-[18px] sm:text-[24px] lg:text-[33px] font-BasicSans tracking-[5.94px] flex justify-end items-end mr-[30px]"
+      onClick={() => navigate("/all-speciality")}
+    >
       See More
     </p>
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 my-[90px] px-[40px] sm:px-[70px]">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 my-[40px] px-[40px] sm:px-[70px]">
       {FeatureSpeciality.map((items) => {
         return (
           <SpecialityCard

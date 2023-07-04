@@ -7,7 +7,9 @@ import ForgotPassword from "./Pages/Authentication/ForgotPassword";
 import ChangePassword from "./Pages/Authentication/ChangePassword";
 import Home from './Pages/Home';
 import AboutUs from './Components/Common/AboutUs';
-
+import AllSpeciality from './Components/Common/AllSpeciality';
+import BrowseDoctors from './Components/Common/BrowseDoctor';
+import BookAppointment from './Components/Common/BookAppointment';
 const Routing=()=> {
   return (
     <Routes>
@@ -17,7 +19,9 @@ const Routing=()=> {
       <Route exact path="/forgot-password" element={<ForgotPassword />} />
       <Route exact path="/change-password" element={<ChangePassword />} />
       <Route exact path="/home" element={<Home />} />
+      <Route exact path="/all-speciality" element={<AllSpeciality />} />
       <Route exact path="/about-us" element={<AboutUs />} />
+      <Route exact path="/browse-doctors" element={<BrowseDoctors />} />
     </Routes>
   );
 }

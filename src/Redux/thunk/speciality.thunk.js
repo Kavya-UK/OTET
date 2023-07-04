@@ -20,7 +20,7 @@ export const fetchFeaturedSpeciality = createAsyncThunk(
   }
 );
 export const fetchSpeciality = createAsyncThunk("allSpeciality", async () => {
-  try {
+try {
     const response = await axios.post(
       `${BASE_URL}/patient/master/speciality`,
       {},

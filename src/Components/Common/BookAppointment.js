@@ -6,6 +6,8 @@ import Footer from "../Common/Footer";
 import { fetchSpeciality } from "../../Redux/thunk/speciality.thunk";
 import { fetchLocation } from "../../Redux/thunk/location.thunk";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchConditions } from "../../Redux/thunk/conditions.thunk";
+
 const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
   console.log(value);
   let setValue = value;
@@ -36,15 +38,18 @@ export default function BookAppointment() {
   const specialityList = useSelector(
     (state) => state.speciality.specialityList
   );
+  const conditionsList = useSelector(
+    (state) => state.conditions.conditionsList
+  );
   useEffect(() => {
     dispatch(fetchSpeciality());
     dispatch(fetchLocation());
+    dispatch(fetchConditions());
   }, []);
 
-  
   const areasList = useSelector((state) => state.locations.areas);
 
-  const [allList, setAllList] = useState({ speciality: [] });
+  const [allList, setAllList] = useState({ speciality: [], conditions: [] });
   const [showSpecDropdown, setShowSpecDropdown] = useState(false);
   const [showAreasDropdown, setShowAreasDropdown] = useState(false);
   const [specValue, setSpecValue] = useState("");
@@ -53,8 +58,9 @@ export default function BookAppointment() {
   useEffect(() => {
     setAllList({
       speciality: specialityList,
+      conditions: conditionsList,
     });
-  }, [specialityList]);
+  }, [specialityList, conditionsList]);
 
   const handleLocSearch = (e) => {
     const searchText = e.target.value;
@@ -74,10 +80,19 @@ export default function BookAppointment() {
         return spec;
       }
     });
-  
+    const filterCond = conditionsList.filter((cond) => {
+      if (
+        cond.medical_condition_name
+          .toLowerCase()
+          .includes(searchText.toLowerCase())
+      ) {
+        return cond;
+      }
+    });
     setShowSpecDropdown(!!filterSpec.length);
     setAllList({
       speciality: filterSpec,
+      conditions: filterCond,
     });
   };
 
@@ -109,6 +124,7 @@ export default function BookAppointment() {
     setShowSpecDropdown(true);
     setAllList({
       speciality: specialityList,
+      conditions: conditionsList,
     });
   };
 
@@ -182,7 +198,7 @@ export default function BookAppointment() {
               <div className="h-[64px] w-full flex items-center justify-center">
                 <input
                   className="h-full w-full rounded-[5px] border-shadeBlue px-[16px] outline-none placeholder:text-[20px] placeholder:font-thin placeholder:tracking-[3px] bg-white border-opacity-80  rounded-r-none  border-y border-l"
-                  placeholder="Specialty, Condition"
+                  placeholder="Specialty, Condition, Doctor..."
                   type="text"
                   onBlur={handleSpecOnBlur}
                   onFocus={handleSpecFocusIn}
@@ -226,10 +242,32 @@ export default function BookAppointment() {
                     alt="loading"
                   />
                 )}
+                <li className="font-BasicSans text-eastBayLight">Conditions</li>
+                {allList.conditions.length ? (
+                  allList.conditions.map((spec) => {
+                    return (
+                      <li
+                        className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
+                        onClick={() =>
+                          handleSpecSelection(spec.medical_condition_name)
+                        }
+                        key={spec.id}
+                      >
+                        {spec.medical_condition_name}
+                      </li>
+                    );
+                  })
+                ) : (
+                  <img
+                    className="relative top-[80px] left-[180px] w-[100px]"
+                    src={require("../../assets/images/cat-loading.gif")}
+                    alt="loading"
+                  />
+                )}
               </ul>
             </div>
           </div>
-
+          
           <div className="flex flex-col items-start  font-basic-sans-regular ">
             <div className="relative w-full">
               <ReactDatePicker
@@ -242,6 +280,7 @@ export default function BookAppointment() {
                 closeOnScroll={true}
               />
             </div>
+            {/* </div> */}
           </div>
           <div className="space-y-2">
             <label className="text-[20px] tracking-[3px] text-gray-400">

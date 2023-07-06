@@ -10,8 +10,7 @@ import "react-datepicker/dist/react-datepicker.css";
 const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
   console.log(value);
   let setValue = value;
-  if(value === "")
-    setValue="Select Date"
+  if (value === "") setValue = "Select Date";
   return (
     <div className="flex justify-between items-center w-full">
       <Calendar
@@ -40,10 +39,12 @@ export default function HomeBanner() {
   const specialityList = useSelector(
     (state) => state.speciality.specialityList
   );
- 
+  const conditionsList = useSelector(
+    (state) => state.conditions.conditionsList
+  );
   const areasList = useSelector((state) => state.locations.areas);
 
-  const [allList, setAllList] = useState({ speciality: [] });
+  const [allList, setAllList] = useState({ speciality: [], conditions: [] });
   const [showSpecDropdown, setShowSpecDropdown] = useState(false);
   const [showAreasDropdown, setShowAreasDropdown] = useState(false);
   const [specValue, setSpecValue] = useState("");
@@ -53,8 +54,9 @@ export default function HomeBanner() {
   useEffect(() => {
     setAllList({
       speciality: specialityList,
+      conditions: conditionsList,
     });
-  }, [specialityList]);
+  }, [specialityList, conditionsList]);
 
   const handleLocSearch = (e) => {
     const searchText = e.target.value;
@@ -74,10 +76,19 @@ export default function HomeBanner() {
         return spec;
       }
     });
- 
+    const filterCond = conditionsList.filter((cond) => {
+      if (
+        cond.medical_condition_name
+          .toLowerCase()
+          .includes(searchText.toLowerCase())
+      ) {
+        return cond;
+      }
+    });
     setShowSpecDropdown(!!filterSpec.length);
     setAllList({
       speciality: filterSpec,
+      conditions: filterCond,
     });
   };
 
@@ -109,6 +120,7 @@ export default function HomeBanner() {
     setShowSpecDropdown(true);
     setAllList({
       speciality: specialityList,
+      conditions: conditionsList,
     });
   };
 
@@ -230,26 +242,44 @@ export default function HomeBanner() {
                       alt="loading"
                     />
                   )}
+                  <li className="font-BasicSans text-eastBayLight">
+                    Conditions
+                  </li>
+                  {allList.conditions.length ? (
+                    allList.conditions.map((spec) => {
+                      return (
+                        <li
+                          className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
+                          onClick={() =>
+                            handleSpecSelection(spec.medical_condition_name)
+                          }
+                          key={spec.id}
+                        >
+                          {spec.medical_condition_name}
+                        </li>
+                      );
+                    })
+                  ) : (
+                    <img
+                      className="relative top-[80px] left-[180px] w-[100px]"
+                      src={require("../../assets/images/cat-loading.gif")}
+                      alt="loading"
+                    />
+                  )}
                 </ul>
               </div>
             </div>
             <div className="col-span-3 sm:col-span-1 flex justify-around items-center ">
               <div className="">
-               
-                  <DatePicker
-                    className="bg-white font-Basicsans sm:text-[20px] lg:text-[24px] xl:text-[28px] text-codGray tracking-[5.04px] outline-none"
-                    dateFormat="MMMM d, yyyy"
-                    selected={startDate}
-                    minDate={new Date()}
-                    onChange={(date) => setStartDate(date)}
-                    customInput={<DateInputComponent />}
-                    closeOnScroll={true}
-                  />
-                  
-
-                {/* <span className="font-Basicsans sm:text-[20px] lg:text-[24px] xl:text-[28px] text-codGray tracking-[5.04px] ">
-                  Today
-                </span> */}
+                <DatePicker
+                  className="bg-white font-Basicsans sm:text-[20px] lg:text-[24px] xl:text-[28px] text-codGray tracking-[5.04px] outline-none"
+                  dateFormat="MMMM d, yyyy"
+                  selected={startDate}
+                  minDate={new Date()}
+                  onChange={(date) => setStartDate(date)}
+                  customInput={<DateInputComponent />}
+                  closeOnScroll={true}
+                />
               </div>
             </div>
           </div>

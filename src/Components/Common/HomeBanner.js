@@ -40,12 +40,10 @@ export default function HomeBanner() {
   const specialityList = useSelector(
     (state) => state.speciality.specialityList
   );
-  const conditionsList = useSelector(
-    (state) => state.conditions.conditionsList
-  );
+ 
   const areasList = useSelector((state) => state.locations.areas);
 
-  const [allList, setAllList] = useState({ speciality: [], conditions: [] });
+  const [allList, setAllList] = useState({ speciality: [] });
   const [showSpecDropdown, setShowSpecDropdown] = useState(false);
   const [showAreasDropdown, setShowAreasDropdown] = useState(false);
   const [specValue, setSpecValue] = useState("");
@@ -55,9 +53,8 @@ export default function HomeBanner() {
   useEffect(() => {
     setAllList({
       speciality: specialityList,
-      // conditions: conditionsList,
     });
-  }, [specialityList, conditionsList]);
+  }, [specialityList]);
 
   const handleLocSearch = (e) => {
     const searchText = e.target.value;
@@ -77,19 +74,10 @@ export default function HomeBanner() {
         return spec;
       }
     });
-    // const filterCond = conditionsList.filter((cond) => {
-    //   if (
-    //     cond.medical_condition_name
-    //       .toLowerCase()
-    //       .includes(searchText.toLowerCase())
-    //   ) {
-    //     return cond;
-    //   }
-    // });
+ 
     setShowSpecDropdown(!!filterSpec.length);
     setAllList({
       speciality: filterSpec,
-      // conditions: filterCond,
     });
   };
 
@@ -98,7 +86,6 @@ export default function HomeBanner() {
     setShowAreasDropdown(false);
   };
   const handleSpecSelection = (name) => {
-    console.log("TESTTS", name);
     setSpecValue(name);
     setShowSpecDropdown(false);
   };
@@ -109,7 +96,6 @@ export default function HomeBanner() {
     }, 100);
   };
   const handleSpecOnBlur = () => {
-    console.log("TESTTS HAHAHHAHHA");
     setSpecValue("");
     setTimeout(() => {
       setShowSpecDropdown(false);
@@ -119,7 +105,6 @@ export default function HomeBanner() {
     setLocValue("");
   };
   const handleSpecFocusIn = () => {
-    console.log("TESyyyyyTTS");
     setSpecValue("");
     setShowSpecDropdown(true);
     setAllList({

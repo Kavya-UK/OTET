@@ -22,6 +22,7 @@ const Routing=()=> {
       <Route exact path="/all-speciality" element={<AllSpeciality />} />
       <Route exact path="/about-us" element={<AboutUs />} />
       <Route exact path="/browse-doctors" element={<BrowseDoctors />} />
+      <Route exact path="/book-appointment" element={<BookAppointment />} />
     </Routes>
   );
 }

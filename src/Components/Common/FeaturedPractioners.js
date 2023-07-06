@@ -1,6 +1,13 @@
-import React from 'react'
-import HomeCaurosal from '../home/HomeCaurosal';
+import React, { useEffect } from "react";
+import HomeCaurosal from "../home/HomeCaurosal";
+import { fetchFeaturedDoctors } from "../../Redux/thunk/featuredDoctor.thunk";
+import { useDispatch } from "react-redux";
 export default function FeaturedPractioners() {
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(fetchFeaturedDoctors());
+  }, []);
   return (
     <div className="border-b-[2px] mt-[50px] mb-[30px] pb-[80px]">
       <div className="grid grid-cols-2 gap-3 mt-[20px] px-[15px] sm:px-[40px]">

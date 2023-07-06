@@ -3,7 +3,7 @@ import { RxCross2 } from "react-icons/rx";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchBrowseDoctors } from "../../Redux/thunk/browsedoctor.thunk";
 
-export default function BrowseDoctors({setBrowseFlag}) {
+export default function BrowseDoctors({ closeModal }) {
   const dispatch = useDispatch();
   const browsedoctors = useSelector((state) => state.browsedocs.docList);
   useEffect(() => {
@@ -11,14 +11,14 @@ export default function BrowseDoctors({setBrowseFlag}) {
   }, []);
 
   const onModalClick = (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      return false;
-  }
-  
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  };
+
   return (
     <div
-      onClick={() => setBrowseFlag(false)}
+      onClick={() => closeModal(false)}
       className="bg-gray-600 bg-opacity-50  h-[100vh] w-full flex justify-center z-50 fixed"
     >
       <div
@@ -30,7 +30,7 @@ export default function BrowseDoctors({setBrowseFlag}) {
             Browse Doctors
           </h3>
           <RxCross2
-            onClick={() => setBrowseFlag(false)}
+            onClick={() => closeModal(false)}
             className="text-[30px] relative top-[6px]"
           />
         </div>

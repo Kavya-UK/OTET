@@ -4,13 +4,14 @@ import BrowseDoctors from './BrowseDoctor';
 export default function Header() {
   const navigate=useNavigate();
   const [browseFlag, setBrowseFlag] = useState(false)
+  
   return (
     <>
-      {browseFlag && <BrowseDoctors setBrowseFlag={setBrowseFlag} />}
+      {browseFlag && <BrowseDoctors closeModal={setBrowseFlag} />}
 
       <div className=" py-[30px] xl:pl-[75px] lg:pl-[50px] pl-[30px] xl:pr-[50px] lg:pr-[30px] pr-[10px] justify-between sm:flex hidden header-main">
         <div className="flex flex-row">
-          <div className="">
+          <div onClick={() => navigate("/book-appointment")}>
             <Link className="border-r-[1px] border-hexGray pr-[20px] font-BasicSans font-semibold tracking-[3.6px] text-darkBlack sm:text-[12px] lg:text-[14px] xl:text-[20px]">
               MAKE AN APPOINTMENT
             </Link>

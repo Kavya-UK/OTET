@@ -37,6 +37,7 @@ module.exports = {
         Grayish: "#F0F0F0",
         darkGrayish: "#70707091",
         mustardShade: "#C58B36",
+        blueish: "#0082822B",
       },
       boxShadow: {
         "3xl": "0px 3px 6px #00000029",

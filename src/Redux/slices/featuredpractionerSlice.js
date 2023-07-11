@@ -1,7 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { fetchFeaturedDoctors } from '../thunk/featuredDoctor.thunk';
+import {
+  fetchFeaturedDoctors,
+  fetchDoctorData,
+} from "../thunk/featuredDoctor.thunk";
 const initialState = {
-featuredDocs:[]
+featuredDocs:[],
+doctorData:{},
+totalCount: 0
 }
 
 const featuredpractionerSlice = createSlice({
@@ -10,7 +15,11 @@ const featuredpractionerSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchFeaturedDoctors.fulfilled, (state, action) => {
-      state.featuredDocs = [...action.payload];
+      state.featuredDocs = [...action.payload.result];
+      state.totalCount = action.payload.totalCount;
+    });
+    builder.addCase(fetchDoctorData.fulfilled, (state, action) => {
+      state.doctorData = { ...action.payload };
     });
   },
 });

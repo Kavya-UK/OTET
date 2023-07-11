@@ -5,21 +5,14 @@ import Footer from "../Common/Footer"
 export default function AboutUs() {
   return (
     <>
-      <Header />
+      <Header setDropShadow={true} />
       <div className="h-[550px] w-full hidden sm:block  relative">
         <img
-          className="absolute -z-10 w-full h-full object-contain"
+          className="absolute -z-10 w-full h-full object-cover"
           src={require("../../assets/images/about/aboutUsBg.png")}
           alt="about-us"
         />
-        <div>
-          <img
-            className="xl:w-[250px] xl:h-[250px] lg:w-[200px] lg:h-[200px] w-[180px] h-[180px] relative left-[50%] lg:-translate-y-[40%] -translate-x-[50%] transition-all duration-[0.5s] ease-[ease]"
-            src={require("../../assets/images/home/Logo.png")}
-            alt=""
-          />
-        </div>
-        <h1 className=" font-PoppinsMedium text-[45px] pl-[30px] tracking-[10px] text-black z-10">
+       <h1 className=" font-PoppinsMedium text-[45px] pl-[30px] tracking-[10px] text-black z-10 pt-[150px]">
           About Us
         </h1>
       </div>

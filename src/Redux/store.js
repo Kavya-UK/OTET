@@ -5,6 +5,7 @@ import locationSlice from "./slices/locationSlice";
 import diseasesSlice from "./slices/diseasesSlice";
 import browsedoctorSlice from "./slices/browsedoctorSlice";
 import featuredpractionerSlice from "./slices/featuredpractionerSlice";
+import doctorfilterSlice from "./slices/doctorfilterSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     diseases: diseasesSlice,
     browsedocs: browsedoctorSlice,
     featuredpractioner: featuredpractionerSlice,
+    doctorfilter: doctorfilterSlice,
   },
 });

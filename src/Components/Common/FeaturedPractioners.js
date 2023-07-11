@@ -6,13 +6,13 @@ export default function FeaturedPractioners() {
   const dispatch = useDispatch();
   
   useEffect(() => {
-    dispatch(fetchFeaturedDoctors());
+    dispatch(fetchFeaturedDoctors({paginate:3}));
   }, []);
   return (
     <div className="border-b-[2px] mt-[50px] mb-[30px] pb-[80px]">
       <div className="grid grid-cols-2 gap-3 mt-[20px] px-[15px] sm:px-[40px]">
         <div className="col-span-2 lg:col-span-1 flex items-center flex-col justify-center">
-          <h1 className="text-[30px] sm:text-[38px] xl:text-[48px] font-BasicSansBold text-codGray font-bold tracking-[8.1px] mb-[40px] text-center lg:text-left">
+          <h1 className="text-[30px] sm:text-[38px] xl:text-[42px] font-BasicSans font-semibold text-codGray leading-[70px] tracking-[8.1px] mb-[40px] text-center lg:text-left">
             Featured Holistic Practitioners
           </h1>
           <HomeCaurosal />

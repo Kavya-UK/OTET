@@ -14,15 +14,9 @@ export default function AllSpeciality() {
    },[]);
   return (
     <>
-      <Header />
-      <div className="w-full h-[800px] bg-no-repeat">
-        <div className=" ">
-          <img
-            className="xl:w-[250px] xl:h-[250px] lg:w-[200px] lg:h-[200px] w-[180px] h-[180px] relative left-[50%] lg:-translate-y-[40%] -translate-x-[50%] transition-all duration-[0.5s] ease-[ease]  shadow-[0px_15px_10px_-15px_#111] shadow-black rounded-[50%]"
-            src={require("../../assets/images/home/Logo.png")}
-            alt=""
-          />
-        </div>
+      <Header setDropShadow={true} />
+      <div className="w-full h-[800px] bg-no-repeat pt-[200px]">
+       
         <div className="text-center px-[90px] relative top-[-70px]">
           <h1 className="text-codGray text-[40px] font-BasicSansBold tracking-[9px] font-semibold ">
             Speciality

@@ -1,5 +1,4 @@
 import React, { forwardRef, useEffect, useState } from "react";
-import AppointmentHeader from "./AppointmentHeader";
 import ReactDatePicker from "react-datepicker";
 import { BiCalendar } from "react-icons/bi";
 import Footer from "../Common/Footer";
@@ -7,6 +6,7 @@ import { fetchSpeciality } from "../../Redux/thunk/speciality.thunk";
 import { fetchLocation } from "../../Redux/thunk/location.thunk";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchConditions } from "../../Redux/thunk/conditions.thunk";
+import Header from "./Header";
 
 const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
   console.log(value);
@@ -130,7 +130,7 @@ export default function BookAppointment() {
 
   return (
     <>
-      <AppointmentHeader />
+      <Header setDropShadow={true} />
       <div className="relative flex items-center w-full justify-center">
         <div class="block w-[50rem] h-[20rem] rounded-br-full rounded-bl-full -z-10 bg-blueish absolute left-[50%] top-0 -translate-x-1/2"></div>
         <div className="w-[550px] space-y-4 bg-white mt-[80px] rounded-[6px] px-[25px] py-[50px]">
@@ -267,7 +267,7 @@ export default function BookAppointment() {
               </ul>
             </div>
           </div>
-          
+
           <div className="flex flex-col items-start  font-basic-sans-regular ">
             <div className="relative w-full">
               <ReactDatePicker

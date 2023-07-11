@@ -3,12 +3,10 @@ import { ReactComponent as SearchBar } from "../../assets/images/home/SearchBarI
 import { ReactComponent as Calendar } from "../../assets/images/home/Calendar.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchLocation } from "../../Redux/thunk/location.thunk";
-// import ReactDatePicker from "react-datepicker";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
-  console.log(value);
   let setValue = value;
   if (value === "") setValue = "Select Date";
   return (
@@ -19,7 +17,7 @@ const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
       />
 
       <button
-        className="font-Basicsans sm:text-[20px] lg:text-[24px] xl:text-[28px] text-codGray tracking-[5.04px] outline-none"
+        className="font-Basicsans text-[20px] text-codGray tracking-[5.04px] outline-none"
         onClick={onClick}
         ref={ref}
       >
@@ -125,37 +123,30 @@ export default function HomeBanner() {
   };
 
   return (
-    <div className="h-[800px] bg-cyanBlue w-full">
-      <div>
-        <img
-          className="xl:w-[250px] xl:h-[250px] lg:w-[200px] lg:h-[200px] w-[180px] h-[180px] relative left-[50%] lg:-translate-y-[40%] -translate-x-[50%] transition-all duration-[0.5s] ease-[ease]"
-          src={require("../../assets/images/home/Logo.png")}
-          alt=""
-        />
-      </div>
-      <h1 className="text-titleBlack text-[36px] sm:text-[48px] lg:text-[68px] font-PoppinsRegular pt-[5%] text-center tracking-[6.8px] font-normal mb-[15px] transition-all duration-[0.5s] ease-[ease]">
+    <div className="h-[calc(100vh_-_7rem)] bg-cyanBlue w-full pt-[180px]">
+      <h1 className="text-titleBlack text-[36px] sm:text-[48px] lg:text-[55px] font-PoppinsRegular text-center tracking-[6.8px] font-normal mb-[15px] transition-all duration-[0.5s] ease-[ease]">
         HOLISTIC
         <br className="sm:hidden block" />
         <img
           src={require("../../assets/images/home/M.png")}
           alt="title"
-          className="inline-block sm:ml-[40px] lg:ml-[30px] h-[56px] sm:h-[70px] lg:h-[95px] w-[35px] sm:w-[40px] lg:w-[59px] relative bottom-[5px] transition-all duration-[0.5s] ease-[ease]"
+          className="inline-block sm:ml-[40px] lg:ml-[30px] h-[56px] sm:h-[70px] lg:h-[75px] w-[35px] sm:w-[40px] lg:w-[49px] relative bottom-[5px] transition-all duration-[0.5s] ease-[ease] mr-[6px]"
         />
         EDICINE CONNECTING
       </h1>
-      <h3 className="text-[24px] sm:text-[36px] lg:text-[46px] font-PoppinsItalic text-titleBlack italic tracking-[8.28px] text-center">
+      <h3 className=" text-[30px] xl:text-[40px] font-PoppinsItalic text-black italic tracking-[5px] text-center">
         Mind. Body. Soul
       </h3>
-      <div className="grid grid-cols-12 rounded-[60px] sm:rounded-[87px] h-[184px] sm:h-[134px] border-[1px] bg-white mt-[90px] mx-[10px] sm:mx-[40px] transition-all duration-[0.5s] ease-[ease]">
-        <div className="col-span-10 sm:col-span-11">
-          <div className=" grid grid-cols-3 h-full">
-            <div className="col-span-3 sm:col-span-1 flex justify-around items-center relative">
+      <div className="grid grid-cols-12 rounded-[60px] sm:rounded-[87px] h-[100px]  border-[1px] bg-white mt-[90px] mx-[10px] sm:mx-[40px] xl:mx-[100px] transition-all duration-[0.5s] ease-[ease]">
+        <div className="col-span-10 sm:col-span-11 flex items-center  h-[100px] justify-center">
+          <div className=" grid grid-cols-3 ">
+            <div className="col-span-3 sm:col-span-1 flex justify-around items-center relative pl-[60px]">
               <input
                 onBlur={handleLocOnBlur}
                 onFocus={handleLocFocusIn}
                 onChange={handleLocSearch}
                 value={locValue}
-                className="outline-none w-[80%] p-[10px] font-BasicSans sm:text-[20px] lg:text-[24px] xl:text-[28px] text-codGray tracking-[5.04px] semi placeholder:text-gray-800 focus:placeholder:text-gray-400 placeholder:font-medium bg-white"
+                className="outline-none w-[80%] p-[10px] font-BasicSans text-[1.3rem] text-codGray tracking-[5px] semi placeholder:text-codGray focus:placeholder:text-codGray placeholder:font-medium bg-white"
                 placeholder="Location"
                 type="text"
               />
@@ -173,25 +164,19 @@ export default function HomeBanner() {
               >
                 <ul className="">
                   <li className="font-BasicSans text-eastBayLight">Areas</li>
-                  {areasList.length ? (
-                    areasList.map((area) => {
-                      return (
-                        <li
-                          className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
-                          onClick={() => handleLocSelection(area.city)}
-                          key={area.id}
-                        >
-                          {area.city}
-                        </li>
-                      );
-                    })
-                  ) : (
-                    <img
-                      className="relative top-[80px] left-[180px] w-[100px]"
-                      src={require("../../assets/images/cat-loading.gif")}
-                      alt="loading"
-                    />
-                  )}
+                  {areasList.length
+                    ? areasList.map((area) => {
+                        return (
+                          <li
+                            className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
+                            onClick={() => handleLocSelection(area.city)}
+                            key={area.id}
+                          >
+                            {area.city}
+                          </li>
+                        );
+                      })
+                    : null}
                 </ul>
               </div>
             </div>
@@ -201,7 +186,7 @@ export default function HomeBanner() {
                 onFocus={handleSpecFocusIn}
                 onChange={handleSpecSearch}
                 value={specValue}
-                className="outline-none w-[80%] p-[10px] font-BasicSans sm:text-[20px] lg:text-[24px] xl:text-[28px] text-codGray tracking-[5.04px] font-semibold placeholder:text-gray-800 focus:placeholder:text-gray-400 placeholder:font-medium bg-white"
+                className="outline-none w-[80%] p-[10px] font-BasicSans text-[1.3rem] text-codGray tracking-[5px] font-semibold placeholder:text-gray-800 focus:placeholder:text-gray-400 placeholder:font-medium bg-white"
                 placeholder="Speciality"
                 type="text"
               />
@@ -269,23 +254,24 @@ export default function HomeBanner() {
                 </ul>
               </div>
             </div>
-            <div className="col-span-3 sm:col-span-1 flex justify-around items-center ">
-              <div className="">
+            <div className="col-span-3 sm:col-span-1 flex justify-around items-center relative top-[5px]">
+              <div className="text-[20px]">
                 <DatePicker
-                  className="bg-white font-Basicsans sm:text-[20px] lg:text-[24px] xl:text-[28px] text-codGray tracking-[5.04px] outline-none"
+                  className="bg-white font-Basicsans text-[1.3rem] text-codGray tracking-[5px] outline-none"
                   dateFormat="MMMM d, yyyy"
                   selected={startDate}
                   minDate={new Date()}
                   onChange={(date) => setStartDate(date)}
                   customInput={<DateInputComponent />}
                   closeOnScroll={true}
+                  
                 />
               </div>
             </div>
           </div>
         </div>
-        <div className="col-span-2 sm:col-span-1 flex items-center">
-          <SearchBar className="w-[80%] xl:w-[100%]" />
+        <div className="col-span-2 sm:col-span-1 flex items-center h-[100px]">
+          <SearchBar className="w-[80%] xl:w-[90%]" />
         </div>
       </div>
     </div>

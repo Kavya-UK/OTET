@@ -10,6 +10,8 @@ import AboutUs from './Components/Common/AboutUs';
 import AllSpeciality from './Components/Common/AllSpeciality';
 import BrowseDoctors from './Components/Common/BrowseDoctor';
 import BookAppointment from './Components/Common/BookAppointment';
+import DoctorListing from "./Pages/DoctorListing"
+import DoctorsProfileContainer from "./Pages/DoctorsProfile";
 const Routing=()=> {
   return (
     <Routes>
@@ -23,6 +25,12 @@ const Routing=()=> {
       <Route exact path="/about-us" element={<AboutUs />} />
       <Route exact path="/browse-doctors" element={<BrowseDoctors />} />
       <Route exact path="/book-appointment" element={<BookAppointment />} />
+      <Route exact path="/doctor-listing" element={<DoctorListing />} />
+      <Route
+        exact
+        path="/doctor-profile"
+        element={<DoctorsProfileContainer />}
+      />
     </Routes>
   );
 }

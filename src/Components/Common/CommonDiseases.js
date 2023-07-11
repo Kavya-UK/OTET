@@ -34,7 +34,7 @@ export default function CommonDiseases() {
   }, []);
   return (
     <div className="h-[300px] w-full bg-cyanBlue border-[1px] border-Grayish">
-      <h1 className="text-codGray text-[30px] sm:text-[36px] lg:text-[44px] xl:text-[54px] font-BasicSansBold font-bold tracking-[6px] sm:tracking-[9.72px] mt-[30px] ml-[15px] sm:ml-[38px] text-center sm:text-left">
+      <h1 className="text-codGray text-[30px] sm:text-[36px] lg:text-[44px] xl:text-[42px] font-BasicSans font-bold tracking-[3px] leading-[70px] sm:tracking-[9.72px] mt-[50px] ml-[15px] sm:ml-[38px] text-center sm:text-left">
         Most common health concerns
       </h1>
       <div className="grid grid-cols-2 sm:grid-cols-4 mt-[50px]">

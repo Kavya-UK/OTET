@@ -14,7 +14,6 @@ import {
   fetchSpeciality,
 } from "../Redux/thunk/speciality.thunk";
 import { fetchConditions } from '../Redux/thunk/conditions.thunk';
-
 export default function Home() {
   const dispatch = useDispatch()
   useEffect(()=>{
@@ -25,8 +24,8 @@ export default function Home() {
   
   return (
     <>
-      <Header />
-      <HomeBanner />
+        <Header />
+        <HomeBanner />
       <Specialities />
       <CommonDiseases />
       <FeaturedPractioners />

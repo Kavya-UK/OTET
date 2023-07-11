@@ -2,14 +2,28 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { BASE_URL, headersprops, authUser } from "../constant";
 
-export const fetchFeaturedDoctors = createAsyncThunk("featuredDoctors", async () => {
+export const fetchFeaturedDoctors = createAsyncThunk("featuredDoctors", async (data) => {
   try {
-    const response = await axios.post(
-      `${BASE_URL}/patient/doctors`,
-      { paginate: 3 },
-      { headers: headersprops, auth: authUser }
-    );
-    return [...response?.data?.data?.result];
+    const response = await axios.post(`${BASE_URL}/patient/doctors`, data, {
+      headers: headersprops,
+      auth: authUser,
+    });
+    return {
+      result: [...response?.data?.data?.result],
+      totalCount: response?.data?.data?.total_count,
+    };
+  } catch (err) {
+    return err.message;
+  }
+});
+
+export const fetchDoctorData = createAsyncThunk("doctorData", async (data) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/patient/doctors/${data.url}`, {}, {
+      headers: headersprops,
+      auth: authUser,
+    });
+    return response?.data?.data?.result?.[0]
   } catch (err) {
     return err.message;
   }

@@ -28,3 +28,18 @@ export const fetchDoctorData = createAsyncThunk("doctorData", async (data) => {
     return err.message;
   }
 });
+export const fetchDoctorSlot = createAsyncThunk("slotAvailability", async (data) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/patient/slot_availability`,
+      {...data},
+      {
+        headers: headersprops,
+        auth: authUser,
+      }
+    );
+    return response?.data?.data?.result
+  } catch (err) {
+    return err.message;
+  }
+});

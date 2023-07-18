@@ -5,15 +5,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchLocation } from "../../Redux/thunk/location.thunk";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+import { useNavigate } from "react-router-dom";
 const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
   let setValue = value;
-  if (value === "") setValue = "Select Date";
+  if (value === "") setValue = "Today";
   return (
-    <div className="flex justify-between items-center w-full">
+    <div className="flex md:justify-between items-center w-full pl-[10px]">
       <Calendar
         onClick={onClick}
-        className="w-[15px] sm:w-auto relative -top-[5px] sm:top-0 mr-[15px]"
+        className="w-[15px] md:w-auto relative sm:top-[2px] lg:-top-[5px] mr-[20px] lg:mr-[15px] "
       />
 
       <button
@@ -25,15 +25,16 @@ const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
       </button>
       <img
         onClick={onClick}
-        className="ml-[15px] w-[12px] h-[12px] sm:w-[18px] sm:h-[18px] relative -top-[5px] sm:top-[4px] -right-[5px] sm:right-auto"
+        className="hidden md:block ml-[15px] w-[12px] h-[12px] sm:w-[18px] sm:h-[18px] relative -top-[5px] md:top-[4px] -right-[5px] md:right-auto"
         src={require("../../assets/images/home/WhiteDropdown.png")}
         alt="dropdown"
       />
     </div>
   );
 });
-export default function HomeBanner() {
+export default function HomeBanner({}) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const specialityList = useSelector(
     (state) => state.speciality.specialityList
   );
@@ -41,12 +42,13 @@ export default function HomeBanner() {
     (state) => state.conditions.conditionsList
   );
   const areasList = useSelector((state) => state.locations.areas);
-
   const [allList, setAllList] = useState({ speciality: [], conditions: [] });
   const [showSpecDropdown, setShowSpecDropdown] = useState(false);
   const [showAreasDropdown, setShowAreasDropdown] = useState(false);
   const [specValue, setSpecValue] = useState("");
+  const [specId, setSpecId] = useState("");
   const [locValue, setLocValue] = useState("");
+  const [locId, setLocId] = useState("");
   const [startDate, setStartDate] = useState("");
 
   useEffect(() => {
@@ -90,40 +92,64 @@ export default function HomeBanner() {
     });
   };
 
-  const handleLocSelection = (city) => {
+  const handleLocSelection = (city,id) => {
     setLocValue(city);
+    setLocId(id)
     setShowAreasDropdown(false);
   };
-  const handleSpecSelection = (name) => {
+  const handleSpecSelection = (name,id) => {
     setSpecValue(name);
+    setSpecId(id);
     setShowSpecDropdown(false);
   };
   const handleLocOnBlur = () => {
     setLocValue("");
+    setLocId("");
     setTimeout(() => {
       setShowAreasDropdown(false);
     }, 100);
   };
   const handleSpecOnBlur = () => {
     setSpecValue("");
+    setSpecId("");
     setTimeout(() => {
       setShowSpecDropdown(false);
     }, 100);
   };
   const handleLocFocusIn = () => {
     setLocValue("");
+    setLocId("");
   };
   const handleSpecFocusIn = () => {
+
     setSpecValue("");
+    setSpecId("");
     setShowSpecDropdown(true);
     setAllList({
       speciality: specialityList,
       conditions: conditionsList,
     });
   };
+  const handleSearch = () => {
+    let url = "/doctor-listing?";
+    if (locValue) {
+      url = `${url}area=${locValue}_${locId}&`;
+    }
+    if(specValue) {
+      url = `${url}specialty=${specValue}_${specId}&`;
+    }
+   if(startDate) {
+    const d = new Date(startDate).toLocaleDateString("fr-CA");
+    url = `${url}date=${d}`;
+   } else {
+    const d = new Date().toLocaleDateString("fr-CA");
+    url = `${url}date=${d}`;
+   }
+   navigate(url);
+  }
 
   return (
-    <div className="h-[calc(100vh_-_7rem)] bg-cyanBlue w-full pt-[180px]">
+    <div className="lg:h-[calc(100vh_-_7rem)] bg-cyanBlue w-full pt-[180px] pb-[40px]">
       <h1 className="text-titleBlack text-[36px] sm:text-[48px] lg:text-[55px] font-PoppinsRegular text-center tracking-[6.8px] font-normal mb-[15px] transition-all duration-[0.5s] ease-[ease]">
         HOLISTIC
         <br className="sm:hidden block" />
@@ -137,26 +163,20 @@ export default function HomeBanner() {
       <h3 className=" text-[30px] xl:text-[40px] font-PoppinsItalic text-black italic tracking-[5px] text-center">
         Mind. Body. Soul
       </h3>
-      <div className="grid grid-cols-12 rounded-[60px] sm:rounded-[87px] h-[100px]  border-[1px] bg-white mt-[90px] mx-[10px] sm:mx-[40px] xl:mx-[100px] transition-all duration-[0.5s] ease-[ease]">
-        <div className="col-span-10 sm:col-span-11 flex items-center  h-[100px] justify-center">
-          <div className=" grid grid-cols-3 ">
-            <div className="col-span-3 sm:col-span-1 flex justify-around items-center relative pl-[60px]">
+      <div className="grid grid-cols-12 rounded-[20px] lg:rounded-[87px] h-[250px] md:h-[100px]  border-[1px] bg-white mt-[90px] mx-[10px] md:mx-[40px] xl:mx-[100px] transition-all duration-[0.5s] ease-[ease]">
+        <div className=" col-span-12 md:col-span-11 flex items-center md:h-[100px] lg:justify-center">
+          <div className=" grid grid-cols-3 w-full pl-[20px] md:pl-0">
+            <div className="col-span-3 md:col-span-1 flex justify-between items-center relative md:pl-[20px] lg:pl-[60px]">
               <input
                 onBlur={handleLocOnBlur}
                 onFocus={handleLocFocusIn}
                 onChange={handleLocSearch}
                 value={locValue}
-                className="outline-none w-[80%] p-[10px] font-BasicSans text-[1.3rem] text-codGray tracking-[5px] semi placeholder:text-codGray focus:placeholder:text-codGray placeholder:font-medium bg-white"
+                className="outline-none w-[80%] p-[10px] font-BasicSans text-[1.3rem] text-codGray tracking-[5px] placeholder:text-codGray focus:placeholder:text-codGray placeholder:font-medium bg-white"
                 placeholder="Location"
                 type="text"
               />
-              <div>
-                <img
-                  className="w-[12px] h-[12px] sm:w-[18px] sm:h-[18px] relative top-[4px]"
-                  src={require("../../assets/images/home/WhiteDropdown.png")}
-                  alt="dropdown"
-                />
-              </div>
+
               <div
                 className={`absolute top-[80px] left-0 w-[500px] h-[300px] bg-white overflow-auto shadow-lg ring-1 ring-black ring-opacity-5 pl-[20px] pt-[20px] rounded-[20px]  ${
                   showAreasDropdown ? " block " : " hidden "
@@ -168,8 +188,10 @@ export default function HomeBanner() {
                     ? areasList.map((area) => {
                         return (
                           <li
-                            className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
-                            onClick={() => handleLocSelection(area.city)}
+                            className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none hover:bg-cyanBlue  active-dropdown-item"
+                            onClick={() =>
+                              handleLocSelection(area.city, area.zip_code_id)
+                            }
                             key={area.id}
                           >
                             {area.city}
@@ -180,13 +202,13 @@ export default function HomeBanner() {
                 </ul>
               </div>
             </div>
-            <div className="col-span-3 sm:col-span-1 flex justify-around items-center relative">
+            <div className="col-span-3 md:col-span-1 flex md:justify-around items-center relative">
               <input
                 onBlur={handleSpecOnBlur}
                 onFocus={handleSpecFocusIn}
                 onChange={handleSpecSearch}
                 value={specValue}
-                className="outline-none w-[80%] p-[10px] font-BasicSans text-[1.3rem] text-codGray tracking-[5px] font-semibold placeholder:text-gray-800 focus:placeholder:text-gray-400 placeholder:font-medium bg-white"
+                className="outline-none w-[80%] p-[10px] font-BasicSans text-[1.3rem] text-codGray tracking-[5px] placeholder:text-gray-800 focus:placeholder:text-gray-400 placeholder:font-medium bg-white"
                 placeholder="Speciality"
                 type="text"
               />
@@ -206,56 +228,50 @@ export default function HomeBanner() {
                   <li className="font-BasicSans text-eastBayLight">
                     Speciality
                   </li>
-                  {allList.speciality.length ? (
-                    allList.speciality.map((spec) => {
-                      return (
-                        <li
-                          className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
-                          onClick={() =>
-                            handleSpecSelection(spec.medical_speciality_name)
-                          }
-                          key={spec.id}
-                        >
-                          {spec.medical_speciality_name}
-                        </li>
-                      );
-                    })
-                  ) : (
-                    <img
-                      className="relative top-[80px] left-[180px] w-[100px]"
-                      src={require("../../assets/images/cat-loading.gif")}
-                      alt="loading"
-                    />
-                  )}
+                  {allList.speciality.length
+                    ? allList.speciality.map((spec) => {
+                        return (
+                          <li
+                            className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-codGray hover:bg-cyanBlue  active-dropdown-item"
+                            onClick={() =>
+                              handleSpecSelection(
+                                spec.medical_speciality_name,
+                                spec.id
+                              )
+                            }
+                            key={spec.id}
+                          >
+                            {spec.medical_speciality_name}
+                          </li>
+                        );
+                      })
+                    : null}
                   <li className="font-BasicSans text-eastBayLight">
                     Conditions
                   </li>
-                  {allList.conditions.length ? (
-                    allList.conditions.map((spec) => {
-                      return (
-                        <li
-                          className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
-                          onClick={() =>
-                            handleSpecSelection(spec.medical_condition_name)
-                          }
-                          key={spec.id}
-                        >
-                          {spec.medical_condition_name}
-                        </li>
-                      );
-                    })
-                  ) : (
-                    <img
-                      className="relative top-[80px] left-[180px] w-[100px]"
-                      src={require("../../assets/images/cat-loading.gif")}
-                      alt="loading"
-                    />
-                  )}
+                  {allList.conditions.length
+                    ? allList.conditions.map((spec) => {
+                        return (
+                          <li
+                            className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
+                            onClick={() =>
+                              handleSpecSelection(
+                                spec.medical_condition_name,
+                                spec.id
+                              )
+                            }
+                            key={spec.id}
+                          >
+                            {spec.medical_condition_name}
+                          </li>
+                        );
+                      })
+                    : null}
                 </ul>
               </div>
             </div>
-            <div className="col-span-3 sm:col-span-1 flex justify-around items-center relative top-[5px]">
-              <div className="text-[20px]">
+            <div className="col-span-3 md:col-span-1 flex md:justify-around items-center relative top-[5px]">
+              <div className="text-[20px] w-full xl:w-[80%]">
                 <DatePicker
                   className="bg-white font-Basicsans text-[1.3rem] text-codGray tracking-[5px] outline-none"
                   dateFormat="MMMM d, yyyy"
@@ -264,14 +280,21 @@ export default function HomeBanner() {
                   onChange={(date) => setStartDate(date)}
                   customInput={<DateInputComponent />}
                   closeOnScroll={true}
-                  
                 />
               </div>
             </div>
           </div>
         </div>
-        <div className="col-span-2 sm:col-span-1 flex items-center h-[100px]">
-          <SearchBar className="w-[80%] xl:w-[90%]" />
+        <div className="hidden md:flex col-span-2 md:col-span-1 items-center h-[100px]">
+          <SearchBar
+            onClick={() => handleSearch()}
+            className="w-[80%] xl:w-[90%] cursor-pointer"
+          />
+        </div>
+        <div className=" md:hidden col-span-12 text-center ">
+          <button className="bg-shadeBlue py-[8px] w-[50%] text-white rounded-[10px] text-[1rem]">
+            Search
+          </button>
         </div>
       </div>
     </div>

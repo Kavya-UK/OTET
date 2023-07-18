@@ -1,24 +1,23 @@
 import React, { forwardRef, useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import { BiCalendar } from "react-icons/bi";
-import Footer from "../Common/Footer";
-import { fetchSpeciality } from "../../Redux/thunk/speciality.thunk";
-import { fetchLocation } from "../../Redux/thunk/location.thunk";
+import Footer from "../Components/common/Footer";
+import { fetchSpeciality } from "../Redux/thunk/speciality.thunk";
+import { fetchLocation } from "../Redux/thunk/location.thunk";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchConditions } from "../../Redux/thunk/conditions.thunk";
-import Header from "./Header";
-
+import { fetchConditions } from "../Redux/thunk/conditions.thunk";
+import AppointmentHeader from "../Components/home/AppointmentHeader";
 const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
   console.log(value);
   let setValue = value;
-  if (value === "") setValue = "Select Date";
+  if (value === "") setValue = "Today";
   return (
     <div className="relative w-full">
       <div className="relative">
         <input
           onClick={onClick}
           ref={ref}
-          className="h-[64px] w-full rounded-[6px] border cursor-pointer border-opacity-80 p-2 placeholder:text-gray-400 placeholder:tracking-[3px] font-basic-sans-regular text-sm px-2 outline-none border-shadeBlue text-size-6 placeholder:font-thin pl-[1rem] "
+          className="h-[64px] w-full rounded-[6px] border cursor-pointer border-opacity-80 p-2 text-placeholderGray placeholder:tracking-[3px] font-basic-sans-regular text-sm px-2 outline-none border-shadeBlue text-[15px] placeholder:font-thin pl-[1rem] "
           placeholder="Today"
           value={setValue}
         />
@@ -130,7 +129,7 @@ export default function BookAppointment() {
 
   return (
     <>
-      <Header setDropShadow={true} />
+      <AppointmentHeader />
       <div className="relative flex items-center w-full justify-center">
         <div class="block w-[50rem] h-[20rem] rounded-br-full rounded-bl-full -z-10 bg-blueish absolute left-[50%] top-0 -translate-x-1/2"></div>
         <div className="w-[550px] space-y-4 bg-white mt-[80px] rounded-[6px] px-[25px] py-[50px]">
@@ -147,7 +146,7 @@ export default function BookAppointment() {
             <div className="flex flex-col">
               <div className="h-[64px] w-full flex items-center justify-center">
                 <input
-                  className="h-full w-full rounded-[5px] border-shadeBlue px-[16px] outline-none placeholder:text-[20px] placeholder:font-thin placeholder:tracking-[3px] bg-white border-opacity-80  rounded-r-none border-y border-l"
+                  className="h-full w-full rounded-[5px] border-shadeBlue px-[16px] outline-none placeholder:text-[15px] placeholder:font-thin placeholder:tracking-[3px] bg-white border-opacity-80  rounded-r-none border-y border-l"
                   placeholder="City, Zip Code"
                   type="text"
                   onBlur={handleLocOnBlur}
@@ -157,7 +156,7 @@ export default function BookAppointment() {
                 />
                 <div className="cursor-pointer bg-[white] border-shadeBlue h-full flex items-center justify-center border-y border-r rounded-r-[6px] pl-3 pr-6  ">
                   <img
-                    src={require("../../assets/images/home/GreenArrowDown.png")}
+                    src={require("../assets/images/home/GreenArrowDown.png")}
                     alt="Dropdown"
                     className="h-[12px] w-[12px] text-green rotate-0 transition-transform duration-300"
                   />
@@ -185,7 +184,7 @@ export default function BookAppointment() {
                   ) : (
                     <img
                       className="relative top-[80px] left-[180px] w-[100px]"
-                      src={require("../../assets/images/cat-loading.gif")}
+                      src={require("../assets/images/cat-loading.gif")}
                       alt="loading"
                     />
                   )}
@@ -197,7 +196,7 @@ export default function BookAppointment() {
             <div className="flex flex-col">
               <div className="h-[64px] w-full flex items-center justify-center">
                 <input
-                  className="h-full w-full rounded-[5px] border-shadeBlue px-[16px] outline-none placeholder:text-[20px] placeholder:font-thin placeholder:tracking-[3px] bg-white border-opacity-80  rounded-r-none  border-y border-l"
+                  className="h-full w-full rounded-[5px] border-shadeBlue px-[16px] outline-none placeholder:text-[15px] placeholder:font-thin placeholder:tracking-[3px] bg-white border-opacity-80  rounded-r-none  border-y border-l"
                   placeholder="Specialty, Condition, Doctor..."
                   type="text"
                   onBlur={handleSpecOnBlur}
@@ -207,7 +206,7 @@ export default function BookAppointment() {
                 />
                 <div className=" border-shadeBlue cursor-pointer bg-[white]  h-full flex items-center justify-center border-y border-r rounded-r-[6px] pl-3 pr-6  ">
                   <img
-                    src={require("../../assets/images/home/GreenArrowDown.png")}
+                    src={require("../assets/images/home/GreenArrowDown.png")}
                     alt="Dropdown"
                     className="h-[12px] w-[12px] text-green rotate-0 transition-transform duration-300"
                   />
@@ -238,7 +237,7 @@ export default function BookAppointment() {
                 ) : (
                   <img
                     className="relative top-[80px] left-[180px] w-[100px]"
-                    src={require("../../assets/images/cat-loading.gif")}
+                    src={require("../assets/images/cat-loading.gif")}
                     alt="loading"
                   />
                 )}
@@ -260,7 +259,7 @@ export default function BookAppointment() {
                 ) : (
                   <img
                     className="relative top-[80px] left-[180px] w-[100px]"
-                    src={require("../../assets/images/cat-loading.gif")}
+                    src={require("../assets/images/cat-loading.gif")}
                     alt="loading"
                   />
                 )}
@@ -269,7 +268,7 @@ export default function BookAppointment() {
           </div>
 
           <div className="flex flex-col items-start  font-basic-sans-regular ">
-            <div className="relative w-full">
+            <div className="relative w-full ">
               <ReactDatePicker
                 className="test"
                 dateFormat="MMMM d, yyyy"
@@ -283,7 +282,7 @@ export default function BookAppointment() {
             {/* </div> */}
           </div>
           <div className="space-y-2">
-            <label className="text-[20px] tracking-[3px] text-gray-400">
+            <label className="text-[15px] tracking-[3px] text-gray-400">
               Type of Visit
             </label>
             <div className="flex h-[fit-content] flex-col w-full ">

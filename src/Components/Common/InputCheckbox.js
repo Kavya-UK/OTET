@@ -1,20 +1,26 @@
 import React from "react";
 
-export default function InputCheckbox() {
+export default function InputCheckbox({
+  id = "loginCheck",
+  value = "yes",
+  heightWidth = "w-[30px] h-[30px]",
+  margin = "mr-4 mb-2",
+}) {
   return (
     <div className="inline-block">
-      <div class="flex items-center mr-4 mb-2">
+      <div class={`flex items-center `}>
         <input
           type="checkbox"
-          id="A3-yes"
-          name="A3-confirmation"
-          value="yes"
-          class="opacity-0 absolute w-[30px] h-[30px]"
+          id={id}
+          name={id}
+          value={value}
+          className={`opacity-0 absolute ${heightWidth}`}
         />
-        <div class="bg-white border-2 rounded-md border-shadeGray w-[30px] h-[30px] flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-shadeGray">
+        <div
+          className={`bg-white border-2 rounded-md border-shadeGray ${heightWidth} flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-shadeGray`}
+        >
           <svg
-            class="fill-current hidden w-3 h-3 text-shadeGray pointer-events-none"
-            version="1.1"
+            className="fill-current hidden w-3 h-3 text-shadeGray pointer-events-none"
             viewBox="0 0 17 12"
           >
             <g fill="none" fill-rule="evenodd">

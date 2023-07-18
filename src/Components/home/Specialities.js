@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import SpecialityCard from "../Common/SpecialityCard"
+import SpecialityCard from "../common/SpecialityCard"
 import {useSelector} from "react-redux";
 
 export default function Specialities() {
@@ -18,7 +18,7 @@ return (
       15 + Specialities
     </p>
     <p
-      className="text-mustardYellow text-[18px] sm:text-[24px] lg:text-[33px] font-BasicSans tracking-[5.94px] flex justify-end items-end mr-[30px]"
+      className="text-mustardYellow text-[18px] sm:text-[15px] lg:text-[20px] font-BasicSans tracking-[4px] flex justify-end items-end mr-[30px]"
       onClick={() => navigate("/all-speciality")}
     >
       See More

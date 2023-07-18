@@ -1,36 +1,47 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import { fetchLocation } from "../../Redux/thunk/location.thunk";
 import { fetchSpeciality } from "../../Redux/thunk/speciality.thunk";
 import { fetchConditions } from "../../Redux/thunk/conditions.thunk";
 import { useSelector, useDispatch } from "react-redux";
+import { useLocation,useNavigate } from "react-router-dom";
 
 export default function DoctorHeader() {
   const specialityList = useSelector(
     (state) => state.speciality.specialityList
   );
   const areasList = useSelector((state) => state.locations.areas);
-const dispatch=useDispatch();
-useEffect(()=>{
-  dispatch(fetchLocation());
-  dispatch(fetchSpeciality());
-  dispatch(fetchConditions());
+  const useQuery = () => new URLSearchParams(useLocation().search);
+  let query = useQuery();
+  const dispatch = useDispatch();
+    const navigate = useNavigate();
 
 
-},[])
-const conditionsList = useSelector((state) => state.conditions.conditionsList);
+  useEffect(() => {
+    dispatch(fetchLocation());
+    dispatch(fetchSpeciality());
+    dispatch(fetchConditions());
+  }, []);
+  const conditionsList = useSelector(
+    (state) => state.conditions.conditionsList
+  );
 
-const [allList, setAllList] = useState({ speciality: [], conditions: [] });
-const [showSpecDropdown, setShowSpecDropdown] = useState(false);
-const [showAreasDropdown, setShowAreasDropdown] = useState(false);
-const [specValue, setSpecValue] = useState("");
-const [locValue, setLocValue] = useState("");
+  const [allList, setAllList] = useState({ speciality: [], conditions: [] });
+  const [showSpecDropdown, setShowSpecDropdown] = useState(false);
+  const [showAreasDropdown, setShowAreasDropdown] = useState(false);
+  const [specValue, setSpecValue] = useState("");
+  const [locValue, setLocValue] = useState("");
+
   useEffect(() => {
     setAllList({
       speciality: specialityList,
       conditions: conditionsList,
     });
+    const area = query.get("area");
+    const specialty = query.get("specialty");
+    setSpecValue(specialty?.split("_")[0]);
+    setLocValue(area?.split("_")[0]);
   }, [specialityList, conditionsList]);
 
   const handleLocSearch = (e) => {
@@ -100,7 +111,7 @@ const [locValue, setLocValue] = useState("");
   };
   return (
     <div className="flex flex-row justify-between items-center max-h-fit py-[5px] pl-[30px] pr-[50px] bg-white  drop-shadow-md">
-      <div>
+      <div onClick={()=>navigate('/home')}>
         <img
           className="w-[130px] h-[130px]"
           src={require("../../assets/images/home/Logo.png")}

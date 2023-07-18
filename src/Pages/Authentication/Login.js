@@ -1,9 +1,9 @@
 import React from 'react'
-import InputText from "../../Components/Common/InputText"
+import InputText from "../../Components/common/InputText"
 import {Link, useNavigate} from 'react-router-dom'
-import InputCheckbox from '../../Components/Common/InputCheckbox';
-import SideBanner from '../../Components/Common/SideBanner';
-import LoginFooter from "../../Components/Common/LoginFooter";
+import InputCheckbox from '../../Components/common/InputCheckbox';
+import SideBanner from '../../Components/common/SideBanner';
+import LoginFooter from "../../Components/common/LoginFooter";
 
  const Login=()=> {
   const navigate= useNavigate();

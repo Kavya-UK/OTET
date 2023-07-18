@@ -1,11 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { fetchDoctorData } from "../../Redux/thunk/featuredDoctor.thunk";
+import React, { forwardRef, useEffect, useState } from "react";
+import {
+  fetchDoctorData,
+  fetchDoctorSlot,
+} from "../../Redux/thunk/featuredDoctor.thunk";
 import { useSelector, useDispatch } from "react-redux";
+import ReactDatePicker from "react-datepicker";
+import { useLocation, useNavigate } from "react-router-dom";
+
+const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
+  // let setValue = value;
+  // if (value === "") setValue = "Select Date";
+  return (
+    <div className="">
+      <img
+        onClick={onClick}
+        ref={ref}
+        src={require("../../assets/images/home/Calendar.png")}
+        alt="calendar"
+      />
+    </div>
+  );
+});
 
 export default function DoctorProfile() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const doctorData = useSelector(
     (state) => state.featuredpractioner.doctorData
+  );
+  const useQuery = () => new URLSearchParams(useLocation().search);
+  let query = useQuery();
+  const doc_url = query.get("doc_url");
+  const doctorSlot = useSelector(
+    (state) => state.featuredpractioner.doctorSlot
   );
   const month = [
     "Jan",
@@ -22,11 +49,20 @@ export default function DoctorProfile() {
     "Dec",
   ];
   const [selectedDate, setSelectedDate] = useState("");
+  const [selectedSlot, setSelectedSlot] = useState({});
+  const [viewDetails, setviewDetails] = useState(false);
+  const [slotError, setSlotError] = useState(false);
   const [inPersonSlot, setInPersonSlot] = useState([]);
   const [virtualSlot, setVirtualSlot] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [startDate, setStartDate] = useState("");
+  // const [startDate, setStartDate] = useState("");
   useEffect(() => {
-    dispatch(fetchDoctorData({ url: "dr-afnan-haq/1" }));
+    dispatch(fetchDoctorData({ url: doc_url }));
+    const d = new Date().toLocaleDateString("fr-CA");
+    dispatch(
+      fetchDoctorSlot({ doctor_id: doc_url.split("/")[1], time_slot_date: d })
+    );
   }, []);
   useEffect(() => {
     if (doctorData.doctor_name) {
@@ -35,17 +71,27 @@ export default function DoctorProfile() {
       setLoading(true);
     }
   }, [doctorData]);
+  const onDateChange = (date) => {
+    setSelectedDate("");
+    setInPersonSlot([]);
+    setVirtualSlot([]);
+    const d = new Date(date).toLocaleDateString("fr-CA");
+    setStartDate(date);
+    dispatch(
+      fetchDoctorSlot({ doctor_id: doc_url.split("/")[1], time_slot_date: d })
+    );
+  };
   const onDaySelect = (inPerson, virtual) => {
-    if (inPerson.value.length >= 1 || virtual.value.length >= 1){
+    setSelectedSlot({});
+    if (inPerson.value.length >= 1 || virtual.value.length >= 1) {
       setSelectedDate(inPerson.date);
       setInPersonSlot(inPerson.value);
       setVirtualSlot(virtual.value);
     }
   };
   const getClassForDay = (inPerson, virtual) => {
-    console.log({ inPerson, virtual });
     if (selectedDate === inPerson.date) return " bg-shadeBlue text-white ";
-    else if (inPerson.value.length >= 1 || virtual.value.length >= 1)
+    else if (inPerson?.value?.length >= 1 || virtual?.value?.length >= 1)
       return " bg-Turquoise text-codGray ";
     else return " bg-ashGray text-codGray cursor-not-allowed";
   };
@@ -54,12 +100,23 @@ export default function DoctorProfile() {
       .toString()
       .match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
     if (time.length > 1) {
-      time = time.slice(1); 
+      time = time.slice(1);
       time[5] = +time[0] < 12 ? "AM" : "PM";
-      time[0] = +time[0] % 12 || 12; 
+      time[0] = +time[0] % 12 || 12;
     }
-    return `${time[0]}:${time[2]} ${time[5]}`; 
-  }
+    return `${time[0]}:${time[2]} ${time[5]}`;
+  };
+  const scheduleApp = () => {
+    if (!selectedSlot.time) {
+      setSlotError(true);
+    } else {
+      setSlotError(false);
+      navigate(`/schedule-appointment?doc_url=${doc_url}`);
+    }
+  };
+  const selectSlot = (time, type, selectedDate) => {
+    setSelectedSlot({ type, time: time.from, selectedDate });
+  };
   return (
     <>
       <div className="mb-[90px] pt-[150px] px-[50px]">
@@ -69,8 +126,8 @@ export default function DoctorProfile() {
           </h1>
         </div>
         <div className="grid grid-cols-10 gap-10 mt-[30px]">
-          <div className="col-span-10 lg:col-span-6 grid grid-cols-2 gap-5">
-            <div className="col-span-1 h-[400px] md:h-[450px] w-full">
+          <div className="col-span-10 lg:col-span-6 grid grid-cols-2 gap-5 ">
+            <div className="col-span-1 h-[400px] md:h-[450px] w-full cursor-pointer">
               <img
                 alt="doctor"
                 className="rounded-[31px] w-full h-full object-cover"
@@ -135,7 +192,7 @@ export default function DoctorProfile() {
                 Availability
               </p>
               <div className="flex flex-row gap-4 ">
-                {doctorData.time_slots?.InPerson.map((day, i) => {
+                {doctorSlot?.InPerson?.map((day, i) => {
                   return (
                     <span
                       onClick={() =>
@@ -154,16 +211,26 @@ export default function DoctorProfile() {
                 })}
 
                 <div className="w-[68px] sm:w-[58px] h-[65px] sm:h-[56px]">
-                  <img
-                    src={require("../../assets/images/home/Calendar.png")}
-                    alt="calendar"
+                  <ReactDatePicker
+                    className="bg-white font-Basicsans text-[1.3rem] text-codGray tracking-[5px] outline-none"
+                    dateFormat="dd-mm-yyyy"
+                    selected={startDate}
+                    minDate={new Date()}
+                    onChange={(date) => onDateChange(date)}
+                    customInput={<DateInputComponent />}
+                    closeOnScroll={true}
                   />
                 </div>
               </div>
             </div>
             <div className="col-span-2">
               <p className=" font-BasicSansBold text-[22px] text-codGray mb-[20px]">
-                Sep 10, 2022
+                {selectedDate &&
+                  new Intl.DateTimeFormat("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "2-digit",
+                  }).format(new Date(selectedDate))}
               </p>
               <div className="flex flex-col gap-4">
                 {inPersonSlot.length ? (
@@ -174,14 +241,24 @@ export default function DoctorProfile() {
                     <div className="grid grid-cols-5 gap-4">
                       {inPersonSlot.map((time) => {
                         return (
-                          <span className="font-BasicSans cursor-pointer text-black text-[12px] sm:text-[15px] flex justify-center items-center bg-Turquoise rounded-[5px] h-[60px] sm:h-[43px] w-[150px] sm:w-[130px]">
+                          <span
+                            onClick={() =>
+                              selectSlot(time, "inperson", selectedDate)
+                            }
+                            className={`font-BasicSans cursor-pointer  text-[12px] sm:text-[15px] flex justify-center items-center  rounded-[5px] h-[60px] sm:h-[43px] w-[150px] sm:w-[130px] ${
+                              selectedSlot.time === time.from &&
+                              selectedSlot.type === "inperson"
+                                ? " bg-shadeBlue text-white "
+                                : " bg-Turquoise text-black "
+                            }`}
+                          >
                             {tConvert(time.from)}
                           </span>
                         );
                       })}
                     </div>
                   </>
-                ): null}
+                ) : null}
 
                 {virtualSlot.length ? (
                   <>
@@ -191,38 +268,39 @@ export default function DoctorProfile() {
                     <div className="grid grid-cols-5 gap-4">
                       {virtualSlot.map((time) => {
                         return (
-                          <span className="font-BasicSans cursor-pointer text-black text-[12px] sm:text-[15px] flex justify-center items-center bg-Turquoise rounded-[5px] h-[60px] sm:h-[43px] w-[150px] sm:w-[130px]">
+                          <span
+                            onClick={() =>
+                              selectSlot(time, "virtual", selectedDate)
+                            }
+                            className={`font-BasicSans cursor-pointer  text-[12px] sm:text-[15px] flex justify-center items-center  rounded-[5px] h-[60px] sm:h-[43px] w-[150px] sm:w-[130px] ${
+                              selectedSlot.time === time.from &&
+                              selectedSlot.type === "virtual"
+                                ? " bg-shadeBlue text-white "
+                                : " bg-Turquoise text-black "
+                            }`}
+                          >
                             {tConvert(time.from)}
                           </span>
                         );
                       })}
                     </div>
                   </>
-                ): null}
-
-                {/* <span className="font-BasicSans cursor-pointer text-codGray text-[12px] sm:text-[15px] flex justify-center items-center bg-lightSkyBlue rounded-[5px] h-[60px] sm:h-[43px] w-[150px] sm:w-[130px]">
-                  08:00 AM
-                </span>
-                <span className="font-BasicSans cursor-pointer text-codGray text-[12px] sm:text-[15px] flex justify-center items-center bg-lightSkyBlue rounded-[5px] h-[60px] sm:h-[43px] w-[150px] sm:w-[130px]">
-                  08:00 AM
-                </span>
-                <span className="font-BasicSans cursor-pointer text-codGray text-[12px] sm:text-[15px] flex justify-center items-center bg-lightSkyBlue rounded-[5px] h-[60px] sm:h-[43px] w-[150px] sm:w-[130px]">
-                  08:00 AM
-                </span>
-                <span className="font-BasicSans cursor-pointer text-codGray text-[12px] sm:text-[15px] flex justify-center items-center bg-lightSkyBlue rounded-[5px] h-[60px] sm:h-[43px] w-[150px] sm:w-[130px]">
-                  08:00 AM
-                </span>
-                <span className="font-BasicSans cursor-pointer text-codGray text-[12px] sm:text-[15px] flex justify-center items-center bg-lightSkyBlue rounded-[5px] h-[60px] sm:h-[43px] w-[150px] sm:w-[130px]">
-                  08:00 AM
-                </span>
-                <span className="font-BasicSans cursor-pointer text-codGray text-[12px] sm:text-[15px] flex justify-center items-center bg-lightSkyBlue rounded-[5px] h-[60px] sm:h-[43px] w-[150px] sm:w-[130px]">
-                  08:00 AM
-                </span> */}
+                ) : null}
               </div>
+            </div>
+            <div>
+              {slotError && (
+                <p className="text-red-600 font-BasicSansLight text-[18px]">
+                  *Please select a time slot
+                </p>
+              )}
             </div>
             <div className="col-span-2 text-center lg:text-right">
               <div className="pt-[120px]">
-                <button className="bg-shadeBlue text-white rounded-[100px] w-[300px] h-[55px] font-BasicSansLight text-[18px]">
+                <button
+                  onClick={() => scheduleApp()}
+                  className="bg-shadeBlue text-white rounded-[100px] w-[300px] h-[55px] font-BasicSansLight text-[18px]"
+                >
                   Schedule an appointment
                 </button>
               </div>
@@ -231,11 +309,21 @@ export default function DoctorProfile() {
           <div className="col-span-10 lg:col-span-4">
             <div>
               <p className="font-HenrietteBold text-[22px] text-codGray">
-                About Alexander
+                About {doctorData.doctor_name}
               </p>
-              <p className="mt-[20px] font-BasicSansLight text-[1.1rem] max-w-[80%] text-eastBay">
+              <p
+                className={`mt-[20px] font-BasicSansLight text-[1.1rem]  text-eastBay ${
+                  !viewDetails ? " max-h-[60px] truncate-content" : " "
+                }`}
+              >
                 {doctorData.doctor_description}
               </p>
+              <span
+                onClick={() => setviewDetails((f) => !f)}
+                className="text-[14px] font-BasicSans underline text-mustardYellow  cursor-pointer"
+              >
+                {viewDetails ? "View less" : "View more"}
+              </span>
             </div>
             <div className="">
               <p className="font-HenrietteBold text-[22px] text-codGray mt-[30px] mb-[20px]">

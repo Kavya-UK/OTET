@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import Header from './Header'
-import SpecialityCard from './SpecialityCard';
-import { fetchSpeciality } from '../../Redux/thunk/speciality.thunk';
+import Header from '../Components/common/Header'
+import SpecialityCard from '../Components/common/SpecialityCard';
+import { fetchSpeciality } from '../Redux/thunk/speciality.thunk';
 import { useDispatch, useSelector } from "react-redux";
-import Footer from "./Footer";
+import Footer from "../Components/common/Footer";
 
 
 export default function AllSpeciality() {
@@ -28,7 +28,7 @@ export default function AllSpeciality() {
             field. Browse through each specialty and select as per your need.
           </p>
         </div>
-        <div className="grid grid-cols-4 gap-4 my-[40px] px-[40px] sm:px-[70px]">
+        <div className="grid grid-cols-4 gap-4 my-[40px] px-[40px] sm:px-[70px] cursor-pointer">
           {speciality.map((items) => {
             return (
               <SpecialityCard

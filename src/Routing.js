@@ -6,12 +6,13 @@ import Login from "./Pages/Authentication/Login";
 import ForgotPassword from "./Pages/Authentication/ForgotPassword";
 import ChangePassword from "./Pages/Authentication/ChangePassword";
 import Home from './Pages/Home';
-import AboutUs from './Components/Common/AboutUs';
-import AllSpeciality from './Components/Common/AllSpeciality';
-import BrowseDoctors from './Components/Common/BrowseDoctor';
-import BookAppointment from './Components/Common/BookAppointment';
+import AboutUs from './Pages/AboutUs';
+import AllSpeciality from './Pages/AllSpeciality';
+import BrowseDoctors from './Components/home/BrowseDoctor';
+import BookAppointment from './Pages/BookAppointment';
 import DoctorListing from "./Pages/DoctorListing"
 import DoctorsProfileContainer from "./Pages/DoctorsProfile";
+import ScheduleAppointmentForm from './Components/appointments/ScheduleAppointment';
 const Routing=()=> {
   return (
     <Routes>
@@ -30,6 +31,11 @@ const Routing=()=> {
         exact
         path="/doctor-profile"
         element={<DoctorsProfileContainer />}
+      />
+      <Route
+        exact
+        path="/schedule-appointment"
+        element={<ScheduleAppointmentForm />}
       />
     </Routes>
   );

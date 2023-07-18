@@ -1,8 +1,8 @@
 import React from "react";
 import {Link,useNavigate} from 'react-router-dom';
-import SideBanner from '../../Components/Common/SideBanner';
-import LoginFooter from "../../Components/Common/LoginFooter";
-import Otp from "../../Components/Common/Otp";
+import SideBanner from '../../Components/common/SideBanner';
+import LoginFooter from "../../Components/common/LoginFooter";
+import Otp from "../../Components/common/Otp";
 
 const OtpVerification=()=> {
   const navigate=useNavigate();

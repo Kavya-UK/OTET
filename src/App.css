@@ -3,40 +3,40 @@
   font-style: normal;
   font-weight: 400;
 }
-select{
-  color: #9FA1AF;
+select {
+  color: #9fa1af;
 }
 
-input[type="date"]{
-    color: #9FA1AF;
+input[type="date"] {
+  color: #9fa1af;
 }
 
-.select-dropdown{
+.select-dropdown {
   -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
-.no-icon{
+.no-icon {
   -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 input[type="date"]::-webkit-inner-spin-button,
 input[type="date"]::-webkit-calendar-picker-indicator {
-    display: none;
-    -webkit-appearance: none;
+  display: none;
+  -webkit-appearance: none;
 }
 
- /* input[type=checkbox] {
+/* input[type=checkbox] {
   outline: 1px solid #008282;
    border-radius: 20px;
   border: 3px solid #008282;
 } */
-input:checked + div {  
-  @apply border-blue-500;  
-}  
-input:checked + div svg {  
-  @apply block;  
+input:checked + div {
+  @apply border-blue-500;
+}
+input:checked + div svg {
+  @apply block;
 }
 
 .footer-link {
@@ -49,19 +49,26 @@ input:checked + div svg {
 .footer-link.expand {
   min-height: 75px;
   position: relative;
-  visibility:visible;
+  visibility: visible;
   border-radius: 4px;
   padding: 10px;
   padding-left: 30px;
   transition: all 1s ease;
 }
-.header-main{
+.header-main {
   box-shadow: 0px 3px 6px #00000029;
-
 }
-.test{
+.test {
   margin-top: 50px;
+  color:gray;
 }
-.react-datepicker-wrapper{
+.react-datepicker-wrapper {
   width: 100%;
+}
+.truncate-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 }

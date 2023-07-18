@@ -1,18 +1,22 @@
-import React from 'react'
-import DoctorFilter from '../Components/Common/DoctorFilter'
-import DocAvailability from "../Components/Common/DocAvailability" 
-import DoctorHeader from "../Components/Common/DoctorHeader";
+import React, { useState } from 'react'
+import DoctorFilter from '../Components/doctor/DoctorFilter'
+import DocAvailability from "../Components/doctor/DocAvailability" 
+import DoctorHeader from "../Components/doctor/DoctorHeader";
+import { useSelector } from 'react-redux';
 export default function DoctorListing() {
+   const docTotalCount = useSelector(
+     (state) => state.featuredpractioner.totalCount
+   );
   return (
     <>
       <DoctorHeader />
-      <div className="pl-[10px] mb-[20px]">
+      <div className="pl-[30px] my-[40px]">
         <h1 className="text-codGray font-BasicSansBold text-[25px] tracking-[3px]">
-          We have found 75 Doctors for your search criteria.
+          We have found {docTotalCount || 0 } Doctors for your search criteria.
         </h1>
       </div>
       <div className="grid grid-cols-10">
-        <div className="col-span-2">
+        <div className="col-span-2 pl-[30px]">
           <h1 className=" font-BasicSansBold text-[20px] font-bold tracking-[2px] pl-[10px]">
             Filters
           </h1>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate} from "react-router-dom";
-import BrowseDoctors from "./BrowseDoctor";
+import BrowseDoctors from "../home/BrowseDoctor";
 
 
 export default function Header({setDropShadow=false}) {

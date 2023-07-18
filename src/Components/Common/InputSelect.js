@@ -1,5 +1,5 @@
 import React from "react";
-import Label from "../Common/Label"
+import Label from "./Label"
 export default function InputSelect({
   type,
   optionList,

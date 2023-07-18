@@ -48,8 +48,9 @@ export default function HomeCaurosal() {
               <span className="font-HenrietteBold text-[12px] sm:text-[16px] xl:text-[20px] text-codGray">
                 {list.country[0]}
               </span>
-              <p className="text-[13px] xl:text-[15px] font-BasicSans text-eastBay mt-[10px] w-[100%] sm:w-[80%] lg:w-[80%]">
-                {list.doctor_bio}
+              <p className="text-[13px] xl:text-[15px] font-BasicSans text-eastBay mt-[10px] w-[100%] sm:w-[80%] lg:w-[80%] overflow-hidden truncate ">
+                {list.doctor_bio.substring(0, 60)}
+                {list.doctor_bio.length >= 60 && "..."}
               </p>
             </div>
           </div>

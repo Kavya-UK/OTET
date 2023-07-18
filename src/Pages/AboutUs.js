@@ -1,6 +1,6 @@
 import React from 'react'
-import Header from './Header'
-import Footer from "../Common/Footer"
+import Header from '../Components/common/Header'
+import Footer from "../Components/common/Footer"
 
 export default function AboutUs() {
   return (
@@ -9,7 +9,7 @@ export default function AboutUs() {
       <div className="h-[550px] w-full hidden sm:block  relative">
         <img
           className="absolute -z-10 w-full h-full object-cover"
-          src={require("../../assets/images/about/aboutUsBg.png")}
+          src={require("../assets/images/about/aboutUsBg.png")}
           alt="about-us"
         />
        <h1 className=" font-PoppinsMedium text-[45px] pl-[30px] tracking-[10px] text-black z-10 pt-[150px]">
@@ -36,7 +36,7 @@ export default function AboutUs() {
         <div className="">
           <img
             className="h-full w-full"
-            src={require("../../assets/images/about/doctor-patient.png")}
+            src={require("../assets/images/about/doctor-patient.png")}
             alt="doctor"
           />
         </div>
@@ -56,7 +56,7 @@ export default function AboutUs() {
             <div className="hidden md:block border-l-[2px] h-[60%] absolute right-0 top-[50px]"></div>
             <img
               className=" w-[100px] h-[100px] mb-[20px] mx-auto "
-              src={require("../../assets/images/about/Approach1.png")}
+              src={require("../assets/images/about/Approach1.png")}
               alt="connect"
             />
             <span className="text-codGray font-BasicSansBold text-[20px] lg:text-[25px] font-bold">
@@ -74,7 +74,7 @@ export default function AboutUs() {
 
             <img
               className=" w-[140px] h-[100px] mb-[20px] mx-auto "
-              src={require("../../assets/images/about/Approach2.png")}
+              src={require("../assets/images/about/Approach2.png")}
               alt="connect"
             />
             <span className="text-codGray font-BasicSansBold text-[20px] lg:text-[25px] font-bold">
@@ -90,7 +90,7 @@ export default function AboutUs() {
           <div className="col-span-1 text-center">
             <img
               className=" w-[140px] h-[100px] mb-[20px] mx-auto "
-              src={require("../../assets/images/about/Approach3.png")}
+              src={require("../assets/images/about/Approach3.png")}
               alt="connect"
             />
             <span className="text-codGray font-BasicSansBold text-[20px] lg:text-[25px] font-bold">
@@ -114,7 +114,7 @@ export default function AboutUs() {
           <div className="flex flex-col items-center">
             <img
               className="w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] xl:w-[350px] lg:w-[250px] lg:h-[250px] xl:h-[350px] mb-[40px] object-contain"
-              src={require("../../assets/images/about/Person1.png")}
+              src={require("../assets/images/about/Person1.png")}
               alt="person"
             />
             <p className=" font-HenrietteBold text-[15px] lg:text-[25px] xl:text-[30px] text-codGray font-codGray">
@@ -127,7 +127,7 @@ export default function AboutUs() {
           <div className="flex flex-col items-center">
             <img
               className="w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] xl:w-[350px] lg:w-[250px] lg:h-[250px] xl:h-[350px] mb-[40px] object-contain"
-              src={require("../../assets/images/about/Person2.png")}
+              src={require("../assets/images/about/Person2.png")}
               alt="person"
             />
             <p className=" font-HenrietteBold text-[15px] lg:text-[25px] xl:text-[30px] text-codGray font-codGray ">
@@ -140,7 +140,7 @@ export default function AboutUs() {
           <div className="flex flex-col items-center">
             <img
               className="w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] xl:w-[350px] lg:w-[250px] lg:h-[250px] xl:h-[350px] mb-[40px] object-contain"
-              src={require("../../assets/images/about/Person3.png")}
+              src={require("../assets/images/about/Person3.png")}
               alt="person"
             />
             <p className=" font-HenrietteBold text-[15px] lg:text-[25px] xl:text-[30px] text-codGray font-codGray ">
@@ -154,7 +154,7 @@ export default function AboutUs() {
         <div className="w-full mt-[40px]">
           <img
             className="w-[65px] h-[21px] float-right"
-            src={require("../../assets/images/about/LongArrowRight.png")}
+            src={require("../assets/images/about/LongArrowRight.png")}
             alt="arrow"
           />
         </div>
@@ -179,7 +179,7 @@ export default function AboutUs() {
         <div className="mt-[40px]">
           <img
             className="w-full h-full"
-            src={require("../../assets/images/about/Mission.png")}
+            src={require("../assets/images/about/Mission.png")}
             alt="mission"
           />
         </div>
@@ -193,21 +193,21 @@ export default function AboutUs() {
           <div className="w-full">
             <img
               className="w-[96px] h-[20px] md:h-[40px] lg:h-[48px] sm:w-full object-contain"
-              src={require("../../assets/images/about/Montefiore.png")}
+              src={require("../assets/images/about/Montefiore.png")}
               alt="mount"
             />
           </div>
           <div className="w-full">
             <img
               className="w-[106px] h-[20px] md:h-[48px] lg:h-[64px] sm:w-full object-contain"
-              src={require("../../assets/images/about/SCL.png")}
+              src={require("../assets/images/about/SCL.png")}
               alt="scl"
             />
           </div>
           <div className="w-full">
             <img
               className="w-[106px] h-[20px] md:h-[48px] lg:h-[64px] sm:w-full object-contain"
-              src={require("../../assets/images/about/Mount.png")}
+              src={require("../assets/images/about/Mount.png")}
               alt="montefiore"
             />
           </div>

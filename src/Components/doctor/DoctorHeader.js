@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import { fetchLocation } from "../../Redux/thunk/location.thunk";
@@ -6,17 +6,52 @@ import { fetchSpeciality } from "../../Redux/thunk/speciality.thunk";
 import { fetchConditions } from "../../Redux/thunk/conditions.thunk";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation,useNavigate } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { ReactComponent as Calendar } from "../../assets/images/home/Calendar.svg";
+import { fetchFeaturedDoctors } from "../../Redux/thunk/featuredDoctor.thunk";
+import { useSearchParams } from "react-router-dom";
 
+const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
+  let setValue = value;
+  if (value === "") setValue = "Today";
+  return (
+    <div className="flex md:justify-between items-center w-full pl-[10px]">
+      <Calendar
+        onClick={onClick}
+        className="w-[15px] md:w-auto relative  mr-[20px] lg:mr-[15px] "
+      />
+
+      <button
+        className="text-codGray font-BasicSans h-[40px] text-[16px] w-full outline-none bg-white px-[0.5rem]"
+        onClick={onClick}
+        ref={ref}
+      >
+        {setValue}
+      </button>
+      
+    </div>
+  );
+});
 export default function DoctorHeader() {
   const specialityList = useSelector(
     (state) => state.speciality.specialityList
   );
   const areasList = useSelector((state) => state.locations.areas);
   const useQuery = () => new URLSearchParams(useLocation().search);
+  const [searchParams, setSearchParams] = useSearchParams();
   let query = useQuery();
   const dispatch = useDispatch();
     const navigate = useNavigate();
-
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
 
   useEffect(() => {
     dispatch(fetchLocation());
@@ -32,6 +67,9 @@ export default function DoctorHeader() {
   const [showAreasDropdown, setShowAreasDropdown] = useState(false);
   const [specValue, setSpecValue] = useState("");
   const [locValue, setLocValue] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [locId, setLocId] = useState("");
+  const [specId, setSpecId] = useState("");
 
   useEffect(() => {
     setAllList({
@@ -40,10 +78,29 @@ export default function DoctorHeader() {
     });
     const area = query.get("area");
     const specialty = query.get("specialty");
+    const date = query.get("date");
+    setStartDate(new Date(date));
     setSpecValue(specialty?.split("_")[0]);
     setLocValue(area?.split("_")[0]);
   }, [specialityList, conditionsList]);
 
+  const searchDocList = (e) => {
+     const curdate = new Date(`${startDate}`);
+     var day = days[curdate.getDay()];
+     const param = {
+       paginate: 4,
+       page: 1,
+       ...(locId ? { serving_areas: locId } : {}),
+       ...(specId ? { specialty: specId } : {}),
+       ...(startDate ? { time_slot_day: day } : {}),
+     };
+    setSearchParams({
+      date: new Date(startDate).toLocaleDateString("fr-CA"),
+      ...(specId ? { specialty: `${specValue}_${specId}` } : {}),
+      ...(locId ? { area: `${locValue}_${locId}` } : {}),
+    });
+     dispatch(fetchFeaturedDoctors(param));
+  };
   const handleLocSearch = (e) => {
     const searchText = e.target.value;
     setLocValue(searchText);
@@ -78,31 +135,37 @@ export default function DoctorHeader() {
     });
   };
 
-  const handleLocSelection = (city) => {
+  const handleLocSelection = (city, id) => {
     setLocValue(city);
+    setLocId(id);
     setShowAreasDropdown(false);
   };
-  const handleSpecSelection = (name) => {
+  const handleSpecSelection = (name, id) => {
     setSpecValue(name);
+    setSpecId(id);
     setShowSpecDropdown(false);
   };
   const handleLocOnBlur = () => {
     setLocValue("");
+    setLocId("");
     setTimeout(() => {
       setShowAreasDropdown(false);
     }, 100);
   };
   const handleSpecOnBlur = () => {
     setSpecValue("");
+    setSpecId("");
     setTimeout(() => {
       setShowSpecDropdown(false);
     }, 100);
   };
   const handleLocFocusIn = () => {
     setLocValue("");
+    setLocId("");
   };
   const handleSpecFocusIn = () => {
     setSpecValue("");
+    setSpecId("");
     setShowSpecDropdown(true);
     setAllList({
       speciality: specialityList,
@@ -111,7 +174,7 @@ export default function DoctorHeader() {
   };
   return (
     <div className="flex flex-row justify-between items-center max-h-fit py-[5px] pl-[30px] pr-[50px] bg-white  drop-shadow-md">
-      <div onClick={()=>navigate('/home')}>
+      <div onClick={() => navigate("/home")}>
         <img
           className="w-[130px] h-[130px]"
           src={require("../../assets/images/home/Logo.png")}
@@ -144,7 +207,9 @@ export default function DoctorHeader() {
                       return (
                         <li
                           className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
-                          onClick={() => handleLocSelection(area.city)}
+                          onClick={() =>
+                            handleLocSelection(area.city, area.zip_code_id)
+                          }
                           key={area.id}
                         >
                           {area.city}
@@ -180,7 +245,10 @@ export default function DoctorHeader() {
                         <li
                           className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
                           onClick={() =>
-                            handleSpecSelection(spec.medical_speciality_name)
+                            handleSpecSelection(
+                              spec.medical_speciality_name,
+                              spec.id
+                            )
                           }
                           key={spec.id}
                         >
@@ -196,7 +264,10 @@ export default function DoctorHeader() {
                       <li
                         className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
                         onClick={() =>
-                          handleSpecSelection(spec.medical_condition_name)
+                          handleSpecSelection(
+                            spec.medical_condition_name,
+                            spec.id
+                          )
                         }
                         key={spec.id}
                       >
@@ -216,15 +287,20 @@ export default function DoctorHeader() {
           </div>
           <div className="w-[30%]">
             <div className="ml-3">
-              <input
-                placeholder="Others"
-                type="text"
-                className="text-codGray font-BasicSans h-[40px] text-[16px] px-2 outline-none bg-white"
-                value=""
-              />{" "}
+              <div className="text-[20px] w-full xl:w-[80%]">
+                <DatePicker
+                  className="bg-white font-Basicsans text-[1.3rem] text-codGray tracking-[5px] outline-none"
+                  dateFormat="MMMM d, yyyy"
+                  selected={startDate}
+                  minDate={new Date()}
+                  onChange={(date) => setStartDate(date)}
+                  customInput={<DateInputComponent />}
+                  closeOnScroll={true}
+                />
+              </div>
             </div>
           </div>
-          <button className="absolute -right-[1px]  bg-shadeBlue border-y border-r border-l-none w-[4rem] h-full flex items-center justify-center rounded-xl text-white">
+          <button onClick={() => searchDocList()} className="absolute -right-[1px]  bg-shadeBlue border-y border-r border-l-none w-[4rem] h-full flex items-center justify-center rounded-xl text-white">
             <BsSearch className="text-[30px] text-white " />
           </button>
         </div>

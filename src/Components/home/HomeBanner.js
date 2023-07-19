@@ -6,6 +6,7 @@ import { fetchLocation } from "../../Redux/thunk/location.thunk";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
+
 const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
   let setValue = value;
   if (value === "") setValue = "Today";

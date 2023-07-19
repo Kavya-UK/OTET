@@ -4,9 +4,31 @@ import {Link, useNavigate} from 'react-router-dom'
 import InputCheckbox from '../../Components/common/InputCheckbox';
 import SideBanner from '../../Components/common/SideBanner';
 import LoginFooter from "../../Components/common/LoginFooter";
-
+import { useForm } from "react-hook-form";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { loginSchema } from "../../validations/auth.js";
  const Login=()=> {
   const navigate= useNavigate();
+const {
+  handleSubmit,
+  control,
+  setValue,
+  register,
+  formState: { errors },
+} = useForm({
+  mode: "onSubmit",
+  resolver: joiResolver(loginSchema),
+});
+ const onSubmit = async (data) => {
+  console.log("PPPPPPPPPPPPPPPPPPPPPPPPPPPPpp");
+ 
+   navigate("/home");
+ };
+
+ const handleLogin = (e) => {
+  console.log('OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOooooo');
+   handleSubmit(onSubmit)(e);
+ };
 
   return (
     <div className="grid grid-cols-5">
@@ -36,10 +58,16 @@ import LoginFooter from "../../Components/common/LoginFooter";
             <div className="grid grid-cols-1 sm:grid-cols-1 gap-4 mt-[20px] text-left">
               <div>
                 <InputText
-                  type="phonenumber"
+                  type="email"
                   label="Mobile Number"
                   inputWidth={"w-[100%] sm:w-[85%]"}
                   placeholder="XXX XXX XXXX"
+                  control={control}
+                  schema={loginSchema.email}
+                  register={register}
+                  isValidationSet={true}
+                  setValue={setValue}
+                  errorMessage={errors.email?.message}
                 />
               </div>
               <div>
@@ -48,6 +76,12 @@ import LoginFooter from "../../Components/common/LoginFooter";
                   label=" Password"
                   inputWidth={"w-[100%] sm:w-[85%]"}
                   placeholder="********"
+                  control={control}
+                  schema={loginSchema.password}
+                  register={register}
+                  isValidationSet={true}
+                  setValue={setValue}
+                  errorMessage={errors.email?.message}
                 />
               </div>
               <div className="w-full flex justify-end text-codGray sm:w-[85%]">
@@ -69,7 +103,11 @@ import LoginFooter from "../../Components/common/LoginFooter";
             </div>
           </div>
         </div>
-        <LoginFooter label="Login" info="Don’t have an account? Signup" />
+        <LoginFooter
+          onClick={handleLogin}
+          label="Login"
+          info="Don’t have an account? Signup"
+        />
       </div>
     </div>
   );

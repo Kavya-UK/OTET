@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchDoctorFilter } from "../../Redux/thunk/doctorfilter.thunk";
+import { fetchDoctorFilter } from "../../redux/thunk/doctorfilter.thunk";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function DoctorFilter() {

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import InputText from "../../Components/common/InputText";
+import InputText from "../../components/common/InputText";
 import { Link } from "react-router-dom";
-import PasswordModal from "../../Components/common/PasswordModal";
-import SideBanner from "../../Components/common/SideBanner";
-import Otp from "../../Components/common/Otp";
-import LoginFooter from "../../Components/common/LoginFooter";
+import PasswordModal from "../../components/common/PasswordModal";
+import SideBanner from "../../components/common/SideBanner";
+import Otp from "../../components/common/Otp";
+import LoginFooter from "../../components/common/LoginFooter";
 export default function ForgotPassword() {
 
   const [step, setStep] = useState(1);

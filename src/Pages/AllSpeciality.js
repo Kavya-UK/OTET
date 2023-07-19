@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import Header from '../Components/common/Header'
-import SpecialityCard from '../Components/common/SpecialityCard';
-import { fetchSpeciality } from '../Redux/thunk/speciality.thunk';
+import Header from '../components/common/Header'
+import SpecialityCard from '../components/common/SpecialityCard';
+import { fetchSpeciality } from '../redux/thunk/speciality.thunk';
 import { useDispatch, useSelector } from "react-redux";
-import Footer from "../Components/common/Footer";
+import Footer from "../components/common/Footer";
 
 
 export default function AllSpeciality() {

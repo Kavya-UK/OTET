@@ -1,15 +1,15 @@
 import React, { useEffect, useState, forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
-import { fetchLocation } from "../../Redux/thunk/location.thunk";
-import { fetchSpeciality } from "../../Redux/thunk/speciality.thunk";
-import { fetchConditions } from "../../Redux/thunk/conditions.thunk";
+import { fetchLocation } from "../../redux/thunk/location.thunk";
+import { fetchSpeciality } from "../../redux/thunk/speciality.thunk";
+import { fetchConditions } from "../../redux/thunk/conditions.thunk";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation,useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ReactComponent as Calendar } from "../../assets/images/home/Calendar.svg";
-import { fetchFeaturedDoctors } from "../../Redux/thunk/featuredDoctor.thunk";
+import { fetchFeaturedDoctors } from "../../redux/thunk/featuredDoctor.thunk";
 import { useSearchParams } from "react-router-dom";
 
 const DateInputComponent = forwardRef(({ value, onClick }, ref) => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect, forwardRef } from "react";
 import { ReactComponent as SearchBar } from "../../assets/images/home/SearchBarIcon.svg";
 import { ReactComponent as Calendar } from "../../assets/images/home/Calendar.svg";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchLocation } from "../../Redux/thunk/location.thunk";
+import { fetchLocation } from "../../redux/thunk/location.thunk";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";

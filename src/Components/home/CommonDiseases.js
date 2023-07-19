@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchDiseases } from "../../Redux/thunk/diseases.thunk";
+import { fetchDiseases } from "../../redux/thunk/diseases.thunk";
 import { useDispatch, useSelector } from "react-redux";
 export default function CommonDiseases() {
   const cond1 = useSelector((state) => state.diseases.diseases[23]);

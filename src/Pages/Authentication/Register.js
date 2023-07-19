@@ -1,9 +1,9 @@
 import React from 'react'
-import InputText from "../../Components/common/InputText";
-import InputSelect from '../../Components/common/InputSelect';
+import InputText from "../../components/common/InputText";
+import InputSelect from '../../components/common/InputSelect';
 import { useNavigate } from 'react-router-dom';
-import SideBanner from "../../Components/common/SideBanner";
-import LoginFooter from '../../Components/common/LoginFooter';
+import SideBanner from "../../components/common/SideBanner";
+import LoginFooter from '../../components/common/LoginFooter';
 
 export default function Register() {
   const navigate=useNavigate();

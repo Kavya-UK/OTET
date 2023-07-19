@@ -1,8 +1,8 @@
 import React,{useState} from 'react'
-import InputText from '../../Components/common/InputText';
-import PasswordModal from '../../Components/common/PasswordModal';
-import SideBanner from '../../Components/common/SideBanner';
-import LoginFooter from '../../Components/common/LoginFooter';
+import InputText from '../../components/common/InputText';
+import PasswordModal from '../../components/common/PasswordModal';
+import SideBanner from '../../components/common/SideBanner';
+import LoginFooter from '../../components/common/LoginFooter';
 
 export default function ChangePassword() {
 

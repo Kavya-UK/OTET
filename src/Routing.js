@@ -9,11 +9,11 @@ import Home from "./pages/Home"
 import AboutUs from './pages/AboutUs';
 import AllSpeciality from './pages/AllSpeciality';
 import BrowseDoctors from "./components/home/BrowseDoctor";
-import BookAppointment from './Pages/BookAppointment';
-import DoctorListing from "./Pages/DoctorListing"
-import DoctorsProfileContainer from "./Pages/DoctorsProfile";
-import ScheduleAppointmentForm from './Components/appointments/ScheduleAppointment';
-import SideBar from './Components/common/SideBar';
+import BookAppointment from './pages/BookAppointment';
+import DoctorListing from "./pages/DoctorListing"
+import DoctorsProfileContainer from "./pages/DoctorsProfile";
+import ScheduleAppointmentForm from './components/appointments/ScheduleAppointment';
+import SideBar from './components/common/SideBar';
 const Routing=()=> {
   return (
     <Routes>

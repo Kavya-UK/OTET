@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
-import Header from "../Components/common/Header";
-import HomeBanner from "../Components/home/HomeBanner";
-import Specialities from "../Components/home/Specialities";
-import CommonDiseases from "../Components/home/CommonDiseases";
-import FeaturedPractioners from "../Components/home/FeaturedPractioners";
-import OurProcess from "../Components/home/OurProcess";
-import ListPractise from "../Components/home/ListPractise";
-import DownloadApp from "../Components/home/DownloadApp";
-import Footer from "../Components/common/Footer";
+import Header from "../components/common/Header";
+import HomeBanner from "../components/home/HomeBanner";
+import Specialities from "../components/home/Specialities";
+import CommonDiseases from "../components/home/CommonDiseases";
+import FeaturedPractioners from "../components/home/FeaturedPractioners";
+import OurProcess from "../components/home/OurProcess";
+import ListPractise from "../components/home/ListPractise";
+import DownloadApp from "../components/home/DownloadApp";
+import Footer from "../components/common/Footer";
 import { useDispatch } from "react-redux";
 import {
   fetchFeaturedSpeciality,
   fetchSpeciality,
-} from "../Redux/thunk/speciality.thunk";
-import { fetchConditions } from "../Redux/thunk/conditions.thunk";
+} from "../redux/thunk/speciality.thunk";
+import { fetchConditions } from "../redux/thunk/conditions.thunk";
 export default function Home() {
   const dispatch = useDispatch();
   useEffect(() => {

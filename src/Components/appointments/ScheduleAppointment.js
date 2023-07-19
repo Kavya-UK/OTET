@@ -4,10 +4,12 @@ import InputCheckbox from "../common/InputCheckbox";
 import Footer from "../common/Footer";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+
 import {
   fetchDoctorData,
   fetchDoctorSlot,
-} from "../../Redux/thunk/featuredDoctor.thunk";
+} from "../../redux/thunk/featuredDoctor.thunk";
+
 
 export default function ScheduleAppointmentForm() {
   const dispatch = useDispatch();

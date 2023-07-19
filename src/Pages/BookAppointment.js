@@ -1,12 +1,12 @@
 import React, { forwardRef, useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import { BiCalendar } from "react-icons/bi";
-import Footer from "../Components/common/Footer";
-import { fetchSpeciality } from "../Redux/thunk/speciality.thunk";
-import { fetchLocation } from "../Redux/thunk/location.thunk";
+import Footer from "../components/common/Footer";
+import { fetchSpeciality } from "../redux/thunk/speciality.thunk";
+import { fetchLocation } from "../redux/thunk/location.thunk";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchConditions } from "../Redux/thunk/conditions.thunk";
-import AppointmentHeader from "../Components/home/AppointmentHeader";
+import { fetchConditions } from "../redux/thunk/conditions.thunk";
+import AppointmentHeader from "../components/home/AppointmentHeader";
 const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
   console.log(value);
   let setValue = value;

@@ -1,9 +1,9 @@
 import React from 'react'
-import InputText from "../../Components/common/InputText"
+import InputText from "../../components/common/InputText"
 import {Link, useNavigate} from 'react-router-dom'
-import InputCheckbox from '../../Components/common/InputCheckbox';
-import SideBanner from '../../Components/common/SideBanner';
-import LoginFooter from "../../Components/common/LoginFooter";
+import InputCheckbox from '../../components/common/InputCheckbox';
+import SideBanner from '../../components/common/SideBanner';
+import LoginFooter from "../../components/common/LoginFooter";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { loginSchema } from "../../validations/auth.js";

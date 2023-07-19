@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import DoctorFilter from '../Components/doctor/DoctorFilter'
-import DocAvailability from "../Components/doctor/DocAvailability" 
-import DoctorHeader from "../Components/doctor/DoctorHeader";
+import DoctorFilter from '../components/doctor/DoctorFilter'
+import DocAvailability from "../components/doctor/DocAvailability" 
+import DoctorHeader from "../components/doctor/DoctorHeader";
 import { useSelector } from 'react-redux';
 export default function DoctorListing() {
    const docTotalCount = useSelector(

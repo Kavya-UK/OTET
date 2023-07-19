@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchBrowseDoctors } from "../../Redux/thunk/browsedoctor.thunk";
+import { fetchBrowseDoctors } from "../../redux/thunk/browsedoctor.thunk";
 
 export default function BrowseDoctors({ closeModal }) {
   const dispatch = useDispatch();

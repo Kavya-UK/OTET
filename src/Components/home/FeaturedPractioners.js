@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import HomeCaurosal from "./HomeCaurosal";
-import { fetchFeaturedDoctors } from "../../Redux/thunk/featuredDoctor.thunk";
+import { fetchFeaturedDoctors } from "../../redux/thunk/featuredDoctor.thunk";
 import { useDispatch } from "react-redux";
 export default function FeaturedPractioners() {
   const dispatch = useDispatch();

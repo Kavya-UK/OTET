@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useState } from "react";
 import {
   fetchDoctorData,
   fetchDoctorSlot,
-} from "../../Redux/thunk/featuredDoctor.thunk";
+} from "../../redux/thunk/featuredDoctor.thunk";
 import { useSelector, useDispatch } from "react-redux";
 import ReactDatePicker from "react-datepicker";
 import { useLocation, useNavigate } from "react-router-dom";

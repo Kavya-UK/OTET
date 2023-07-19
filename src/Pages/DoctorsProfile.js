@@ -1,7 +1,7 @@
 import React from 'react'
-import Header from "../Components/common/Header"
-import DoctorProfile from '../Components/doctor/DoctorProfile'
-import Footer from '../Components/common/Footer'
+import Header from "../components/common/Header"
+import DoctorProfile from '../components/doctor/DoctorProfile'
+import Footer from '../components/common/Footer'
 
 export default function DoctorsProfileContainer() {
   return (

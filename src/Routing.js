@@ -1,18 +1,19 @@
 import React from 'react'
 import {Routes,Route} from 'react-router-dom' 
-import Register from "./Pages/Authentication/Register";
-import OtpVerification from "./Pages/Authentication/OtpVerification";
-import Login from "./Pages/Authentication/Login";
-import ForgotPassword from "./Pages/Authentication/ForgotPassword";
-import ChangePassword from "./Pages/Authentication/ChangePassword";
-import Home from './Pages/Home';
-import AboutUs from './Pages/AboutUs';
-import AllSpeciality from './Pages/AllSpeciality';
-import BrowseDoctors from './Components/home/BrowseDoctor';
+import Register from "./pages/Authentication/Register";
+import OtpVerification from "./pages/Authentication/OtpVerification";
+import Login from "./pages/Authentication/Login";
+import ForgotPassword from "./pages/Authentication/ForgotPassword";
+import ChangePassword from "./pages/Authentication/ChangePassword";
+import Home from "./pages/Home"
+import AboutUs from './pages/AboutUs';
+import AllSpeciality from './pages/AllSpeciality';
+import BrowseDoctors from "./components/home/BrowseDoctor";
 import BookAppointment from './Pages/BookAppointment';
 import DoctorListing from "./Pages/DoctorListing"
 import DoctorsProfileContainer from "./Pages/DoctorsProfile";
 import ScheduleAppointmentForm from './Components/appointments/ScheduleAppointment';
+import SideBar from './Components/common/SideBar';
 const Routing=()=> {
   return (
     <Routes>
@@ -36,6 +37,11 @@ const Routing=()=> {
         exact
         path="/schedule-appointment"
         element={<ScheduleAppointmentForm />}
+      />
+      <Route
+        exact
+        path="/sidebar"
+        element={<SideBar />}
       />
     </Routes>
   );

@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function SpecialityCard({ image,title,info}) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col py-[30px] px-[20px] hover:shadow-[0_0_8px_5px_#E2F6F3] rounded-[20px] ">
       <div>
         <img
           className="lg:h-[130px] lg:w-[130px] sm:h-[80px] sm:w-[80px]  h-[80px] w-[80px] "

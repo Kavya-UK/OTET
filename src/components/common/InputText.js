@@ -47,13 +47,13 @@ export default function InputText({
         type={inputType}
         placeholder={placeholder}
         disable={disable}
-        {...(otherProps.isValidationSet
-          ? {
-              ...otherProps.register(name, {
-                ...otherProps.schema,
-              }),
-            }
-          : null)}
+        // {...(otherProps.isValidationSet
+        //   ? {
+        //       ...otherProps.register(name, {
+        //         ...otherProps.schema,
+        //       }),
+        //     }
+        //   : null)}
         className={`border-[2px] opacity-100 rounded-[5px] border-shadeGray active:border-shadeGray hover:border-shadeGray  py-[10px]  bg-white w-full outline-none placeholder-placeholderGray placeholder:font-BasicSansLight text-[15px] ${passwordStyle}  ${
           noIcon ? "no-icon " : " "
         } ${

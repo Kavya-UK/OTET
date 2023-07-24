@@ -11,14 +11,14 @@ const speciality = useSelector(
 const FeatureSpeciality=speciality.slice(0,4)
 return (
   <div className="mt-[70px]">
-    <h1 className="text-[30px] sm:text-[46px] xl:text-[42px] font-BasicSans font-semibold leading-[70px] text-codGray tracking-[8px] text-center">
+    <h1 className="text-[30px] sm:text-[46px] xl:text-[42px] font-BasicSans font-bold md:leading-[70px] text-codGray tracking-[10px] text-center">
       Holistic fields
     </h1>
     <p className="text-[24px] lg:text-[33px] font-BasicSans text-codGray tracking-[5.94px] font-bold text-center mt-[20px]">
       15 + Specialities
     </p>
     <p
-      className="text-mustardYellow text-[18px] sm:text-[15px] lg:text-[20px] font-BasicSans tracking-[4px] flex justify-end items-end mr-[30px]"
+      className="text-mustardYellow text-[18px] sm:text-[15px] lg:text-[20px] cursor-pointer font-BasicSans tracking-[4px] flex justify-end items-end mr-[30px]"
       onClick={() => navigate("/all-speciality")}
     >
       See More

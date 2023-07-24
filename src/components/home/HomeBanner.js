@@ -7,32 +7,47 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
 
-const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
-  let setValue = value;
-  if (value === "") setValue = "Today";
-  return (
-    <div className="flex md:justify-between items-center w-full pl-[10px]">
-      <Calendar
-        onClick={onClick}
-        className="w-[15px] md:w-auto relative sm:top-[2px] lg:-top-[5px] mr-[20px] lg:mr-[15px] "
-      />
+const DateInputComponent = forwardRef(
+  ({ value, onClick, setDateIsOpen, dateIsOpen }, ref) => {
+    let setValue = value;
+    if (value === "") setValue = "Today";
+    return (
+      <div className="flex md:justify-between items-center w-full pl-[10px]">
+        <div className="flex">
+          <Calendar
+            onClick={() => {
+              onClick();
+              setDateIsOpen(true);
+            }}
+            className="w-[15px] md:w-auto relative sm:top-[2px] lg:-top-[5px] mr-[20px] lg:mr-[15px] "
+          />
 
-      <button
-        className="font-Basicsans text-[20px] text-codGray tracking-[5.04px] outline-none"
-        onClick={onClick}
-        ref={ref}
-      >
-        {setValue}
-      </button>
-      <img
-        onClick={onClick}
-        className="hidden md:block ml-[15px] w-[12px] h-[12px] sm:w-[18px] sm:h-[18px] relative -top-[5px] md:top-[4px] -right-[5px] md:right-auto"
-        src={require("../../assets/images/home/WhiteDropdown.png")}
-        alt="dropdown"
-      />
-    </div>
-  );
-});
+          <button
+            className="font-Basicsans text-[20px] text-codGray tracking-[5.04px] outline-none ml-[10px]"
+            onClick={() => {
+              onClick();
+              setDateIsOpen(true);
+            }}
+            ref={ref}
+          >
+            {setValue}
+          </button>
+        </div>
+        <img
+          onClick={() => {
+            onClick();
+            setDateIsOpen(true);
+          }}
+          className={`transition-all duration-[0.5s] ease-[ease] hidden md:block ml-[15px] w-[12px] h-[12px] sm:w-[18px] sm:h-[18px] relative -top-[5px] md:top-[4px] -right-[5px] md:right-auto ${
+            dateIsOpen ? " rotate-180" : " rotate-0"
+          }`}
+          src={require("../../assets/images/home/WhiteDropdown.png")}
+          alt="dropdown"
+        />
+      </div>
+    );
+  }
+);
 export default function HomeBanner({}) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -51,6 +66,7 @@ export default function HomeBanner({}) {
   const [locValue, setLocValue] = useState("");
   const [locId, setLocId] = useState("");
   const [startDate, setStartDate] = useState("");
+  const [dateIsOpen, setDateIsOpen] = useState("");
 
   useEffect(() => {
     setAllList({
@@ -151,13 +167,12 @@ export default function HomeBanner({}) {
 
   return (
     <div className="lg:h-[calc(100vh_-_7rem)] bg-cyanBlue w-full pt-[180px] pb-[40px]">
-      <h1 className="text-titleBlack text-[36px] sm:text-[48px] lg:text-[55px] font-PoppinsRegular text-center tracking-[6.8px] font-normal mb-[15px] transition-all duration-[0.5s] ease-[ease]">
+      <h1 className="text-titleBlack text-[18px] sm:text-[24px] lg:text-[48px] xl:text-[52px] font-PoppinsRegular text-center tracking-[0.1em] font-normal mb-[15px] transition-all duration-[0.5s] ease-[ease]">
         HOLISTIC
-        <br className="sm:hidden block" />
         <img
           src={require("../../assets/images/home/M.png")}
           alt="title"
-          className="inline-block sm:ml-[40px] lg:ml-[30px] h-[56px] sm:h-[70px] lg:h-[75px] w-[35px] sm:w-[40px] lg:w-[49px] relative bottom-[5px] transition-all duration-[0.5s] ease-[ease] mr-[6px]"
+          className="inline-block pl-[5px] sm:ml-[8px] lg:ml-[30px] h-[26px] sm:h-[36px] lg:h-[70px]  relative bottom-[2px] lg:bottom-[5px] transition-all duration-[0.5s] ease-[ease] sm:mr-[2px]"
         />
         EDICINE CONNECTING
       </h1>
@@ -165,7 +180,7 @@ export default function HomeBanner({}) {
         Mind. Body. Soul
       </h3>
       <div className="grid grid-cols-12 rounded-[20px] lg:rounded-[87px] h-[250px] md:h-[100px]  border-[1px] bg-white mt-[90px] mx-[10px] md:mx-[40px] xl:mx-[100px] transition-all duration-[0.5s] ease-[ease]">
-        <div className=" col-span-12 md:col-span-11 flex items-center md:h-[100px] lg:justify-center">
+        <div className=" col-span-12 md:col-span-10 xl:col-span-11 flex items-center md:h-[100px] lg:justify-center">
           <div className=" grid grid-cols-3 w-full pl-[20px] md:pl-0">
             <div className="col-span-3 md:col-span-1 flex justify-between items-center relative md:pl-[20px] lg:pl-[60px]">
               <input
@@ -215,7 +230,10 @@ export default function HomeBanner({}) {
               />
               <div>
                 <img
-                  className="w-[12px] h-[12px] sm:w-[18px] sm:h-[18px] relative top-[4px]"
+                  onClick={handleSpecFocusIn}
+                  className={`transition-all duration-[0.3s] ease-[linear] w-[12px] h-[12px] sm:w-[18px] sm:h-[18px] relative top-[4px] ${
+                    showSpecDropdown ? " rotate-180" : " rotate-0"
+                  }`}
                   src={require("../../assets/images/home/WhiteDropdown.png")}
                   alt="dropdown"
                 />
@@ -226,9 +244,11 @@ export default function HomeBanner({}) {
                 }`}
               >
                 <ul className="">
-                  <li className="font-BasicSans text-eastBayLight">
-                    Speciality
-                  </li>
+                  {allList.speciality.length ? (
+                    <li className="font-BasicSans text-eastBayLight">
+                      Speciality
+                    </li>
+                  ) : null}
                   {allList.speciality.length
                     ? allList.speciality.map((spec) => {
                         return (
@@ -247,9 +267,11 @@ export default function HomeBanner({}) {
                         );
                       })
                     : null}
-                  <li className="font-BasicSans text-eastBayLight">
-                    Conditions
-                  </li>
+                  {allList.conditions.length ? (
+                    <li className="font-BasicSans text-eastBayLight">
+                      Conditions
+                    </li>
+                  ) : null}
                   {allList.conditions.length
                     ? allList.conditions.map((spec) => {
                         return (
@@ -271,31 +293,41 @@ export default function HomeBanner({}) {
                 </ul>
               </div>
             </div>
-            <div className="col-span-3 md:col-span-1 flex md:justify-around items-center relative top-[5px]">
+            <div className="col-span-3 md:col-span-1 flex md:justify-end items-center relative top-[5px]">
               <div className="text-[20px] w-full xl:w-[80%]">
                 <DatePicker
                   className="bg-white font-Basicsans text-[1.3rem] text-codGray tracking-[5px] outline-none"
                   dateFormat="MMMM d, yyyy"
                   selected={startDate}
                   minDate={new Date()}
-                  onChange={(date) => setStartDate(date)}
-                  customInput={<DateInputComponent />}
+                  onChange={(date) => {
+                    setStartDate(date);
+                  }}
+                  onCalendarClose={() => setDateIsOpen(false)}
+                  customInput={
+                    <DateInputComponent
+                      setDateIsOpen={setDateIsOpen}
+                      dateIsOpen={dateIsOpen}
+                    />
+                  }
                   closeOnScroll={true}
                 />
               </div>
             </div>
           </div>
         </div>
-        <div className="hidden md:flex col-span-2 md:col-span-1 items-center h-[100px]">
-          <SearchBar
-            onClick={() => handleSearch()}
-            className="w-[80%] xl:w-[90%] cursor-pointer"
-          />
-        </div>
-        <div className=" md:hidden col-span-12 text-center ">
-          <button className="bg-shadeBlue py-[8px] w-[50%] text-white rounded-[10px] text-[1rem]">
-            Search
-          </button>
+        <div className="col-span-12 md:col-span-2 xl:col-span-1 flex md:justify-end">
+          <div className="hidden md:flex col-span-2 md:col-span-1 items-center h-[100px] w-[100px]">
+            <SearchBar
+              onClick={() => handleSearch()}
+              className=" cursor-pointer "
+            />
+          </div>
+          <div className=" md:hidden col-span-12 text-center w-full">
+            <button className="bg-shadeBlue py-[8px] w-[50%] text-white rounded-[10px] text-[1rem]">
+              Search
+            </button>
+          </div>
         </div>
       </div>
     </div>

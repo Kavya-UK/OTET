@@ -35,6 +35,10 @@
   font-family: "PoppinsMedium";
   src: url("./assets/fonts/Poppins-Medium.otf");
 }
+@font-face {
+  font-family: "HenrietteRegular";
+  src: url("./assets/fonts/Henriette-Regular.ttf");
+}
 
 
 

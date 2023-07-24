@@ -18,7 +18,9 @@ const featuredpractionerSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchFeaturedDoctors.fulfilled, (state, action) => {
-      state.featuredDocs = [...action.payload.result];
+      state.featuredDocs = action.payload.result
+        ? [...action.payload.result]
+        : [];
       state.totalCount = action.payload.totalCount;
       state.isFeaturedDocLoading = false;
     });

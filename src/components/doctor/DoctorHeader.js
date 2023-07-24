@@ -19,11 +19,11 @@ const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
     <div className="flex md:justify-between items-center w-full pl-[10px]">
       <Calendar
         onClick={onClick}
-        className="w-[15px] md:w-auto relative  mr-[20px] lg:mr-[15px] "
+        className="w-[15px] md:w-auto relative   "
       />
 
       <button
-        className="text-codGray font-BasicSans h-[40px] text-[16px] w-full outline-none bg-white px-[0.5rem]"
+        className="text-codGray font-BasicSans h-[40px] text-[13px] w-full outline-none bg-white px-[0.5rem]"
         onClick={onClick}
         ref={ref}
       >
@@ -174,7 +174,7 @@ export default function DoctorHeader() {
   };
   return (
     <div className="flex flex-row justify-between items-center max-h-fit py-[5px] pl-[30px] pr-[50px] bg-white  drop-shadow-md">
-      <div onClick={() => navigate("/home")}>
+      <div onClick={() => navigate("/")}>
         <img
           className="w-[130px] h-[130px]"
           src={require("../../assets/images/home/Logo.png")}

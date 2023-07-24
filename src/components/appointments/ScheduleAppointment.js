@@ -10,24 +10,23 @@ import {
   fetchDoctorSlot,
 } from "../../redux/thunk/featuredDoctor.thunk";
 
-
 export default function ScheduleAppointmentForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-   const month = [
-     "Jan",
-     "Feb",
-     "Mar",
-     "Apr",
-     "May",
-     "Jun",
-     "Jul",
-     "Aug",
-     "Sep",
-     "Oct",
-     "Nov",
-     "Dec",
-   ];
+  const month = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const doc_url = query.get("doc_url");
@@ -42,6 +41,10 @@ export default function ScheduleAppointmentForm() {
   const [type, settype] = useState(1);
   const [visit, setVisit] = useState(1);
   const [selectedDate, setSelectedDate] = useState("");
+  const [showInsurance, setShowInsurance] = useState(false);
+  const [selectedInc, setselectedInc] = useState("");
+  const [showCondition, setShowCondition] = useState(false);
+  const [selectedCond, setselectedCond] = useState("");
   const [inPersonSlot, setInPersonSlot] = useState([]);
   const [virtualSlot, setVirtualSlot] = useState([]);
   useEffect(() => {
@@ -53,60 +56,59 @@ export default function ScheduleAppointmentForm() {
   }, []);
 
   const onDaySelect = (inPerson, virtual) => {
-    if (visit === 1 && inPerson.value.length >= 1 ) {
+    if (visit === 1 && inPerson.value.length >= 1) {
       setSelectedDate(inPerson.date);
       setInPersonSlot(inPerson.value);
     }
-    if (visit === 2 && virtual.value.length >= 1 ) {
+    if (visit === 2 && virtual.value.length >= 1) {
       setSelectedDate(virtual.date);
       setVirtualSlot(virtual.value);
     }
   };
-const onDateChange = (type) => {
-  setInPersonSlot([]);
-  setVirtualSlot([]);
-  let d;
-  if(type === 'forward') {
-    d = new Date(
-      new Date(doctorSlot.InPerson[6].date) 
-    ).toLocaleDateString("fr-CA");
-     dispatch(
-       fetchDoctorSlot({ doctor_id: doc_url.split("/")[1], time_slot_date: d })
-     );
-  } else if (
-    new Date(doctorSlot.InPerson[0].date).setHours(0, 0, 0, 0) !==
-    new Date().setHours(0, 0, 0, 0)
-  ) {
-  
-    d = new Date(
-      new Date(doctorSlot.InPerson[0].date) - 6 * 24 * 60 * 60 * 1000
-    ).toLocaleDateString("fr-CA");
-     dispatch(
-       fetchDoctorSlot({ doctor_id: doc_url.split("/")[1], time_slot_date: d })
-     );
-  }
-  
- 
-};
-const getClassForDay = (inPerson, virtual) => {
-  if (selectedDate === inPerson.date) return " bg-shadeBlue text-white  cursor-pointer ";
-  else if (visit === 1 && inPerson?.value?.length >= 1 )
-    return " bg-Turquoise text-codGray  cursor-pointer ";
-  else if (visit === 2 && virtual?.value?.length >= 1 )
-    return " bg-Turquoise text-codGray  cursor-pointer ";
-  else return " bg-ashGray text-codGray cursor-not-allowed";
-};
- const tConvert = (time) => {
-   time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [
-     time,
-   ];
-   if (time.length > 1) {
-     time = time.slice(1);
-     time[5] = +time[0] < 12 ? "AM" : "PM";
-     time[0] = +time[0] % 12 || 12;
-   }
-   return `${time[0]}:${time[2]} ${time[5]}`;
- };
+  const onDateChange = (type) => {
+    setInPersonSlot([]);
+    setVirtualSlot([]);
+    let d;
+    if (type === "forward") {
+      d = new Date(new Date(doctorSlot.InPerson[6].date)).toLocaleDateString(
+        "fr-CA"
+      );
+      dispatch(
+        fetchDoctorSlot({ doctor_id: doc_url.split("/")[1], time_slot_date: d })
+      );
+    } else if (
+      new Date(doctorSlot.InPerson[0].date).setHours(0, 0, 0, 0) !==
+      new Date().setHours(0, 0, 0, 0)
+    ) {
+      d = new Date(
+        new Date(doctorSlot.InPerson[0].date) - 6 * 24 * 60 * 60 * 1000
+      ).toLocaleDateString("fr-CA");
+      dispatch(
+        fetchDoctorSlot({ doctor_id: doc_url.split("/")[1], time_slot_date: d })
+      );
+    }
+  };
+  const getClassForDay = (inPerson, virtual) => {
+    if (selectedDate === inPerson.date)
+      return " bg-shadeBlue text-white  cursor-pointer ";
+    else if (visit === 1 && inPerson?.value?.length >= 1)
+      return " bg-Turquoise text-codGray  cursor-pointer ";
+    else if (visit === 2 && virtual?.value?.length >= 1)
+      return " bg-Turquoise text-codGray  cursor-pointer ";
+    else return " bg-ashGray text-codGray cursor-not-allowed";
+  };
+  const tConvert = (time) => {
+    time = time
+      .toString()
+      .match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+    if (time.length > 1) {
+      time = time.slice(1);
+      time[5] = +time[0] < 12 ? "AM" : "PM";
+      time[0] = +time[0] % 12 || 12;
+    }
+    return `${time[0]}:${time[2]} ${time[5]}`;
+  };
+
   return (
     <>
       <div>
@@ -145,18 +147,51 @@ const getClassForDay = (inPerson, virtual) => {
                 <label className="text-lightGray text-[15px] font-BasicSans">
                   Select your Insurance
                 </label>
-                <div className="h-[40px] w-full flex items-center justify-center mb-[30px]">
+                <div className="h-[40px] w-full flex items-center justify-center mb-[30px] relative">
                   <input
                     className="h-full w-full rounded-[5px] border-shadeBlue px-[16px] outline-none placeholder:text-[12px] placeholder:tracking-[3px] bg-white border-opacity-80  rounded-r-none border-y border-l"
                     placeholder="Select Insurance"
                     type="text"
+                    value={selectedInc}
+                    onClick={() => setShowInsurance(true)}
+                    onBlur={() => {
+                      setTimeout(() => {
+                        setShowInsurance(false);
+                      }, 100);
+                    }}
                   />
-                  <div className="cursor-pointer bg-[white]  border-shadeBlue h-full flex items-center justify-center border-y border-r border-l border-l-gray-300 rounded-r-[6px] px-3  ">
+                  <div
+                    onClick={() => setShowInsurance(!showInsurance)}
+                    className="cursor-pointer bg-[white]  border-shadeBlue h-full flex items-center justify-center border-y border-r border-l border-l-gray-300 rounded-r-[6px] px-3  "
+                  >
                     <img
                       src={require("../../assets/images/home/GreenArrowDown.png")}
                       alt="Dropdown"
-                      className="h-[8px] w-[16px] text-green rotate-0 transition-transform duration-300"
+                      className={`h-[8px] w-[16px] text-green transition-transform duration-300 ${
+                        showInsurance ? " rotate-180 " : "rotate-0 "
+                      }`}
                     />
+                  </div>
+                  <div
+                    className={`absolute top-[45px] left-0 w-[100%] h-[100px] bg-white overflow-auto shadow-lg ring-1 ring-black ring-opacity-5 pl-[20px] pt-[20px] rounded-[10px]  ${
+                      showInsurance ? " block z-20" : " hidden "
+                    }`}
+                  >
+                    <ul className="">
+                      {doctorData?.insurance_company?.length
+                        ? doctorData.insurance_company.map((inc) => {
+                            return (
+                              <li
+                                className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none hover:bg-cyanBlue  active-dropdown-item"
+                                onClick={() => setselectedInc(inc)}
+                                key={inc}
+                              >
+                                {inc}
+                              </li>
+                            );
+                          })
+                        : null}
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -164,8 +199,56 @@ const getClassForDay = (inPerson, virtual) => {
                 <label className="text-lightGray text-[15px] font-BasicSans">
                   What’s the reason for your visit?
                 </label>
-                <div className="h-[40px] w-full flex items-center justify-center mb-[30px]">
+                <div className="h-[40px] w-full flex items-center justify-center mb-[30px] relative">
+                  {/* <div className="h-[40px] w-full flex items-center justify-center mb-[30px] relative"> */}
                   <input
+                    className="h-full w-full rounded-[5px] border-shadeBlue px-[16px] outline-none placeholder:text-[12px] placeholder:tracking-[3px] bg-white border-opacity-80  rounded-r-none border-y border-l"
+                    placeholder="Select Condition"
+                    type="text"
+                    value={selectedCond}
+                    onClick={() => setShowCondition(true)}
+                    onBlur={() => {
+                      setTimeout(() => {
+                        setShowCondition(false);
+                      }, 100);
+                    }}
+                  />
+                  <div
+                    onClick={() => setShowCondition(!showCondition)}
+                    className="cursor-pointer bg-[white]  border-shadeBlue h-full flex items-center justify-center border-y border-r border-l border-l-gray-300 rounded-r-[6px] px-3  "
+                  >
+                    <img
+                      src={require("../../assets/images/home/GreenArrowDown.png")}
+                      alt="Dropdown"
+                      className={`h-[8px] w-[16px] text-green transition-transform duration-300 ${
+                        showCondition ? " rotate-180 " : "rotate-0 "
+                      }`}
+                    />
+                  </div>
+                  <div
+                    className={`absolute top-[45px] left-0 w-[100%] h-[100px] bg-white overflow-auto shadow-lg ring-1 ring-black ring-opacity-5 pl-[20px] pt-[20px] rounded-[10px]  ${
+                      showCondition ? " block z-20" : " hidden "
+                    }`}
+                  >
+                    <ul className="">
+                      {doctorData?.medical_condition?.length
+                        ? doctorData.medical_condition.map((cond) => {
+                            return (
+                              <li
+                                className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none hover:bg-cyanBlue  active-dropdown-item"
+                                onClick={() => setselectedCond(cond)}
+                                key={cond}
+                              >
+                                {cond}
+                              </li>
+                            );
+                          })
+                        : null}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* <input
                     className="h-full w-full rounded-[5px] border-shadeBlue px-[16px] outline-none placeholder:text-[12px] placeholder:tracking-[3px] bg-white border-opacity-80  rounded-r-none border-y border-l"
                     placeholder="Select Condition"
                     type="text"
@@ -176,8 +259,8 @@ const getClassForDay = (inPerson, virtual) => {
                       alt="Dropdown"
                       className="h-[8px] w-[16px] text-green rotate-0 transition-transform duration-300"
                     />
-                  </div>
-                </div>
+                  </div> */}
+                {/* </div> */}
               </div>
               <div className="">
                 <label className="text-lightGray text-[15px] font-BasicSans">
@@ -188,9 +271,7 @@ const getClassForDay = (inPerson, virtual) => {
                     <div
                       onClick={() => settype(1)}
                       className={`transition-all duration-[0.3s] ease-[linear] rounded-[2px] h-full  flex items-center justify-center text-center w-full ${
-                        type === 1
-                          ? " bg-shadeBlue text-white "
-                          : " text-black "
+                        type === 1 ? " z-10 text-white " : " text-black "
                       } `}
                     >
                       YES
@@ -198,13 +279,16 @@ const getClassForDay = (inPerson, virtual) => {
                     <div
                       onClick={() => settype(2)}
                       className={`transition-all duration-[0.3s] ease-[linear] rounded-[2px] h-full flex items-center justify-center text-center w-full ${
-                        type === 2
-                          ? " bg-shadeBlue text-white "
-                          : " text-black "
+                        type === 2 ? " z-10 text-white " : " text-black "
                       } `}
                     >
                       NO
                     </div>
+                    <div
+                      className={`absolute h-[30px] w-[50%] -z-2 bg-shadeBlue transition-transform duration-400 rounded-[0.2rem]  ${
+                        type === 2 ? " translate-x-[94%]" : " translate-x-[2%]"
+                      }`}
+                    ></div>
                   </div>
                 </div>
               </div>
@@ -222,9 +306,7 @@ const getClassForDay = (inPerson, virtual) => {
                         setVirtualSlot([]);
                       }}
                       className={`transition-all duration-[0.3s] ease-[linear] rounded-[3px] h-full flex items-center justify-center text-center w-full ${
-                        visit === 1
-                          ? " bg-shadeBlue text-white "
-                          : " text-black "
+                        visit === 1 ? " text-white z-10" : " text-black "
                       } `}
                     >
                       InPerson
@@ -237,13 +319,16 @@ const getClassForDay = (inPerson, virtual) => {
                         setVirtualSlot([]);
                       }}
                       className={`transition-all duration-[0.3s] ease-[linear] rounded-[3px] h-full flex items-center justify-center text-center w-full ${
-                        visit === 2
-                          ? " bg-shadeBlue text-white "
-                          : " text-black "
+                        visit === 2 ? " text-white z-10" : " text-black "
                       } `}
                     >
                       Virtual
                     </div>
+                    <div
+                      className={`absolute h-[30px] w-[50%] -z-2 bg-shadeBlue transition-transform duration-400 rounded-[0.2rem]  ${
+                        visit === 2 ? " translate-x-[94%]" : " translate-x-[2%]"
+                      }`}
+                    ></div>
                   </div>
                 </div>
               </div>
@@ -256,6 +341,7 @@ const getClassForDay = (inPerson, virtual) => {
                     className="h-full w-full rounded-[5px] border-shadeBlue px-[16px] outline-none placeholder:text-[12px] placeholder:tracking-[3px] bg-white border-opacity-80  rounded-r-none border-y border-l"
                     placeholder="Select address"
                     type="text"
+                    value={doctorData.doctor_clinic_address}
                   />
                   <div className="cursor-pointer bg-[white]  border-shadeBlue h-full flex items-center justify-center border-y border-r border-l border-l-gray-300 rounded-r-[6px] px-3  ">
                     <img
@@ -328,7 +414,6 @@ const getClassForDay = (inPerson, virtual) => {
                           </span>
                         );
                       })}
-                  {}
                 </div>
                 <div className="flex gap-2 mt-[30px] items-center">
                   <InputCheckbox

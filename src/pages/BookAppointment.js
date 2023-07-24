@@ -8,19 +8,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchConditions } from "../redux/thunk/conditions.thunk";
 import AppointmentHeader from "../components/home/AppointmentHeader";
 const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
-  console.log(value);
   let setValue = value;
   if (value === "") setValue = "Today";
   return (
     <div className="relative w-full">
       <div className="relative">
-        <input
+        <span
           onClick={onClick}
           ref={ref}
-          className="h-[64px] w-full rounded-[6px] border cursor-pointer border-opacity-80 p-2 text-placeholderGray placeholder:tracking-[3px] font-basic-sans-regular text-sm px-2 outline-none border-shadeBlue text-[15px] placeholder:font-thin pl-[1rem] "
-          placeholder="Today"
-          value={setValue}
-        />
+          className="h-[64px] w-full flex items-center rounded-[6px] tracking-[3px] border cursor-pointer border-opacity-80 p-2  text-placeholderGray font-basic-sans-regular text-[16px] px-2  border-shadeBlue  pl-[1rem] "
+        >
+          {setValue}
+        </span>
+
         <BiCalendar
           onClick={onClick}
           className="w-[28px] h-[29px] text-shadeBlue absolute right-5 top-[50%] -translate-y-[50%]"
@@ -158,7 +158,9 @@ export default function BookAppointment() {
                   <img
                     src={require("../assets/images/home/GreenArrowDown.png")}
                     alt="Dropdown"
-                    className="h-[12px] w-[12px] text-green rotate-0 transition-transform duration-300"
+                    className={`transition-all duration-[0.3s] ease-[linear] h-[12px] w-[12px] text-green ${
+                      showAreasDropdown ? " rotate-180" : "rotate-0"
+                    }`}
                   />
                 </div>
               </div>
@@ -169,25 +171,19 @@ export default function BookAppointment() {
               >
                 <ul className="">
                   <li className="font-BasicSans text-eastBayLight">Areas</li>
-                  {areasList.length ? (
-                    areasList.map((area) => {
-                      return (
-                        <li
-                          className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
-                          onClick={() => handleLocSelection(area.city)}
-                          key={area.id}
-                        >
-                          {area.city}
-                        </li>
-                      );
-                    })
-                  ) : (
-                    <img
-                      className="relative top-[80px] left-[180px] w-[100px]"
-                      src={require("../assets/images/cat-loading.gif")}
-                      alt="loading"
-                    />
-                  )}
+                  {areasList.length
+                    ? areasList.map((area) => {
+                        return (
+                          <li
+                            className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
+                            onClick={() => handleLocSelection(area.city)}
+                            key={area.id}
+                          >
+                            {area.city}
+                          </li>
+                        );
+                      })
+                    : null}
                 </ul>
               </div>
             </div>
@@ -208,7 +204,7 @@ export default function BookAppointment() {
                   <img
                     src={require("../assets/images/home/GreenArrowDown.png")}
                     alt="Dropdown"
-                    className="h-[12px] w-[12px] text-green rotate-0 transition-transform duration-300"
+                    className={`transition-all duration-[0.3s] ease-[linear] h-[12px] w-[12px] text-green  ${showSpecDropdown ? " rotate-180" : " rotate-0"}`}
                   />
                 </div>
               </div>
@@ -290,7 +286,7 @@ export default function BookAppointment() {
                 <div
                   onClick={() => settype(1)}
                   className={`transition-all duration-[0.5s] ease-[linear] rounded-[6px]  p-[10px] flex items-center justify-center text-center w-full ${
-                    type === 1 ? " bg-shadeBlue text-white " : " text-black "
+                    type === 1 ? " text-white z-10" : " text-black "
                   } `}
                 >
                   InPerson
@@ -298,11 +294,16 @@ export default function BookAppointment() {
                 <div
                   onClick={() => settype(2)}
                   className={`transition-all duration-[0.5s] ease-[linear] rounded-[6px]  p-[10px] flex items-center justify-center text-center w-full ${
-                    type === 2 ? " bg-shadeBlue text-white " : " text-black "
+                    type === 2 ? " text-white z-10" : " text-black "
                   } `}
                 >
                   Virtual
                 </div>
+                <div
+                  className={`absolute h-[2.8rem] w-[50%] -z-2 bg-shadeBlue transition-transform duration-400 rounded-[0.2rem]  ${
+                    type === 2 ? " translate-x-[90%]" : " translate-x-[2%]"
+                  }`}
+                ></div>
               </div>
             </div>
           </div>

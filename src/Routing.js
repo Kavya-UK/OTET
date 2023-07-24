@@ -13,16 +13,20 @@ import BookAppointment from './pages/BookAppointment';
 import DoctorListing from "./pages/DoctorListing"
 import DoctorsProfileContainer from "./pages/DoctorsProfile";
 import ScheduleAppointmentForm from './components/appointments/ScheduleAppointment';
-import SideBar from './components/common/SideBar';
+import PatientProfile from './pages/PatientProfile';
+import UpdatePatientProfile from './pages/UpdatePatientProfile';
+import NoConnectivity from './pages/NoConnectivity';
+import SiteUnderConstruction from './pages/SiteUnderConstruction';
+import NoAppointments from './pages/NoAppointments';
 const Routing=()=> {
   return (
     <Routes>
-      <Route exact path="/" element={<Register />} />
+      <Route exact path="/register" element={<Register />} />
       <Route exact path="/otp-verification" element={<OtpVerification />} />
       <Route exact path="/login" element={<Login />} />
       <Route exact path="/forgot-password" element={<ForgotPassword />} />
       <Route exact path="/change-password" element={<ChangePassword />} />
-      <Route exact path="/home" element={<Home />} />
+      <Route exact path="/" element={<Home />} />
       <Route exact path="/all-speciality" element={<AllSpeciality />} />
       <Route exact path="/about-us" element={<AboutUs />} />
       <Route exact path="/browse-doctors" element={<BrowseDoctors />} />
@@ -38,10 +42,18 @@ const Routing=()=> {
         path="/schedule-appointment"
         element={<ScheduleAppointmentForm />}
       />
+      <Route exact path="/patient-profile" element={<PatientProfile />} />
+      <Route exact path="/profile-edit" element={<UpdatePatientProfile />} />
+      <Route exact path="/no-internet" element={<NoConnectivity />} />
       <Route
         exact
-        path="/sidebar"
-        element={<SideBar />}
+        path="/site-underconstruction"
+        element={<SiteUnderConstruction />}
+      />
+      <Route
+        exact
+        path="/no-appointment"
+        element={<NoAppointments />}
       />
     </Routes>
   );

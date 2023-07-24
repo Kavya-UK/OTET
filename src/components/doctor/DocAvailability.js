@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Loader from "../common/Loader";
 
 export default function DocAvailability() {
   const dispatch = useDispatch();
@@ -94,7 +95,7 @@ export default function DocAvailability() {
   return (
     <>
       {isFeaturedDocLoading ? (
-        <p className="text-center">LOADING...</p>
+        <Loader />
       ) : (
         featuredDoc.map((items) => {
           return (

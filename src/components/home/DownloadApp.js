@@ -2,9 +2,9 @@ import React from 'react'
 
 export default function DownloadApp() {
   return (
-    <div className="grid grid-cols-2 gap-3 mt-[30px] px-[25px] lg:px-[55px] mb-[50px]">
+    <div className="grid grid-cols-2 gap-3 mt-[50px] px-[25px] lg:px-[55px] mb-[50px]">
       <div className="col-span-2 lg:col-span-1">
-        <h1 className=" font-BasicSansBold text-[30px] sm:text-[38px] xl:text-[48px] text-codGray tracking-[9.72px] font-bold text-center lg:text-left">
+        <h1 className=" font-BasicSans text-[30px] sm:text-[38px] xl:text-[48px] text-codGray tracking-[8px] font-semibold text-center lg:text-left md:leading-[70px]">
           Download Holmeddoc Mobile App
         </h1>
         <div className="lg:pl-[30px] text-center lg:text-left">

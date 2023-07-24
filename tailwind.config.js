@@ -14,6 +14,7 @@ module.exports = {
         PoppinsRegular: ["PoppinsRegular"],
         PoppinsItalic: ["PoppinsItalic"],
         HenrietteBold: ["HenrietteBold"],
+        HenrietteRegular: ["HenrietteRegular"],
         BahnschriftRegular: ["BahnschriftRegular"],
         PoppinsMedium: ["PoppinsMedium"],
       },
@@ -41,6 +42,9 @@ module.exports = {
         lightSkyBlue: "#F2FCFE",
         ashGray: "#E4E4E4",
         Turquoise: "#d5f9f9",
+        graycolor: "#9597A6",
+        labelColor: "#6B7276",
+        headingShade: "#707070",
       },
       boxShadow: {
         "3xl": "0px 3px 6px #00000029",

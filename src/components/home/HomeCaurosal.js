@@ -1,8 +1,12 @@
 import React from 'react'
 import Carousel from "@itseasy21/react-elastic-carousel";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+
 
 export default function HomeCaurosal() {
+    const navigate = useNavigate();
+
   const featuredDoc = useSelector(
     (state) => state.featuredpractioner.featuredDocs
   );
@@ -30,7 +34,10 @@ export default function HomeCaurosal() {
     >
       {featuredDoc.map(list => {
         return (
-          <div className="grid grid-cols-3 gap-2 xl:ml-[60px]">
+          <div
+            className="grid grid-cols-3 gap-2 xl:ml-[60px]"
+            onClick={() => navigate(`/doctor-profile?doc_url=${list.seo_url}`)}
+          >
             <div className="col-span-1">
               <img
                 className="w-[130px] h-[130px] sm:w-[200px] sm:h-[200px]"
@@ -38,19 +45,18 @@ export default function HomeCaurosal() {
                 alt="doctor"
               />
             </div>
-            <div className="col-span-2">
-              <h3 className="font-HenrietteBold text-[16px] sm:text-[26px] xl:text-[31px] text-codGray">
+            <div className="col-span-2 mt-[20px]">
+              <h3 className=" font-HenrietteRegular font-bold text-[1.5rem] text-codGray">
                 {list.doctor_name}
               </h3>
-              <span className="font-HenrietteBold text-[12px] sm:text-[16px] xl:text-[20px] text-codGray inline-block pr-[30px] mt-[10px]">
+              <span className="font-HenrietteRegular font-bold text-[1rem] text-codGray inline-block pr-[10px] mt-[10px]">
                 {list.medical_speciality[0]}
               </span>
-              <span className="font-HenrietteBold text-[12px] sm:text-[16px] xl:text-[20px] text-codGray">
+              <span className="font-HenrietteRegular font-bold text-[1rem] text-codGray">
                 {list.country[0]}
               </span>
-              <p className="text-[13px] xl:text-[15px] font-BasicSans text-eastBay mt-[10px] w-[100%] sm:w-[80%] lg:w-[80%] overflow-hidden truncate ">
-                {list.doctor_bio.substring(0, 60)}
-                {list.doctor_bio.length >= 60 && "..."}
+              <p className="text-[13px] xl:text-[15px] font-BasicSans text-eastBay mt-[10px] w-[100%] sm:w-[80%] lg:w-[80%] overflow-hidden max-h-[70px] truncate-content-carousel ">
+                {list.doctor_bio}
               </p>
             </div>
           </div>

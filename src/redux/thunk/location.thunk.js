@@ -4,8 +4,7 @@ import { BASE_URL, headersprops, authUser } from "../constant";
 
 export const fetchLocation = createAsyncThunk("location", async (data) => {
   try {
-    console.log("data======================");
-    console.log(data);
+    
     const response = await axios.post(
       `${BASE_URL}/patient/master/areas`,
       data,

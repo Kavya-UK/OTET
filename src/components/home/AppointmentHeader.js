@@ -10,7 +10,7 @@ export default function AppointmentHeader({ setDropShadow = true }) {
       {showBrowse && <BrowseDoctors closeModal={setShowBrowse} />}
 
       <div className=" py-[10px] xl:pl-[50px] lg:pl-[30px] pl-[10px] xl:pr-[30px] lg:pr-[15px] pr-[10px] sm:flex hidden justify-between items-center header-main">
-        <div className="" onClick={() => navigate("/home")}>
+        <div className="" onClick={() => navigate("/")}>
           <img
             className="w-[120px] h-[120px]"
             src={require("../../assets/images/home/Logo.png")}

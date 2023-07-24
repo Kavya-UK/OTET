@@ -10,16 +10,17 @@ export default function FeaturedPractioners() {
   }, []);
   return (
     <div className="border-b-[2px] mt-[50px] mb-[30px] pb-[80px]">
-      <div className="grid grid-cols-2 gap-3 mt-[20px] px-[15px] sm:px-[40px]">
-        <div className="col-span-2 lg:col-span-1 flex items-center flex-col justify-center">
+      <div className="grid grid-cols-2 gap-3 mt-[10px]  px-[15px] sm:px-[40px]">
+        <div className="col-span-2 lg:col-span-1 flex  flex-col ">
           <h1 className="text-[30px] sm:text-[38px] xl:text-[42px] font-BasicSans font-semibold text-codGray leading-[70px] tracking-[8.1px] mb-[40px] text-center lg:text-left">
-            Featured Holistic Practitioners
+            Featured Holistic <br className="hidden lg:block" />
+            Practitioners
           </h1>
           <HomeCaurosal />
         </div>
-        <div className="col-span-2 lg:col-span-1 mt-[40px] flex items-center flex-col justify-center">
+        <div className="col-span-2 lg:col-span-1 mt-[20px] flex items-center flex-col ">
           <img
-            className="w-[80%] lg:w-auto"
+            className="w-[80%] lg:w-[90%]"
             src={require("../../assets/images/home/Tree.png")}
             alt="tree"
           />

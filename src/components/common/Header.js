@@ -34,7 +34,7 @@ export default function Header({setDropShadow=false}) {
             <div className="flex items-center justify-center bg-white rounded-full absolute top-[100%] tall:top-[108%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-[10rem] w-[10rem] md:h-[10rem] md:w-[10rem] tall:h-[13rem] tall:w-[13rem] lg:h-[15rem] lg:w-[15rem]">
               <img
                 className="h-[8rem] md:h-[10rem] tall:h-[13rem] lg:h-[15rem] cursor-pointer"
-                onClick={() => navigate("/home")}
+                onClick={() => navigate("/")}
                 alt="Logo"
                 src={require("../../assets/images/home/Logo.png")}
               />

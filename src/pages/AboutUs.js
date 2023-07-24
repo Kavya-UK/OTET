@@ -12,7 +12,7 @@ export default function AboutUs() {
           src={require("../assets/images/about/aboutUsBg.png")}
           alt="about-us"
         />
-       <h1 className=" font-PoppinsMedium text-[45px] pl-[30px] tracking-[10px] text-black z-10 pt-[150px]">
+        <h1 className=" font-PoppinsMedium text-[45px] pl-[40px] tracking-[10px] text-black z-10 pt-[250px]">
           About Us
         </h1>
       </div>
@@ -22,7 +22,7 @@ export default function AboutUs() {
           <h1 className="text-codGray font-BasicSansBold text-[20px] sm:text-[25px] lg:text-[35px] xl:text-[40px] tracking-[8px] font-bold">
             Know about Holmeddoc
           </h1>
-          <p className="mt-[15px] text-[15px] lg:text-[20px] font-BasicSans text-eastBay xl:max-w-[80%] ">
+          <p className="mt-[15px] text-[18px] font-BasicSans text-eastBay xl:max-w-[80%] ">
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
             erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
@@ -32,6 +32,12 @@ export default function AboutUs() {
             et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
             accusam et justo duo dolores et ea rebum.
           </p>
+
+          <div className="flex justify-center items-center lg:block pt-[50px]">
+            <button className="bg-shadeBlue text-white rounded-[30px] w-[150px] sm:w-[200px] lg:w-[280px] h-[35px] sm:h-[45px] xl:h-[50px] font-BasicSansLight text-[15px] lg:text-[20px]">
+              Know More
+            </button>
+          </div>
         </div>
         <div className="">
           <img
@@ -40,11 +46,11 @@ export default function AboutUs() {
             alt="doctor"
           />
         </div>
-        <div className="flex justify-center items-center lg:block">
+        {/* <div className="flex justify-center items-center lg:block">
           <button className="bg-shadeBlue text-white rounded-[30px] w-[150px] sm:w-[200px] lg:w-[280px] h-[35px] sm:h-[45px] xl:h-[50px] font-BasicSansLight text-[15px] lg:text-[20px]">
             Know More
           </button>
-        </div>
+        </div> */}
       </div>
       <div className="px-[15px] sm:px-[25px] lg:px-[35px] xl:px-[50px] my-[50px]">
         <div className="inline-block border-t-[5px] border-mustardShade w-[100px] h-[0px] mb-[20px]"></div>

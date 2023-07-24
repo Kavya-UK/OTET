@@ -20,13 +20,11 @@ const {
   resolver: joiResolver(loginSchema),
 });
  const onSubmit = async (data) => {
-  console.log("PPPPPPPPPPPPPPPPPPPPPPPPPPPPpp");
  
    navigate("/home");
  };
 
  const handleLogin = (e) => {
-  console.log('OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOooooo');
    handleSubmit(onSubmit)(e);
  };
 
@@ -39,7 +37,7 @@ const {
       <div className="col-span-5 lg:col-span-3 relative h-[100vh]">
         <div className="max-h-[82vh] overflow-y-auto h-[100vh]">
           <div className="w-full flex sm:justify-end justify-center">
-            <div className="h-[130px] w-[130px] relative sm:right-[30px] top-[10px] flex items-center justify-center">
+            <div className="h-[130px] w-[130px] relative sm:right-[30px] top-[10px] flex items-center justify-center" onClick={()=>navigate('/')}>
               <img
                 className="w-[80%]"
                 src={require("../../assets/images/icons/Logo.png")}
@@ -63,11 +61,11 @@ const {
                   inputWidth={"w-[100%] sm:w-[85%]"}
                   placeholder="XXX XXX XXXX"
                   control={control}
-                  schema={loginSchema.email}
+                  // schema={loginSchema.email}
                   register={register}
                   isValidationSet={true}
                   setValue={setValue}
-                  errorMessage={errors.email?.message}
+                  // errorMessage={errors.email?.message}
                 />
               </div>
               <div>
@@ -77,11 +75,11 @@ const {
                   inputWidth={"w-[100%] sm:w-[85%]"}
                   placeholder="********"
                   control={control}
-                  schema={loginSchema.password}
+                  // schema={loginSchema.password}
                   register={register}
                   isValidationSet={true}
                   setValue={setValue}
-                  errorMessage={errors.email?.message}
+                  // errorMessage={errors.email?.message}
                 />
               </div>
               <div className="w-full flex justify-end text-codGray sm:w-[85%]">

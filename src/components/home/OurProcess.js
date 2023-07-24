@@ -3,7 +3,7 @@ import React from 'react'
 export default function OurProcess() {
   return (
     <div className="h-[100vh] ">
-      <h1 className="text-[36px] px-[15px] sm:px-[25px] lg:px-[40px] xl:text-[44px] font-BasicSansBold text-codGray font-bold tracking-[9.72px] mb-[20px] ">
+      <h1 className=" font-BasicSans text-[36px] px-[15px] sm:px-[25px] lg:px-[40px] font-semibold xl:text-[44px] text-codGray tracking-[8px] mb-[20px] md:leading-[70px]">
         Our Process
       </h1>
       <div className=" grid grid-cols-6 px-[15px] sm:px-[25px] lg:px-[40px] pt-[40px] pb-[60px] border-b-[2px] mb-[30px] gap-8">

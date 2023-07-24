@@ -8,8 +8,6 @@ import ReactDatePicker from "react-datepicker";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
-  // let setValue = value;
-  // if (value === "") setValue = "Select Date";
   return (
     <div className="">
       <img
@@ -138,7 +136,7 @@ export default function DoctorProfile() {
             <div className="col-span-1">
               <div className="">
                 <h1
-                  className={`font-HenrietteBold text-[22px] text-codGray ${
+                  className={`font-HenrietteRegular font-bold text-[22px] text-codGray ${
                     loading ? " min-h-[30px] bg-gray-50 rounded-md " : " "
                   }`}
                 >
@@ -174,21 +172,74 @@ export default function DoctorProfile() {
                   </span>
                 </div>
               </div>
-              <p className="font-HenrietteBold text-[22px] text-codGray mt-[20px] mb-[10px] ">
+              <p className="font-HenrietteRegular font-bold text-[22px] text-codGray mt-[20px] mb-[10px] ">
                 Insurance
               </p>
               <p className="text-codGray font-BasicSans text-[1.1rem]">
                 {doctorData.insurance_company}
               </p>
-              <p className="font-HenrietteBold text-[22px] mt-[20px] mb-[10px] text-codGray ">
+              <p className="font-HenrietteRegular font-bold text-[22px] mt-[20px] mb-[10px] text-codGray ">
                 Education
               </p>
               <p className="text-codGray font-BasicSans text-[1.1rem]">
                 {doctorData.institute_attended}
               </p>
             </div>
-            <div className="col-span-2 bg-white ">
-              <p className="font-HenrietteBold text-[22px] text-codGray mt-[30px] mb-[20px]">
+          </div>
+          {/* <div className="col-span-10 lg:col-span-4"> */}
+          {/* <div>
+              <p className="font-HenrietteRegular font-bold text-[22px] text-codGray">
+                About {doctorData.doctor_name}
+              </p>
+              <p
+                className={`mt-[20px] font-BasicSansLight text-[1.1rem]  text-eastBay ${
+                  !viewDetails ? " max-h-[60px] truncate-content" : " "
+                }`}
+              >
+                {doctorData.doctor_description}
+              </p>
+              <span
+                onClick={() => setviewDetails((f) => !f)}
+                className="text-[14px] font-BasicSans underline text-mustardYellow  cursor-pointer"
+              >
+                {viewDetails ? "View less" : "View more"}
+              </span>
+            </div> */}
+          {/* <div className="mt-[90px]">
+              <p className="font-HenrietteRegular font-bold text-[22px] text-codGray mt-[30px] mb-[20px]">
+                Practice Location
+              </p>
+              <p className="text-codGray font-BasicSans text-[1.1rem]">
+                {doctorData.doctor_clinic_address}
+              </p>
+              <p className="pt-[30px] text-center font-BasicSans text-black">
+                Location doesnt exists
+              </p>
+            </div> */}
+          {/* </div> */}
+          <div className="  col-span-10 lg:col-span-4">
+            <div>
+              <p className="font-HenrietteRegular font-bold text-[22px] text-codGray">
+                About {doctorData.doctor_name}
+              </p>
+              <p
+                className={`mt-[20px] font-BasicSansLight text-[1.1rem]  text-eastBay ${
+                  !viewDetails ? " max-h-[60px] truncate-content" : " "
+                }`}
+              >
+                {doctorData.doctor_description}
+              </p>
+              <span
+                onClick={() => setviewDetails((f) => !f)}
+                className="text-[14px] font-BasicSans underline text-mustardYellow  cursor-pointer"
+              >
+                {viewDetails ? "View less" : "View more"}
+              </span>
+            </div>
+          </div>
+          <div className="col-span-10 lg:col-span-6  ">
+            <div className=" bg-white ">
+              <p className="font-HenrietteRegular font-bold text-[22px] text-codGray mt-[30px] mb-[20px]">
                 Availability
               </p>
               <div className="flex flex-row gap-4 ">
@@ -223,7 +274,7 @@ export default function DoctorProfile() {
                 </div>
               </div>
             </div>
-            <div className="col-span-2">
+            <div className="mt-[20px]">
               <p className=" font-BasicSansBold text-[22px] text-codGray mb-[20px]">
                 {selectedDate &&
                   new Intl.DateTimeFormat("en-US", {
@@ -306,36 +357,16 @@ export default function DoctorProfile() {
               </div>
             </div>
           </div>
-          <div className="col-span-10 lg:col-span-4">
-            <div>
-              <p className="font-HenrietteBold text-[22px] text-codGray">
-                About {doctorData.doctor_name}
-              </p>
-              <p
-                className={`mt-[20px] font-BasicSansLight text-[1.1rem]  text-eastBay ${
-                  !viewDetails ? " max-h-[60px] truncate-content" : " "
-                }`}
-              >
-                {doctorData.doctor_description}
-              </p>
-              <span
-                onClick={() => setviewDetails((f) => !f)}
-                className="text-[14px] font-BasicSans underline text-mustardYellow  cursor-pointer"
-              >
-                {viewDetails ? "View less" : "View more"}
-              </span>
-            </div>
-            <div className="">
-              <p className="font-HenrietteBold text-[22px] text-codGray mt-[30px] mb-[20px]">
-                Practice Location
-              </p>
-              <p className="text-codGray font-BasicSans text-[1.1rem]">
-                {doctorData.doctor_clinic_address}
-              </p>
-              <p className="pt-[30px] text-center font-BasicSans text-black">
-                Location doesnt exists
-              </p>
-            </div>
+          <div className="col-span-4">
+            <p className="font-HenrietteRegular font-bold text-[22px] text-codGray mt-[30px] mb-[20px]">
+              Practice Location
+            </p>
+            <p className="text-codGray font-BasicSans text-[1.1rem]">
+              {doctorData.doctor_clinic_address}
+            </p>
+            <p className="pt-[30px] text-center font-BasicSans text-black">
+              Location doesnt exists
+            </p>
           </div>
         </div>
       </div>

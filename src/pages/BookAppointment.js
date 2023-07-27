@@ -107,13 +107,13 @@ export default function BookAppointment() {
     setLocValue("");
     setTimeout(() => {
       setShowAreasDropdown(false);
-    }, 100);
+    }, 500);
   };
   const handleSpecOnBlur = () => {
     setSpecValue("");
     setTimeout(() => {
       setShowSpecDropdown(false);
-    }, 100);
+    }, 500);
   };
   const handleLocFocusIn = () => {
     setLocValue("");
@@ -131,18 +131,18 @@ export default function BookAppointment() {
     <>
       <AppointmentHeader />
       <div className="relative flex items-center w-full justify-center">
-        <div class="block w-[50rem] h-[20rem] rounded-br-full rounded-bl-full -z-10 bg-blueish absolute left-[50%] top-0 -translate-x-1/2"></div>
-        <div className="w-[550px] space-y-4 bg-white mt-[80px] rounded-[6px] px-[25px] py-[50px]">
+        <div className="block w-[50rem] h-[20rem] rounded-br-full rounded-bl-full -z-10 bg-blueish absolute left-[50%] top-0 -translate-x-1/2"></div>
+        <div className="w-[550px] space-y-4 bg-white my-[80px] rounded-[10px] px-[25px] py-[50px] drop-shadow-md">
           <div className="">
-            <h1 class="text- codGray text-[20px] font-BasicSansBold tracking-[5.4px] font-bold">
+            <h1 className="text- codGray text-[20px] font-BasicSansBold tracking-[5.4px] font-bold">
               Book Top Doctors Appointment
             </h1>
-            <span class="inline-block text-eastBay font-BasicSansLight my-[15px] text-[15px]">
+            <span className="inline-block text-eastBay font-BasicSansLight my-[15px] text-[15px]">
               Thinking to consult a doctor this week? Use Holmeddoc to find the
               best doctors near you.
             </span>
           </div>
-          <div className="relative  w-full  border-none">
+          <div className="relative  w-full  border-none pb-[20px]">
             <div className="flex flex-col">
               <div className="h-[64px] w-full flex items-center justify-center">
                 <input
@@ -177,7 +177,7 @@ export default function BookAppointment() {
                           <li
                             className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
                             onClick={() => handleLocSelection(area.city)}
-                            key={area.id}
+                            key={area.city}
                           >
                             {area.city}
                           </li>
@@ -188,12 +188,12 @@ export default function BookAppointment() {
               </div>
             </div>
           </div>
-          <div className="relative h-[fit-content] w-full  border-none">
+          <div className="relative h-[fit-content] w-full  border-none pb-[20px]">
             <div className="flex flex-col">
               <div className="h-[64px] w-full flex items-center justify-center">
                 <input
                   className="h-full w-full rounded-[5px] border-shadeBlue px-[16px] outline-none placeholder:text-[15px] placeholder:font-thin placeholder:tracking-[3px] bg-white border-opacity-80  rounded-r-none  border-y border-l"
-                  placeholder="Specialty, Condition, Doctor..."
+                  placeholder="Specialty, Condition"
                   type="text"
                   onBlur={handleSpecOnBlur}
                   onFocus={handleSpecFocusIn}
@@ -204,7 +204,9 @@ export default function BookAppointment() {
                   <img
                     src={require("../assets/images/home/GreenArrowDown.png")}
                     alt="Dropdown"
-                    className={`transition-all duration-[0.3s] ease-[linear] h-[12px] w-[12px] text-green  ${showSpecDropdown ? " rotate-180" : " rotate-0"}`}
+                    className={`transition-all duration-[0.3s] ease-[linear] h-[12px] w-[12px] text-green  ${
+                      showSpecDropdown ? " rotate-180" : " rotate-0"
+                    }`}
                   />
                 </div>
               </div>
@@ -224,19 +226,13 @@ export default function BookAppointment() {
                         onClick={() =>
                           handleSpecSelection(spec.medical_speciality_name)
                         }
-                        key={spec.id}
+                        key={spec.medical_speciality_name}
                       >
                         {spec.medical_speciality_name}
                       </li>
                     );
                   })
-                ) : (
-                  <img
-                    className="relative top-[80px] left-[180px] w-[100px]"
-                    src={require("../assets/images/cat-loading.gif")}
-                    alt="loading"
-                  />
-                )}
+                ) : null}
                 <li className="font-BasicSans text-eastBayLight">Conditions</li>
                 {allList.conditions.length ? (
                   allList.conditions.map((spec) => {
@@ -246,24 +242,18 @@ export default function BookAppointment() {
                         onClick={() =>
                           handleSpecSelection(spec.medical_condition_name)
                         }
-                        key={spec.id}
+                        key={spec.medical_condition_name}
                       >
                         {spec.medical_condition_name}
                       </li>
                     );
                   })
-                ) : (
-                  <img
-                    className="relative top-[80px] left-[180px] w-[100px]"
-                    src={require("../assets/images/cat-loading.gif")}
-                    alt="loading"
-                  />
-                )}
+                ) : null}
               </ul>
             </div>
           </div>
 
-          <div className="flex flex-col items-start  font-basic-sans-regular ">
+          <div className="flex flex-col items-start  font-basic-sans-regular pb-[20px]">
             <div className="relative w-full ">
               <ReactDatePicker
                 className="test"
@@ -277,7 +267,7 @@ export default function BookAppointment() {
             </div>
             {/* </div> */}
           </div>
-          <div className="space-y-2">
+          <div className="space-y-2 pb-[10px]">
             <label className="text-[15px] tracking-[3px] text-gray-400">
               Type of Visit
             </label>

@@ -124,14 +124,14 @@ export default function HomeBanner({}) {
     setLocId("");
     setTimeout(() => {
       setShowAreasDropdown(false);
-    }, 100);
+    }, 500);
   };
   const handleSpecOnBlur = () => {
     setSpecValue("");
     setSpecId("");
     setTimeout(() => {
       setShowSpecDropdown(false);
-    }, 100);
+    }, 500);
   };
   const handleLocFocusIn = () => {
     setLocValue("");
@@ -179,154 +179,156 @@ export default function HomeBanner({}) {
       <h3 className=" text-[30px] xl:text-[40px] font-PoppinsItalic text-black italic tracking-[5px] text-center">
         Mind. Body. Soul
       </h3>
-      <div className="grid grid-cols-12 rounded-[20px] lg:rounded-[87px] h-[250px] md:h-[100px]  border-[1px] bg-white mt-[90px] mx-[10px] md:mx-[40px] xl:mx-[100px] transition-all duration-[0.5s] ease-[ease]">
-        <div className=" col-span-12 md:col-span-10 xl:col-span-11 flex items-center md:h-[100px] lg:justify-center">
-          <div className=" grid grid-cols-3 w-full pl-[20px] md:pl-0">
-            <div className="col-span-3 md:col-span-1 flex justify-between items-center relative md:pl-[20px] lg:pl-[60px]">
-              <input
-                onBlur={handleLocOnBlur}
-                onFocus={handleLocFocusIn}
-                onChange={handleLocSearch}
-                value={locValue}
-                className="outline-none w-[80%] p-[10px] font-BasicSans text-[1.3rem] text-codGray tracking-[5px] placeholder:text-codGray focus:placeholder:text-codGray placeholder:font-medium bg-white"
-                placeholder="Location"
-                type="text"
-              />
+      <div className="flex items-center justify-center h-[300px]">
+        <div className="grid grid-cols-12 rounded-[20px] lg:rounded-[87px] h-[250px] md:h-[100px]  border-[1px] bg-white  mx-[10px] md:mx-[40px] xl:mx-[100px] w-full transition-all duration-[0.5s] ease-[ease]">
+          <div className=" col-span-12 md:col-span-10 xl:col-span-11 flex items-center md:h-[100px] lg:justify-center">
+            <div className=" grid grid-cols-3 w-full pl-[20px] md:pl-0">
+              <div className="col-span-3 md:col-span-1 flex justify-between items-center relative md:pl-[20px] lg:pl-[60px]">
+                <input
+                  onBlur={handleLocOnBlur}
+                  onFocus={handleLocFocusIn}
+                  onChange={handleLocSearch}
+                  value={locValue}
+                  className="outline-none w-[80%] p-[10px] font-BasicSans text-[1.3rem] text-codGray tracking-[5px] placeholder:text-codGray focus:placeholder:text-codGray placeholder:font-medium bg-white"
+                  placeholder="Location"
+                  type="text"
+                />
 
-              <div
-                className={`absolute top-[80px] left-0 w-[500px] h-[300px] bg-white overflow-auto shadow-lg ring-1 ring-black ring-opacity-5 pl-[20px] pt-[20px] rounded-[20px]  ${
-                  showAreasDropdown ? " block " : " hidden "
-                }`}
-              >
-                <ul className="">
-                  <li className="font-BasicSans text-eastBayLight">Areas</li>
-                  {areasList.length
-                    ? areasList.map((area) => {
-                        return (
-                          <li
-                            className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none hover:bg-cyanBlue  active-dropdown-item"
-                            onClick={() =>
-                              handleLocSelection(area.city, area.zip_code_id)
-                            }
-                            key={area.id}
-                          >
-                            {area.city}
-                          </li>
-                        );
-                      })
-                    : null}
-                </ul>
-              </div>
-            </div>
-            <div className="col-span-3 md:col-span-1 flex md:justify-around items-center relative">
-              <input
-                onBlur={handleSpecOnBlur}
-                onFocus={handleSpecFocusIn}
-                onChange={handleSpecSearch}
-                value={specValue}
-                className="outline-none w-[80%] p-[10px] font-BasicSans text-[1.3rem] text-codGray tracking-[5px] placeholder:text-gray-800 focus:placeholder:text-gray-400 placeholder:font-medium bg-white"
-                placeholder="Speciality"
-                type="text"
-              />
-              <div>
-                <img
-                  onClick={handleSpecFocusIn}
-                  className={`transition-all duration-[0.3s] ease-[linear] w-[12px] h-[12px] sm:w-[18px] sm:h-[18px] relative top-[4px] ${
-                    showSpecDropdown ? " rotate-180" : " rotate-0"
+                <div
+                  className={`absolute top-[80px] left-0 w-[500px] h-[300px] bg-white overflow-auto shadow-lg ring-1 ring-black ring-opacity-5 pl-[20px] pt-[20px] rounded-[20px]  ${
+                    showAreasDropdown ? " block " : " hidden "
                   }`}
-                  src={require("../../assets/images/home/WhiteDropdown.png")}
-                  alt="dropdown"
-                />
+                >
+                  <ul className="">
+                    <li className="font-BasicSans text-eastBayLight">Areas</li>
+                    {areasList.length
+                      ? areasList.map((area) => {
+                          return (
+                            <li
+                              className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none hover:bg-cyanBlue  active-dropdown-item"
+                              onClick={() =>
+                                handleLocSelection(area.city, area.zip_code_id)
+                              }
+                              key={area.city}
+                            >
+                              {area.city}
+                            </li>
+                          );
+                        })
+                      : null}
+                  </ul>
+                </div>
               </div>
-              <div
-                className={`absolute top-[80px] left-0 w-[500px] h-[300px] bg-white overflow-auto shadow-lg ring-1 ring-black ring-opacity-5 pl-[20px] pt-[20px] rounded-[20px]  ${
-                  showSpecDropdown ? " block " : " hidden "
-                }`}
-              >
-                <ul className="">
-                  {allList.speciality.length ? (
-                    <li className="font-BasicSans text-eastBayLight">
-                      Speciality
-                    </li>
-                  ) : null}
-                  {allList.speciality.length
-                    ? allList.speciality.map((spec) => {
-                        return (
-                          <li
-                            className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-codGray hover:bg-cyanBlue  active-dropdown-item"
-                            onClick={() =>
-                              handleSpecSelection(
-                                spec.medical_speciality_name,
-                                spec.id
-                              )
-                            }
-                            key={spec.id}
-                          >
-                            {spec.medical_speciality_name}
-                          </li>
-                        );
-                      })
-                    : null}
-                  {allList.conditions.length ? (
-                    <li className="font-BasicSans text-eastBayLight">
-                      Conditions
-                    </li>
-                  ) : null}
-                  {allList.conditions.length
-                    ? allList.conditions.map((spec) => {
-                        return (
-                          <li
-                            className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
-                            onClick={() =>
-                              handleSpecSelection(
-                                spec.medical_condition_name,
-                                spec.id
-                              )
-                            }
-                            key={spec.id}
-                          >
-                            {spec.medical_condition_name}
-                          </li>
-                        );
-                      })
-                    : null}
-                </ul>
-              </div>
-            </div>
-            <div className="col-span-3 md:col-span-1 flex md:justify-end items-center relative top-[5px]">
-              <div className="text-[20px] w-full xl:w-[80%]">
-                <DatePicker
-                  className="bg-white font-Basicsans text-[1.3rem] text-codGray tracking-[5px] outline-none"
-                  dateFormat="MMMM d, yyyy"
-                  selected={startDate}
-                  minDate={new Date()}
-                  onChange={(date) => {
-                    setStartDate(date);
-                  }}
-                  onCalendarClose={() => setDateIsOpen(false)}
-                  customInput={
-                    <DateInputComponent
-                      setDateIsOpen={setDateIsOpen}
-                      dateIsOpen={dateIsOpen}
-                    />
-                  }
-                  closeOnScroll={true}
+              <div className="col-span-3 md:col-span-1 flex md:justify-around items-center relative">
+                <input
+                  onBlur={handleSpecOnBlur}
+                  onFocus={handleSpecFocusIn}
+                  onChange={handleSpecSearch}
+                  value={specValue}
+                  className="outline-none w-[80%] p-[10px] font-BasicSans text-[1.3rem] text-codGray tracking-[5px] placeholder:text-gray-800 focus:placeholder:text-gray-400 placeholder:font-medium bg-white"
+                  placeholder="Speciality"
+                  type="text"
                 />
+                <div>
+                  <img
+                    onClick={handleSpecFocusIn}
+                    className={`transition-all duration-[0.3s] ease-[linear] w-[12px] h-[12px] sm:w-[18px] sm:h-[18px] relative top-[4px] ${
+                      showSpecDropdown ? " rotate-180" : " rotate-0"
+                    }`}
+                    src={require("../../assets/images/home/WhiteDropdown.png")}
+                    alt="dropdown"
+                  />
+                </div>
+                <div
+                  className={`absolute top-[80px] left-0 w-[500px] h-[300px] bg-white overflow-auto shadow-lg ring-1 ring-black ring-opacity-5 pl-[20px] pt-[20px] rounded-[20px]  ${
+                    showSpecDropdown ? " block " : " hidden "
+                  }`}
+                >
+                  <ul className="">
+                    {allList.speciality.length ? (
+                      <li className="font-BasicSans text-eastBayLight">
+                        Speciality
+                      </li>
+                    ) : null}
+                    {allList.speciality.length
+                      ? allList.speciality.map((spec) => {
+                          return (
+                            <li
+                              className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-codGray hover:bg-cyanBlue  active-dropdown-item"
+                              onClick={() => {
+                                handleSpecSelection(
+                                  spec.medical_speciality_name,
+                                  spec.id
+                                );
+                              }}
+                              key={spec.medical_speciality_name}
+                            >
+                              {spec.medical_speciality_name}
+                            </li>
+                          );
+                        })
+                      : null}
+                    {allList.conditions.length ? (
+                      <li className="font-BasicSans text-eastBayLight">
+                        Conditions
+                      </li>
+                    ) : null}
+                    {allList.conditions.length
+                      ? allList.conditions.map((spec) => {
+                          return (
+                            <li
+                              className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
+                              onClick={() => {
+                                handleSpecSelection(
+                                  spec.medical_condition_name,
+                                  spec.id
+                                );
+                              }}
+                              key={spec.medical_condition_name}
+                            >
+                              {spec.medical_condition_name}
+                            </li>
+                          );
+                        })
+                      : null}
+                  </ul>
+                </div>
+              </div>
+              <div className="col-span-3 md:col-span-1 flex md:justify-end items-center relative top-[5px]">
+                <div className="text-[20px] w-full xl:w-[80%]">
+                  <DatePicker
+                    className="bg-white font-Basicsans text-[1.3rem] text-codGray tracking-[5px] outline-none"
+                    dateFormat="MMMM d, yyyy"
+                    selected={startDate}
+                    minDate={new Date()}
+                    onChange={(date) => {
+                      setStartDate(date);
+                    }}
+                    onCalendarClose={() => setDateIsOpen(false)}
+                    customInput={
+                      <DateInputComponent
+                        setDateIsOpen={setDateIsOpen}
+                        dateIsOpen={dateIsOpen}
+                      />
+                    }
+                    closeOnScroll={true}
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="col-span-12 md:col-span-2 xl:col-span-1 flex md:justify-end">
-          <div className="hidden md:flex col-span-2 md:col-span-1 items-center h-[100px] w-[100px]">
-            <SearchBar
-              onClick={() => handleSearch()}
-              className=" cursor-pointer "
-            />
-          </div>
-          <div className=" md:hidden col-span-12 text-center w-full">
-            <button className="bg-shadeBlue py-[8px] w-[50%] text-white rounded-[10px] text-[1rem]">
-              Search
-            </button>
+          <div className="col-span-12 md:col-span-2 xl:col-span-1 flex md:justify-end">
+            <div className="hidden md:flex col-span-2 md:col-span-1 items-center h-[100px] w-[100px]">
+              <SearchBar
+                onClick={() => handleSearch()}
+                className=" cursor-pointer "
+              />
+            </div>
+            <div className=" md:hidden col-span-12 text-center w-full">
+              <button className="bg-shadeBlue py-[8px] w-[50%] text-white rounded-[10px] text-[1rem]">
+                Search
+              </button>
+            </div>
           </div>
         </div>
       </div>

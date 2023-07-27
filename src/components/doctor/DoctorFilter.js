@@ -46,7 +46,7 @@ export default function DoctorFilter() {
     <div className="pl-[10px] border-r-2">
       {doctorFilter.map((list) => {
         return (
-          <div>
+          <div key={list.title}>
             <h1 className=" font-BasicSansBold text-[15px] text-codGray tracking-[2px] font-bold my-[10px]">
               {list.title}
             </h1>
@@ -57,9 +57,9 @@ export default function DoctorFilter() {
                   ? listView[list.title]?.minlength
                   : list.value.length
               )
-              .map((names) => {
+              .map((names,i) => {
                 return (
-                  <div className="flex items-center mt-[10px]">
+                  <div key={`names_${i}`} className="flex items-center mt-[10px]">
                     <div className="flex flex-col">
                       <div className="flex items-start sm:items-center space-x-2">
                         <input

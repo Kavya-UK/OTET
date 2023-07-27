@@ -4,9 +4,30 @@ import InputSelect from '../../components/common/InputSelect';
 import { useNavigate } from 'react-router-dom';
 import SideBanner from "../../components/common/SideBanner";
 import LoginFooter from '../../components/common/LoginFooter';
-
+import { useForm } from "react-hook-form";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { registerSchema } from "../../../src/validations/auth";
 export default function Register() {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+  const {
+    handleSubmit,
+    control,
+    setValue,
+    register,
+    formState: { errors },
+  } = useForm({
+    mode: "onSubmit",
+    resolver: joiResolver(registerSchema),
+  });
+
+  const onSubmit = async (data) => {
+    //  navigate("/");
+  };
+
+  const handleRegister = (e) => {
+    handleSubmit(onSubmit)(e);
+    // navigate("/");
+  };
 
   const optionListGender=["Female","Male"];
 
@@ -17,11 +38,12 @@ export default function Register() {
         imgsrc={"assets/images/login/Register.jpg"}
       />
       <div className="col-span-5 lg:col-span-3 relative h-[100vh]">
-        <div className="max-h-[82vh] overflow-y-auto">
+        <div className="max-h-[86vh] sm:max-h-[95vh] overflow-y-auto">
           <div className="w-full flex sm:justify-end justify-center">
-            <div className="h-[130px] w-[130px] relative sm:right-[30px] top-[10px] flex items-center justify-center">
+            <div className="h-[130px] w-[130px] cursor-pointer relative sm:right-[30px] top-[10px] flex items-center justify-center">
               <img
-                className="w-[80%]"
+                className="w-[80%] z-20"
+                onClick={() => navigate("/")}
                 src={require("../../assets/images/icons/Logo.png")}
                 alt="logo"
               />
@@ -35,86 +57,139 @@ export default function Register() {
               Let's get you setup so that you can manage your profile and start
               booking appointments.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-[50px] text-left">
+            <div className="grid grid-cols-1 sm:grid-cols-2  mt-[30px] text-left">
               <div>
                 <InputText
-                  customLabelStyle="text-[16px]"
+                  name={"firstName"}
+                  customLabelStyle="text-[14px]"
                   type="text"
                   label=" First Name"
                   inputWidth={"w-[100%] sm:w-[85%]"}
                   placeholder="Your first name"
+                  control={control}
+                  schema={registerSchema.firstName}
+                  register={register}
+                  isValidationSet={true}
+                  setValue={setValue}
+                  errorMessage={errors.firstName?.message}
                 />
               </div>
               <div>
                 <InputText
-                  customLabelStyle="text-[16px]"
+                  name={"lastName"}
+                  customLabelStyle="text-[14px]"
                   label=" Last Name"
                   inputWidth={"w-[100%] sm:w-[85%]"}
                   type="text"
                   placeholder="Your last name"
+                  control={control}
+                  schema={registerSchema.lastName}
+                  register={register}
+                  isValidationSet={true}
+                  setValue={setValue}
+                  errorMessage={errors.lastName?.message}
                 />
               </div>
               <div>
                 <InputSelect
-                  customLabelStyle="text-[16px]"
+                  name={"gender"}
+                  customLabelStyle="text-[14px]"
                   label=" Gender"
                   inputWidth={"w-[100%] sm:w-[85%]"}
                   optionList={optionListGender}
+                  control={control}
+                  schema={registerSchema.gender}
+                  register={register}
+                  isValidationSet={true}
+                  setValue={setValue}
+                  errorMessage={errors.gender?.message}
                 />
               </div>
               <div>
                 <InputText
-                  customLabelStyle="text-[16px]"
+                  name={"dateofbirth"}
+                  customLabelStyle="text-[14px]"
                   noIcon={true}
                   type="date"
-                  label=" DOB"
+                  label="DOB"
                   inputWidth={"w-[100%] sm:w-[85%]"}
+                  control={control}
+                  schema={registerSchema.dateofbirth}
+                  register={register}
+                  isValidationSet={true}
+                  setValue={setValue}
+                  errorMessage={errors.dateofbirth?.message}
                 />
               </div>
               <div>
                 <InputText
-                  customLabelStyle="text-[16px]"
+                  name={"phone"}
+                  customLabelStyle="text-[14px]"
                   type="phonenumber"
                   placeholder={"XXX XXX XXXX"}
                   noIcon={true}
                   label=" Mobile Number"
                   inputWidth={"w-[100%] sm:w-[85%]"}
+                  control={control}
+                  schema={registerSchema.phone}
+                  register={register}
+                  isValidationSet={true}
+                  setValue={setValue}
+                  errorMessage={errors.phone?.message}
                 />
               </div>
               <div>
                 <InputText
-                  customLabelStyle="text-[16px]"
+                  name={"email"}
+                  customLabelStyle="text-[14px]"
                   type="email"
                   placeholder={"email@domain.com"}
                   label=" Email ID"
                   inputWidth={"w-[100%] sm:w-[85%]"}
+                  control={control}
+                  schema={registerSchema.email}
+                  register={register}
+                  isValidationSet={true}
+                  setValue={setValue}
+                  errorMessage={errors.email?.message}
                 />
               </div>
               <div>
                 <InputText
-                  customLabelStyle="text-[16px]"
+                  name={"password"}
+                  customLabelStyle="text-[14px]"
                   type="password"
                   placeholder={"*********"}
                   label=" Enter Password"
                   inputWidth={"w-[100%] sm:w-[85%]"}
+                  control={control}
+                  schema={registerSchema.password}
+                  register={register}
+                  isValidationSet={true}
+                  setValue={setValue}
+                  errorMessage={errors.password?.message}
                 />
               </div>
               <div>
                 <InputText
-                  customLabelStyle="text-[16px]"
+                  name={"confirmPassword"}
+                  customLabelStyle="text-[14px]"
                   type="password"
                   placeholder={"*********"}
                   label=" Confirm Password"
                   inputWidth={"w-[100%] sm:w-[85%]"}
+                  control={control}
+                  schema={registerSchema.confirmPassword}
+                  register={register}
+                  isValidationSet={true}
+                  setValue={setValue}
+                  errorMessage={errors.confirmPassword?.message}
                 />
               </div>
             </div>
           </div>
         </div>
-        <LoginFooter
-          label="Next"
-          onClick={() => navigate("/otp-verification")}
-        />
+        <LoginFooter label="Next" onClick={handleRegister} />
       </div>
     </div>
   );

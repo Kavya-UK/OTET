@@ -153,6 +153,7 @@ export default function ScheduleAppointmentForm() {
                     placeholder="Select Insurance"
                     type="text"
                     value={selectedInc}
+                    onChange={() => {}}
                     onClick={() => setShowInsurance(true)}
                     onBlur={() => {
                       setTimeout(() => {
@@ -206,6 +207,7 @@ export default function ScheduleAppointmentForm() {
                     placeholder="Select Condition"
                     type="text"
                     value={selectedCond}
+                    onChange={() => {}}
                     onClick={() => setShowCondition(true)}
                     onBlur={() => {
                       setTimeout(() => {
@@ -341,7 +343,8 @@ export default function ScheduleAppointmentForm() {
                     className="h-full w-full rounded-[5px] border-shadeBlue px-[16px] outline-none placeholder:text-[12px] placeholder:tracking-[3px] bg-white border-opacity-80  rounded-r-none border-y border-l"
                     placeholder="Select address"
                     type="text"
-                    value={doctorData.doctor_clinic_address}
+                    onChange={() => {}}
+                    value={doctorData.doctor_clinic_address || ""}
                   />
                   <div className="cursor-pointer bg-[white]  border-shadeBlue h-full flex items-center justify-center border-y border-r border-l border-l-gray-300 rounded-r-[6px] px-3  ">
                     <img

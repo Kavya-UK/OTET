@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import InputOtpScreen from "./InputOtpScreen";
-
-export default function Otp() {
-
+import { useForm } from "react-hook-form";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { forgotPass2Schema } from "../../validations/auth.js";
+export default function Otp({ control, setValue, register, errors }) {
   const fields = ["otp-1", "otp-2", "otp-3", "otp-4", "otp-5", "otp-6"];
-
+  const [timer, setTimer] = useState(23);
   const handleChange = (e) => {
     const currentId = e.target.id.split("-")[1];
     const nextId = parseInt(currentId) + 1;
@@ -38,22 +39,33 @@ export default function Otp() {
   useEffect(() => {
     document.getElementById(`otp-1`).focus();
   }, []);
-  
+
+  useEffect(() => {
+    const counter = timer > 0 && setInterval(() => setTimer(timer - 1), 1000);
+    return () => clearInterval(counter);
+  }, [timer]);
+
   return (
     <>
       {" "}
       {fields.map((field, ind) => {
         return (
-          <div>
+          <div key={field}>
             <InputOtpScreen
               maxLength={1}
               handleChange={handleChange}
               id={field}
               onPaste={handlePaste}
+              control={control}
+              schema={forgotPass2Schema[field]}
+              register={register}
+              isValidationSet={true}
+              setValue={setValue}
+              errorMessage={errors[field]?.message}
             />
             {ind === 5 && (
               <span className="relative sm:left-[20px] block text-lightBlue font-BasicSans  mt-[10px]">
-                0:23
+                0:{timer}
               </span>
             )}
           </div>

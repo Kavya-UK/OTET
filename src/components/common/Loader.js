@@ -4,10 +4,10 @@ export default function Loader() {
   return (
     <div className=" w-full h-full flex justify-center items-center">
       <img
-        className="h-[8rem] md:h-[10rem] tall:h-[13rem] lg:h-[15rem] cursor-pointer my-img"
-        
+        // className="h-[8rem] md:h-[10rem] tall:h-[13rem] lg:h-[15rem] cursor-pointer my-img"
         alt="Logo"
-        src={require("../../assets/images/home/Logo.png")}
+        src={require("../../assets/images/icons/Loader.gif")}
+        // className="w-[300px] h-[300px]"
       />
     </div>
   );

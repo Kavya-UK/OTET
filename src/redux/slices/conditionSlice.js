@@ -1,8 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {fetchConditions} from "../thunk/conditions.thunk";
+import {
+  fetchConditions,
+  fetchFeaturedConditions,
+} from "../thunk/conditions.thunk";
 
 const initialState = {
-  conditionsList:[]
+  conditionsList:[],
+  featuredConditionsList:[]
 };
 
 export const conditionSlice = createSlice({
@@ -12,6 +16,9 @@ export const conditionSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchConditions.fulfilled, (state, action) => {
       state.conditionsList = [...action.payload];
+    });
+    builder.addCase(fetchFeaturedConditions.fulfilled, (state, action) => {
+      state.featuredConditionsList = [...action.payload];
     });
   },
 });

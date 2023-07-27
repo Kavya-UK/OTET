@@ -5,7 +5,8 @@ export default function DownloadApp() {
     <div className="grid grid-cols-2 gap-3 mt-[50px] px-[25px] lg:px-[55px] mb-[50px]">
       <div className="col-span-2 lg:col-span-1">
         <h1 className=" font-BasicSans text-[30px] sm:text-[38px] xl:text-[48px] text-codGray tracking-[8px] font-semibold text-center lg:text-left md:leading-[70px]">
-          Download Holmeddoc Mobile App
+          Download Holmeddoc
+          <br className="hidden lg:block"/> Mobile App
         </h1>
         <div className="lg:pl-[30px] text-center lg:text-left">
           <p className="mt-[60px] text-[14px] sm:text-[18px] xl:text-[20px] font-BasicSans text-eastBay pb-[15px]">

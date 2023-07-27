@@ -4,6 +4,7 @@ import SpecialityCard from '../components/common/SpecialityCard';
 import { fetchSpeciality } from '../redux/thunk/speciality.thunk';
 import { useDispatch, useSelector } from "react-redux";
 import Footer from "../components/common/Footer";
+import Loader from "../components/common/Loader";
 
 
 export default function AllSpeciality() {
@@ -16,7 +17,6 @@ export default function AllSpeciality() {
     <>
       <Header setDropShadow={true} />
       <div className="w-full h-[800px] bg-no-repeat pt-[200px]">
-       
         <div className="text-center px-[90px] relative top-[-70px]">
           <h1 className="text-codGray text-[40px] font-BasicSansBold tracking-[9px] font-semibold ">
             Speciality
@@ -29,16 +29,22 @@ export default function AllSpeciality() {
           </p>
         </div>
         <div className="grid grid-cols-4 gap-4 my-[40px] px-[40px] sm:px-[70px] cursor-pointer">
-          {speciality.map((items) => {
-            return (
-              <SpecialityCard
-                key={items.id}
-                image={items.image}
-                title={items.medical_speciality_name}
-                info={items.description}
-              />
-            );
-          })}
+          {speciality.length>88 ? (
+            speciality.map((items) => {
+              return (
+                <SpecialityCard
+                  key={items.id}
+                  image={items.image}
+                  title={items.medical_speciality_name}
+                  info={items.description}
+                />
+              );
+            })
+          ) : (
+            <div className=" col-span-4 flex justify-center relative -top-[90px]">
+              <Loader />
+            </div>
+          )}
         </div>
         <Footer />
       </div>

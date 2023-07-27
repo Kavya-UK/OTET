@@ -90,3 +90,11 @@ input:checked + div svg {
     transform: rotate(359deg);
    }
   }
+
+.number-field::-webkit-inner-spin-button,
+.number-field::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}

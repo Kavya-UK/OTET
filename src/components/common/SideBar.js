@@ -5,7 +5,7 @@ export default function SideBar() {
   const navigate=useNavigate();
   return (
     <div className="w-[250px] h-full bg-shadeBlue relative shadow-3xl">
-      <div className="flex justify-center items-center pt-[15px]" onClick={()=>navigate("/")}>
+      <div className="flex justify-center items-center pt-[15px] cursor-pointer" onClick={()=>navigate("/")} >
         <img
           className="w-[140px] h-[140px]"
           src={require("../../assets/images/profile/Logo.png")}

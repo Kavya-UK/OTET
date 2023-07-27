@@ -3,8 +3,31 @@ import {Link,useNavigate} from 'react-router-dom';
 import SideBanner from '../../components/common/SideBanner';
 import LoginFooter from "../../components/common/LoginFooter";
 import Otp from "../../components/common/Otp";
-
+import { useForm } from "react-hook-form";
+import { joiResolver } from "@hookform/resolvers/joi";
+import {
+  otpSchema
+} from "../../validations/auth.js";
 const OtpVerification=()=> {
+  const {
+    handleSubmit,
+    control,
+    setValue,
+    register,
+    formState: { errors },
+  } = useForm({
+    mode: "onSubmit",
+    resolver: joiResolver(otpSchema),
+  });
+  const onSubmit = async (data) => {
+   navigate("/login")
+  };
+
+  const submitHandler = (e) => {
+    handleSubmit(onSubmit)(e);
+    // navigate("/");
+  };
+
   const navigate=useNavigate();
   return (
     <div className="grid grid-cols-5">
@@ -15,7 +38,10 @@ const OtpVerification=()=> {
       <div className="col-span-5 lg:col-span-3 relative h-[100vh]">
         <div className="max-h-[82vh] overflow-y-auto">
           <div className="w-full flex sm:justify-end justify-center">
-            <div className="h-[130px] w-[130px] relative sm:right-[30px] top-[10px]  flex items-center justify-center">
+            <div
+              className="h-[130px] w-[130px] cursor-pointer relative sm:right-[30px] top-[10px]  flex items-center justify-center"
+              onClick={() => navigate("/")}
+            >
               <img
                 className="w-[80%]"
                 src={require("../../assets/images/icons/Logo.png")}
@@ -33,7 +59,12 @@ const OtpVerification=()=> {
             </p>
             <div className="grid grid-cols-8 mt-[40px]">
               <div className=" col-start-2 lg:col-start-1 lg:col-span-7 col-span-6 grid grid-cols-6 gap-2 mb-[30px]">
-               <Otp />
+                <Otp
+                  control={control}
+                  setValue={setValue}
+                  register={register}
+                  errors={errors}
+                />
               </div>
             </div>
             <div className="">
@@ -46,7 +77,7 @@ const OtpVerification=()=> {
             </div>
           </div>
         </div>
-        <LoginFooter label="Continue" onClick={() => navigate("/login")} />
+        <LoginFooter label="Continue" onClick={submitHandler} />
       </div>
     </div>
   );

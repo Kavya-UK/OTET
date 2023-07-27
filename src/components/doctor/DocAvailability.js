@@ -159,7 +159,10 @@ export default function DocAvailability() {
                 <div className="flex flex-row gap-4 mt-[20px]">
                   {items.time_slots.InPerson.map((avail) => {
                     return (
-                      <div className="flex flex-col rounded-[8px] bg-cyanBlue items-center p-[8px]">
+                      <div
+                        key={avail.date}
+                        className="flex flex-col rounded-[8px] bg-cyanBlue items-center p-[8px]"
+                      >
                         <span className="inline-block font-BasicSansLight text-[15px]">
                           {avail.day.substring(0, 3)}
                         </span>
@@ -211,7 +214,7 @@ export default function DocAvailability() {
           </li>
           {[...Array(totalPage)].map((_, i) => {
             return (
-              <li className="">
+              <li key={`fet_${i}`} className="">
                 <span
                   onClick={() => pageinate(i + 1)}
                   className={`cursor-pointer p-[10px] ${

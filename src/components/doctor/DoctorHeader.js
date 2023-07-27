@@ -150,14 +150,14 @@ export default function DoctorHeader() {
     setLocId("");
     setTimeout(() => {
       setShowAreasDropdown(false);
-    }, 100);
+    }, 500);
   };
   const handleSpecOnBlur = () => {
     setSpecValue("");
     setSpecId("");
     setTimeout(() => {
       setShowSpecDropdown(false);
-    }, 100);
+    }, 500);
   };
   const handleLocFocusIn = () => {
     setLocValue("");
@@ -174,9 +174,9 @@ export default function DoctorHeader() {
   };
   return (
     <div className="flex flex-row justify-between items-center max-h-fit py-[5px] pl-[30px] pr-[50px] bg-white  drop-shadow-md">
-      <div onClick={() => navigate("/")}>
+      <div onClick={() => navigate("/")} className="cursor-pointer">
         <img
-          className="w-[130px] h-[130px]"
+          className="w-[130px] h-[130px] "
           src={require("../../assets/images/home/Logo.png")}
           alt="logo"
         />
@@ -189,7 +189,7 @@ export default function DoctorHeader() {
                 onBlur={handleLocOnBlur}
                 onFocus={handleLocFocusIn}
                 onChange={handleLocSearch}
-                value={locValue}
+                value={locValue||""}
                 type="text"
                 placeholder="Location"
                 className="text-codGray font-BasicSans h-[40px] text-[16px] w-full border-r outline-none bg-white px-[0.5rem]"
@@ -210,7 +210,7 @@ export default function DoctorHeader() {
                           onClick={() =>
                             handleLocSelection(area.city, area.zip_code_id)
                           }
-                          key={area.id}
+                          key={area.city}
                         >
                           {area.city}
                         </li>
@@ -226,7 +226,7 @@ export default function DoctorHeader() {
                 onBlur={handleSpecOnBlur}
                 onFocus={handleSpecFocusIn}
                 onChange={handleSpecSearch}
-                value={specValue}
+                value={specValue||""}
                 placeholder="Specialty"
                 type="text"
                 className="text-[16px] text-codGray font-BasicSans h-[40px] border-r w-full px-2 outline-none bg-white"
@@ -238,7 +238,7 @@ export default function DoctorHeader() {
               }`}
             >
               <ul className="">
-                <li className="font-BasicSans text-eastBayLight">Speciality</li>
+                {allList.speciality.length ? <li className="font-BasicSans text-eastBayLight">Speciality</li> : null}
                 {allList.speciality.length
                   ? allList.speciality.map((spec) => {
                       return (
@@ -250,14 +250,14 @@ export default function DoctorHeader() {
                               spec.id
                             )
                           }
-                          key={spec.id}
+                          key={spec.medical_speciality_name}
                         >
                           {spec.medical_speciality_name}
                         </li>
                       );
                     })
                   : null}
-                <li className="font-BasicSans text-eastBayLight">Conditions</li>
+                {allList.conditions.length ? <li className="font-BasicSans text-eastBayLight">Conditions</li> : null}
                 {allList.conditions.length ? (
                   allList.conditions.map((spec) => {
                     return (
@@ -269,19 +269,13 @@ export default function DoctorHeader() {
                             spec.id
                           )
                         }
-                        key={spec.id}
+                        key={spec.medical_condition_name}
                       >
                         {spec.medical_condition_name}
                       </li>
                     );
                   })
-                ) : (
-                  <img
-                    className="relative top-[80px] left-[180px] w-[100px]"
-                    src={require("../../assets/images/cat-loading.gif")}
-                    alt="loading"
-                  />
-                )}
+                ) : null}
               </ul>
             </div>
           </div>
@@ -300,12 +294,15 @@ export default function DoctorHeader() {
               </div>
             </div>
           </div>
-          <button onClick={() => searchDocList()} className="absolute -right-[1px]  bg-shadeBlue border-y border-r border-l-none w-[4rem] h-full flex items-center justify-center rounded-xl text-white">
+          <button
+            onClick={() => searchDocList()}
+            className="absolute -right-[1px]  bg-shadeBlue border-y border-r border-l-none w-[4rem] h-full flex items-center justify-center rounded-xl text-white"
+          >
             <BsSearch className="text-[30px] text-white " />
           </button>
         </div>
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center cursor-pointer">
         <Link className="font-BasicSans tracking-[3.6px] font-semibold text-darkBlack sm:text-[12px] lg:text-[14px] xl:text-[20px] pr-[10px] relative top-[5px] lg:top-[3px] xl:top-[0px]">
           LOGIN/SIGNUP
         </Link>

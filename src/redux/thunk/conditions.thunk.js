@@ -18,4 +18,20 @@ export const fetchConditions = createAsyncThunk(
     }
   }
 );
+export const fetchFeaturedConditions = createAsyncThunk(
+  "featuredmedconditions",
+  async () => {
+    
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/patient/master/condition`,
+        { paginate: 4, featured: "1" },
+        { headers: headersprops, auth: authUser }
+      );
+      return [...response?.data?.data?.result];
+    } catch (err) {
+      return err.message;
+    }
+  }
+);
 

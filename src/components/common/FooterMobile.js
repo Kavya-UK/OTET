@@ -49,7 +49,7 @@ const FooterMobile = () => {
   const handleClick = (id, flag) => {
     const accorList = openAcc.map((list)=> {
       if(list.id === id)
-        return { ...list, isOpen: flag };
+        return  { ...list, isOpen: flag };
       else
         return { ...list, isOpen: false };
     })
@@ -60,10 +60,10 @@ const FooterMobile = () => {
       {
         openAcc.map(list => {
           return (
-            <>
-              <div class="border-b-[1px] pl-[20px] py-[20px] border-eastBayLight">
-                <div class="flex items-center justify-between">
-                  <h1 class="text-black font-black text-[14px]">
+            <div key={list.title}>
+              <div className="border-b-[1px] pl-[20px] py-[20px] border-eastBayLight">
+                <div className="flex items-center justify-between">
+                  <h1 className="text-black font-black text-[14px]">
                     {list.title}
                   </h1>
                   {!list.isOpen ? (
@@ -77,14 +77,17 @@ const FooterMobile = () => {
                 >
                   {list.links.map((link) => {
                     return (
-                      <Link className="block text-[14px] font-BasicSans text-black tracking-[3.6px] pb-[10px]">
+                      <Link
+                        key={link}
+                        className="block text-[14px] font-BasicSans text-black tracking-[3.6px] pb-[10px]"
+                      >
                         {link}
                       </Link>
                     );
                   })}
                 </div>
               </div>
-            </>
+            </div>
           );
         })
       }

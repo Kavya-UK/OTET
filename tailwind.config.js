@@ -45,6 +45,8 @@ module.exports = {
         graycolor: "#9597A6",
         labelColor: "#6B7276",
         headingShade: "#707070",
+        borderColor: "#65B3B3",
+        bgColor: "#EBFEFE",
       },
       boxShadow: {
         "3xl": "0px 3px 6px #00000029",

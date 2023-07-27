@@ -10,7 +10,7 @@ export const fetchDiseases = createAsyncThunk("diseases", async (data) => {
       { headers: headersprops, auth: authUser }
     );
     return {
-      id: data.condition_id,
+      
       result: [...response?.data?.data?.result],
     };
   } catch (err) {

@@ -2,6 +2,7 @@ import React from 'react'
 import Carousel from "@itseasy21/react-elastic-carousel";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
+import Loader from '../common/Loader';
 
 
 export default function HomeCaurosal() {
@@ -21,7 +22,8 @@ export default function HomeCaurosal() {
               const isActivePage = activePage === page;
               return (
                 <span
-                  key={page} className={` inline-block w-[15px] h-[15px] border-[2px] rounded-[50%] ml-[10px] ${
+                  key={page}
+                  className={` inline-block w-[15px] h-[15px] border-[2px] rounded-[50%] ml-[10px] ${
                     isActivePage ? "bg-shadeBlue border-shadeBlue " : ""
                   }`}
                   onClick={() => onClick(page)}
@@ -32,9 +34,10 @@ export default function HomeCaurosal() {
         );
       }}
     >
-      {featuredDoc.map(list => {
+      {featuredDoc.length ? featuredDoc.map((list) => {
         return (
           <div
+            key={list.doctor_name}
             className="grid grid-cols-3 gap-2 xl:ml-[60px]"
             onClick={() => navigate(`/doctor-profile?doc_url=${list.seo_url}`)}
           >
@@ -61,8 +64,7 @@ export default function HomeCaurosal() {
             </div>
           </div>
         );
-      })}
-      
+      }) : <Loader />}
     </Carousel>
   );
 }

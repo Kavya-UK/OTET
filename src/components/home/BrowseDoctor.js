@@ -31,13 +31,16 @@ export default function BrowseDoctors({ closeModal }) {
           </h3>
           <RxCross2
             onClick={() => closeModal(false)}
-            className="text-[30px] relative top-[6px]"
+            className="text-[30px] relative top-[6px] cursor-pointer"
           />
         </div>
         <div className="grid grid-cols-4 mt-[40px]">
-          {browsedoctors.map((list) => {
+          {browsedoctors.map((list,i) => {
             return (
-              <div className="col-span-1 bg-cyanBlue rounded-[18px] mx-[20px] ">
+              <div
+                key={`city_${i}`}
+                className="col-span-1 bg-cyanBlue rounded-[18px] mx-[20px] cursor-pointer"
+              >
                 <span className="inline-block py-[15px] px-[20px] text-shadeBlue text-[20px]">
                   <img
                     className="w-[30px] h-[30px] inline-block mr-[10px]"

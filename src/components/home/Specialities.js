@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import SpecialityCard from "../common/SpecialityCard"
 import {useSelector} from "react-redux";
+import Loader from '../common/Loader';
 
 export default function Specialities() {
   const navigate=useNavigate();
@@ -24,16 +25,22 @@ return (
       See More
     </p>
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 my-[70px] px-[40px] sm:px-[70px] cursor-pointer">
-      {FeatureSpeciality.map((items) => {
-        return (
-          <SpecialityCard
-            key={items.id}
-            image={items.image}
-            title={items.medical_speciality_name}
-            info={items.description}
-          />
-        );
-      })}
+      {FeatureSpeciality.length ? (
+        FeatureSpeciality.map((items) => {
+          return (
+            <SpecialityCard
+              key={items.id}
+              image={items.image}
+              title={items.medical_speciality_name}
+              info={items.description}
+            />
+          );
+        })
+      ) : (
+        <div className="col-span-2 lg:col-span-4 flex items-center">
+          <Loader />
+        </div>
+      )}
     </div>
   </div>
 );

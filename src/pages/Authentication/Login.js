@@ -9,6 +9,7 @@ import { joiResolver } from "@hookform/resolvers/joi";
 import { loginSchema } from "../../validations/auth.js";
  const Login=()=> {
   const navigate= useNavigate();
+
 const {
   handleSubmit,
   control,
@@ -19,13 +20,14 @@ const {
   mode: "onSubmit",
   resolver: joiResolver(loginSchema),
 });
+
  const onSubmit = async (data) => {
- 
-   navigate("/home");
+   navigate("/");
  };
 
  const handleLogin = (e) => {
    handleSubmit(onSubmit)(e);
+  // navigate("/");
  };
 
   return (
@@ -37,7 +39,10 @@ const {
       <div className="col-span-5 lg:col-span-3 relative h-[100vh]">
         <div className="max-h-[82vh] overflow-y-auto h-[100vh]">
           <div className="w-full flex sm:justify-end justify-center">
-            <div className="h-[130px] w-[130px] relative sm:right-[30px] top-[10px] flex items-center justify-center" onClick={()=>navigate('/')}>
+            <div
+              className="h-[130px] w-[130px] cursor-pointer relative sm:right-[30px] top-[10px] flex items-center justify-center"
+              onClick={() => navigate("/")}
+            >
               <img
                 className="w-[80%]"
                 src={require("../../assets/images/icons/Logo.png")}
@@ -53,47 +58,58 @@ const {
             <p className="font-BasicSans text-eastBay text-[20px]">
               We care for your body.It’s the only place you have to live in.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-1 gap-4 mt-[20px] text-left">
+            <div className="grid grid-cols-1 sm:grid-cols-1 mt-[20px] text-left">
               <div>
                 <InputText
-                  type="email"
+                  name={"phoneNumber"}
+                  type="phonenumber"
                   label="Mobile Number"
                   inputWidth={"w-[100%] sm:w-[85%]"}
                   placeholder="XXX XXX XXXX"
                   control={control}
-                  // schema={loginSchema.email}
+                  schema={loginSchema.phoneNumber}
                   register={register}
                   isValidationSet={true}
                   setValue={setValue}
-                  // errorMessage={errors.email?.message}
+                  errorMessage={errors.phoneNumber?.message}
                 />
               </div>
               <div>
                 <InputText
+                  name={"password"}
                   type="password"
                   label=" Password"
                   inputWidth={"w-[100%] sm:w-[85%]"}
                   placeholder="********"
                   control={control}
-                  // schema={loginSchema.password}
+                  schema={loginSchema.password}
                   register={register}
                   isValidationSet={true}
                   setValue={setValue}
-                  // errorMessage={errors.email?.message}
+                  errorMessage={errors.password?.message}
                 />
               </div>
+
               <div className="w-full flex justify-end text-codGray sm:w-[85%]">
                 <Link
                   to="/forgot-password"
-                  className="text-[18px] font-BasicSans underline font-normal opacity-50"
+                  className="text-[16px] font-BasicSans underline font-normal opacity-50"
                   onClick={() => navigate("/forgot-password")}
                 >
                   Forgot your password?
                 </Link>
               </div>
               <div className="mt-[20px] flex gap-0">
-                <InputCheckbox />
-                <span className="inline-block text-lightGray font-BasicSans text-[18px]">
+                <InputCheckbox
+                  name={"termsCondition"}
+                  control={control}
+                  schema={loginSchema.termsCondition}
+                  register={register}
+                  isValidationSet={true}
+                  setValue={setValue}
+                  errorMessage={errors.termsCondition?.message}
+                />
+                <span className="inline-block text-lightGray font-BasicSans text-[16px]">
                   I have read the Privacy Policy and agree to the Terms of
                   Service.
                 </span>
@@ -104,7 +120,17 @@ const {
         <LoginFooter
           onClick={handleLogin}
           label="Login"
-          info="Don’t have an account? Signup"
+          info={
+            <>
+              Don’t have an account?{" "}
+              <span
+                onClick={() => navigate("/register")}
+                className=" cursor-pointer font-BasicSans"
+              >
+                Signup
+              </span>
+            </>
+          }
         />
       </div>
     </div>

@@ -5,6 +5,7 @@ import BrowseDoctors from "../home/BrowseDoctor";
 
 export default function Header({setDropShadow=false}) {
   const [browseFlag, setBrowseFlag] = useState(false);
+  const [showDropdown,setDropdown] =useState(false)
 
   const navigate=useNavigate();
   return (
@@ -12,7 +13,11 @@ export default function Header({setDropShadow=false}) {
       {browseFlag && <BrowseDoctors closeModal={setBrowseFlag} />}
 
       <div>
-        <div className={`hidden px-[1.5rem] md:px-[0.5rem] lg:px-[0.5rem] xl:px-[1rem] text-darkBlack lg:py-[1.25rem] md:grid grid-col-12 py-[0.25rem] md:py-[0.75rem] bg-white h-[7rem] relative false ${setDropShadow ? " drop-shadow-md " : " "} z-20`}>
+        <div
+          className={`hidden px-[1.5rem] md:px-[0.5rem] lg:px-[0.5rem] xl:px-[1rem] text-darkBlack lg:py-[1.25rem] md:grid grid-col-12 py-[0.25rem] md:py-[0.75rem] bg-white h-[7rem] relative false ${
+            setDropShadow ? " drop-shadow-md " : " "
+          } z-20`}
+        >
           <div className="flex flex-row justify-between items-center mx-10  text-gray-900 ">
             <div className="flex items-center justify-between ">
               <div
@@ -51,18 +56,18 @@ export default function Header({setDropShadow=false}) {
                 <div className="w-full z-40">
                   <div className="mx-auto w-full max-w-md">
                     <div>
-                      <div
-                        className="relative z-20"
-                        onClick={() => navigate("/login")}
-                      >
+                      <div className="relative z-20">
                         <button
                           className="flex w-full justify-between items-center text-darkBlack
- px-[0px] pt-[0px] text-left text-[0.75rem] leading-[1rem]  focus:outline-none font-bold z-40"
+ px-[0px] pt-[0px] text-left text-[0.75rem] leading-[1rem]  focus:outline-none font-bold z-40 "
                         >
-                          <span className="font-BasicSans mr-[0.5rem] font-bold lg:text-base text-[0.75rem] leading-[1rem] tracking-[.15rem] cursor-pointer">
+                          <span
+                            className="font-BasicSans cursor-pointer mr-[0.5rem] font-bold lg:text-base text-[0.75rem] leading-[1rem] tracking-[.15rem] "
+                            onClick={() => navigate("/login")}
+                          >
                             LOGIN/SIGNUP
                           </span>
-                          <div>
+                          <div onClick={() => setDropdown(!showDropdown)}>
                             <img
                               className="h-[1.75rem]"
                               alt="user"
@@ -70,6 +75,31 @@ export default function Header({setDropShadow=false}) {
                             />
                           </div>
                         </button>
+                        {showDropdown && (
+                          <div className="absolute right-0 -bottom-[110px] bg-white">
+                            <div className="flex flex-col p-[10px] whitespace-nowrap">
+                              <div className="flex flex-row justify-center items-center pb-[10px] border-b-[2px] border-b-gray-300">
+                                <div className=" font-BasicSans font-bold text-[15px] text-black pr-[8px]">
+                                  Patients
+                                </div>
+                                <span className=" cursor-pointer text-black font-BasicSansLight  border-gray-800 hover:underline underline-offset-4 mr-[5px]" onClick={()=>navigate("/login")}>
+                                  Log in
+                                </span>
+                                <span className=" cursor-pointer text-black font-BasicSansLight  border-gray-800 hover:underline underline-offset-4" onClick={()=>navigate("/register")}>
+                                  Sign up
+                                </span>
+                              </div>
+                              <div className="flex flex-row justify-start items-center pt-[10px]">
+                                <div className=" font-BasicSans font-bold text-[15px] text-black pr-[8px]">
+                                  Doctors
+                                </div>
+                                <span className=" cursor-pointer text-black font-BasicSansLight  border-gray-800 hover:underline underline-offset-4 ">
+                                  Log in
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>

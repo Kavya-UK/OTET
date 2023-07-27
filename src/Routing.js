@@ -18,6 +18,8 @@ import UpdatePatientProfile from './pages/UpdatePatientProfile';
 import NoConnectivity from './pages/NoConnectivity';
 import SiteUnderConstruction from './pages/SiteUnderConstruction';
 import NoAppointments from './pages/NoAppointments';
+import AppointmentSuccess from "./pages/AppointmentSuccess";
+import NoDoctorFound from './pages/NoDoctorFound';
 const Routing=()=> {
   return (
     <Routes>
@@ -50,10 +52,16 @@ const Routing=()=> {
         path="/site-underconstruction"
         element={<SiteUnderConstruction />}
       />
+      <Route exact path="/no-appointment" element={<NoAppointments />} />
       <Route
         exact
-        path="/no-appointment"
-        element={<NoAppointments />}
+        path="/appointment-success"
+        element={<AppointmentSuccess />}
+      />
+      <Route
+        exact
+        path="/no-doctor-found"
+        element={<NoDoctorFound />}
       />
     </Routes>
   );

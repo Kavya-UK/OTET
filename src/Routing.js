@@ -19,7 +19,6 @@ import NoConnectivity from './pages/NoConnectivity';
 import SiteUnderConstruction from './pages/SiteUnderConstruction';
 import NoAppointments from './pages/NoAppointments';
 import AppointmentSuccess from "./pages/AppointmentSuccess";
-import NoDoctorFound from './pages/NoDoctorFound';
 const Routing=()=> {
   return (
     <Routes>
@@ -58,11 +57,7 @@ const Routing=()=> {
         path="/appointment-success"
         element={<AppointmentSuccess />}
       />
-      <Route
-        exact
-        path="/no-doctor-found"
-        element={<NoDoctorFound />}
-      />
+      
     </Routes>
   );
 }

@@ -243,9 +243,24 @@ export default function DocAvailability() {
           </li>
         </ul>
       ) : (
-        <p className="text-center ">
-          {isFeaturedDocLoading ? "" : "No Doctors found"}
-        </p>
+        <div className="relative h-full w-full">
+          <div className="flex flex-col justify-center items-center">
+            {isFeaturedDocLoading ? (
+              ""
+            ) : (
+              <>
+                <img
+                  className="w-[250px] h-[400px] "
+                  src={require("../../assets/images/home/zerodoctor.png")}
+                  alt="doctor"
+                />
+                <h2 className="text-[25px] font-BasicSansBold tracking-[3px] text-headingShade">
+                Sorry! No Doctors Found
+              </h2>
+              </>
+            )}
+          </div>
+        </div>
       )}
     </>
   );

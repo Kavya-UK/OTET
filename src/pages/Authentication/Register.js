@@ -29,7 +29,7 @@ export default function Register() {
 
   const handleRegister = (e) => {
     handleSubmit(onSubmit)(e);
-     navigate("/otp-verification");
+    //  navigate("/otp-verification");
   };
 
   const optionListGender = ["Female", "Male"];

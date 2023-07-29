@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useEffect } from "react";
 import Header from '../components/common/Header'
 import Footer from "../components/common/Footer"
 
 export default function AboutUs() {
+   useEffect(() => {
+     document.body.scrollTop = document.documentElement.scrollTop = 0;
+   }, []);
   return (
     <>
       <Header setDropShadow={true} />

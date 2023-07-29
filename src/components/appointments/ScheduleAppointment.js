@@ -30,6 +30,8 @@ export default function ScheduleAppointmentForm() {
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const doc_url = query.get("doc_url");
+  const selected_date = query.get("date");
+  const selected_slot = query.get("slot");
 
   const doctorSlot = useSelector(
     (state) => state.featuredpractioner.doctorSlot
@@ -44,30 +46,72 @@ export default function ScheduleAppointmentForm() {
   const [showInsurance, setShowInsurance] = useState(false);
   const [selectedInc, setselectedInc] = useState("");
   const [showCondition, setShowCondition] = useState(false);
+  const [onDateChangeFlag, setOnDateChangeFlag] = useState(false);
   const [selectedCond, setselectedCond] = useState("");
   const [inPersonSlot, setInPersonSlot] = useState([]);
   const [virtualSlot, setVirtualSlot] = useState([]);
+  const [selectedSlot, setSelectedSlot] = useState("");
   useEffect(() => {
     dispatch(fetchDoctorData({ url: doc_url }));
-    const d = new Date().toLocaleDateString("fr-CA");
+    const d = new Date(selected_date).toLocaleDateString("fr-CA");
     dispatch(
-      fetchDoctorSlot({ doctor_id: doc_url.split("/")[1], time_slot_date: d })
+      fetchDoctorSlot({ doctor_id: doc_url?.split("/")[1], time_slot_date: d })
     );
   }, []);
+  useEffect(() => {
+    if (selected_slot) {
+      if (selected_slot.split("_")[0] === "inperson") {
+        setVisit(1);
+      } else {
+        setVisit(2);
+      }
+    }
+    if (selected_date) {
+      setSelectedDate(selected_date);
+    }
+  }, [selected_date, selected_slot]);
+  useEffect(() => {
+    if (!onDateChangeFlag) {
+      Object.keys(doctorSlot).map((key) => {
+        if (key.toLowerCase() === selected_slot.split("_")[0]) {
+          doctorSlot[key].map((slots) => {
+            if (slots.date === selected_date) {
+              if (selected_slot.split("_")[0] === "inperson") {
+                setInPersonSlot(slots.value);
+                setSelectedSlot(selected_slot.split("_")[1]);
+              } else {
+                setVirtualSlot(slots.value);
+                setSelectedSlot(selected_slot.split("_")[1]);
+              }
+            }
+          });
+        }
+      });
+      
+      if (selected_date) {
+        setSelectedDate(selected_date);
+      }
+    }
+  }, [doctorSlot]);
 
   const onDaySelect = (inPerson, virtual) => {
+
     if (visit === 1 && inPerson.value.length >= 1) {
       setSelectedDate(inPerson.date);
       setInPersonSlot(inPerson.value);
+      setSelectedSlot("");
     }
     if (visit === 2 && virtual.value.length >= 1) {
       setSelectedDate(virtual.date);
       setVirtualSlot(virtual.value);
+      setSelectedSlot("");
     }
   };
   const onDateChange = (type) => {
     setInPersonSlot([]);
     setVirtualSlot([]);
+    setSelectedSlot("");
+    setOnDateChangeFlag(true);
     let d;
     if (type === "forward") {
       d = new Date(new Date(doctorSlot.InPerson[6].date)).toLocaleDateString(
@@ -173,7 +217,7 @@ export default function ScheduleAppointmentForm() {
                       }`}
                     />
                   </div>
-                  <div
+                  {doctorData?.insurance_company?.length ? <div
                     className={`absolute top-[45px] left-0 w-[100%] h-[100px] bg-white overflow-auto shadow-lg ring-1 ring-black ring-opacity-5 pl-[20px] pt-[20px] rounded-[10px]  ${
                       showInsurance ? " block z-20" : " hidden "
                     }`}
@@ -193,7 +237,7 @@ export default function ScheduleAppointmentForm() {
                           })
                         : null}
                     </ul>
-                  </div>
+                  </div> : null}
                 </div>
               </div>
               <div>
@@ -227,14 +271,13 @@ export default function ScheduleAppointmentForm() {
                       }`}
                     />
                   </div>
-                  <div
+                  {doctorData?.medical_condition?.length ? <div
                     className={`absolute top-[45px] left-0 w-[100%] h-[100px] bg-white overflow-auto shadow-lg ring-1 ring-black ring-opacity-5 pl-[20px] pt-[20px] rounded-[10px]  ${
                       showCondition ? " block z-20" : " hidden "
                     }`}
                   >
                     <ul className="">
-                      {doctorData?.medical_condition?.length
-                        ? doctorData.medical_condition.map((cond) => {
+                      {doctorData.medical_condition.map((cond) => {
                             return (
                               <li
                                 className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none hover:bg-cyanBlue  active-dropdown-item"
@@ -244,25 +287,10 @@ export default function ScheduleAppointmentForm() {
                                 {cond}
                               </li>
                             );
-                          })
-                        : null}
+                          })}
                     </ul>
-                  </div>
+                  </div> : null }
                 </div>
-
-                {/* <input
-                    className="h-full w-full rounded-[5px] border-shadeBlue px-[16px] outline-none placeholder:text-[12px] placeholder:tracking-[3px] bg-white border-opacity-80  rounded-r-none border-y border-l"
-                    placeholder="Select Condition"
-                    type="text"
-                  />
-                  <div className="cursor-pointer bg-[white]  border-shadeBlue h-full flex items-center justify-center border-y border-r border-l border-l-gray-300 rounded-r-[6px] px-3 ">
-                    <img
-                      src={require("../../assets/images/home/GreenArrowDown.png")}
-                      alt="Dropdown"
-                      className="h-[8px] w-[16px] text-green rotate-0 transition-transform duration-300"
-                    />
-                  </div> */}
-                {/* </div> */}
               </div>
               <div className="">
                 <label className="text-lightGray text-[15px] font-BasicSans">
@@ -374,12 +402,12 @@ export default function ScheduleAppointmentForm() {
                     return (
                       <span
                         onClick={() =>
-                          onDaySelect(day, doctorData?.time_slots?.Virtual?.[i])
+                          onDaySelect(day, doctorSlot?.Virtual?.[i])
                         }
                         key={day.date}
                         className={`font-BasicSans text-[12px] sm:text-[15px] text-center flex justify-center items-center rounded-[8px] py-[5px] w-[55px] ${getClassForDay(
                           day,
-                          doctorData?.time_slots?.Virtual?.[i]
+                          doctorSlot?.Virtual?.[i]
                         )}`}
                       >
                         {day.day.slice(0, 3)}
@@ -405,14 +433,28 @@ export default function ScheduleAppointmentForm() {
                   {visit === 1
                     ? inPersonSlot.map((time) => {
                         return (
-                          <span className="bg-shadeBlue text-white rounded-[5px] font-BasicSans text-[12px] px-[15px] py-[5px] ml-[10px]">
+                          <span
+                            onClick={() => setSelectedSlot(time.from)}
+                            className={`  rounded-[5px] font-BasicSans text-[12px] px-[15px] py-[5px] ml-[10px] cursor-pointer ${
+                              selectedSlot === time.from
+                                ? " bg-shadeBlue text-white "
+                                : " bg-Turquoise text-black"
+                            }`}
+                          >
                             {tConvert(time.from)}
                           </span>
                         );
                       })
                     : virtualSlot.map((time) => {
                         return (
-                          <span className="bg-shadeBlue text-white rounded-[5px] font-BasicSans text-[12px] px-[15px] py-[5px] ml-[10px]">
+                          <span
+                            onClick={() => setSelectedSlot(time.from)}
+                            className={` rounded-[5px] font-BasicSans text-[12px] px-[15px] py-[5px] ml-[10px] cursor-pointer ${
+                              selectedSlot === time.from
+                                ? " bg-shadeBlue text-white "
+                                : " bg-Turquoise text-black"
+                            }`}
+                          >
                             {tConvert(time.from)}
                           </span>
                         );

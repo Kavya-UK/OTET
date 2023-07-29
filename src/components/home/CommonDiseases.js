@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchDiseases } from "../../redux/thunk/diseases.thunk";
 import { fetchFeaturedConditions } from "../../redux/thunk/conditions.thunk";
 import { useDispatch, useSelector } from "react-redux";
+import BufferLoader from "../common/Bufferloader";
 
 export default function CommonDiseases() {
 
@@ -42,47 +43,50 @@ export default function CommonDiseases() {
         Most common health concerns
       </h1>
       <div className="grid grid-cols-2 sm:grid-cols-4 mt-[50px]">
-        {featuredConditionsList.map((cond,ind) => {
-          return (
-            <div
-              key={cond.medical_condition_code}
-              className="col-span-1 flex justify-around "
-            >
-              <div className="mx-[10px] sm:mx-[45px] relative w-full text-left text-sm text-slate-700 focus:outline-none font-semibold rounded-none px-2 py-4">
-                <div
-                  onClick={() => handleOnClick(ind, cond.id)}
-                  className="flex w-full pb-6 md:pb-8 border-b border-gray-400 items-center justify-between md:h-[4rem]"
-                >
-                  <span className="inline-block text-[12px] lg:text-[14px] xl:text-[20px] font-BasicSansBold text-codGray tracking-[4.5px] font-bold whitespace-nowrap truncate">
-                    {cond.medical_condition_code}
-                  </span>
-                  <img
-                    className={`transition-all duration-[0.5s] ease-[ease] h-[10px] w-[10px] lg:h-[15px] lg:w-[15px] relative top-[5px] xl:top-[10px] ${
-                      diseasesDropdown[ind] ? " rotate-180 " : " "
-                    }`}
-                    src={require("../../assets/images/home/BlackDropdown.png")}
-                    alt="homedropdown"
-                  />
-                </div>
-                {diseasesDropdown[ind] && (
-                  <div className="absolute z-10 bg-white w-full top-[50px] md:top-[64px] px-4 py-3 text-size-5 md:text-lg text-gray rounded-lg">
-                    {condition.map((dis) => {
-                      return (
-                        <h4
-                          key={dis.speciality_name}
-                          className="hover:bg-cyanBlue mt-1 text-grey tracking-[0.1rem] cursor-pointer"
-                        >
-                          {dis.speciality_name}
-                        </h4>
-                      );
-                    })}
+        {(
+          featuredConditionsList.map((cond, ind) => {
+            return (
+              <div
+                key={cond.medical_condition_code}
+                className="col-span-1 flex justify-around "
+              >
+                <div className="mx-[10px] sm:mx-[45px] relative w-full text-left text-sm text-slate-700 focus:outline-none font-semibold rounded-none px-2 py-4">
+                  <div
+                    onClick={() => handleOnClick(ind, cond.id)}
+                    className=" cursor-pointer flex w-full pb-6 md:pb-8 border-b border-gray-400 items-center justify-between md:h-[4rem]"
+                  >
+                    <span className="inline-block text-[12px] lg:text-[14px] xl:text-[20px] font-BasicSansBold text-codGray tracking-[4.5px] font-bold whitespace-nowrap truncate">
+                      {cond.medical_condition_code}
+                    </span>
+                    <img
+                      className={`transition-all duration-[0.5s] ease-[ease] h-[10px] w-[10px] lg:h-[15px] lg:w-[15px] relative top-[5px] xl:top-[10px] ${
+                        diseasesDropdown[ind] ? " rotate-180 " : " "
+                      }`}
+                      src={require("../../assets/images/home/BlackDropdown.png")}
+                      alt="homedropdown"
+                    />
                   </div>
-                )}
+                  {diseasesDropdown[ind] && (
+                    <div className="absolute z-10 bg-white w-full top-[50px] md:top-[64px] px-4 py-3 text-size-5 md:text-lg text-gray rounded-lg">
+                      {condition.length
+                        ? condition.map((dis) => {
+                            return (
+                              <h4
+                                key={dis.speciality_name}
+                                className="hover:bg-cyanBlue mt-1 text-grey tracking-[0.1rem] cursor-pointer"
+                              >
+                                {dis.speciality_name}
+                              </h4>
+                            );
+                          })
+                        : <BufferLoader/>}
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          );
-        })}
-        
+            );
+          })
+        )}
       </div>
     </div>
   );

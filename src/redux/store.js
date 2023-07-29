@@ -6,6 +6,7 @@ import diseasesSlice from "./slices/diseasesSlice";
 import browsedoctorSlice from "./slices/browsedoctorSlice";
 import featuredpractionerSlice from "./slices/featuredpractionerSlice";
 import doctorfilterSlice from "./slices/doctorfilterSlice";
+import  insuranceSlice  from "./slices/insurancefooterSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
     browsedocs: browsedoctorSlice,
     featuredpractioner: featuredpractionerSlice,
     doctorfilter: doctorfilterSlice,
+    insurance:insuranceSlice
   },
 });

@@ -8,7 +8,7 @@ export default function PatientProfile() {
       <div className="col-span-2 ">
         <SideBar />
       </div>
-      <div className="col-span-10 flex flex-col items-center">
+      <div className="col-span-10 flex flex-col items-center h-[100vh] overflow-auto">
         <h1 className=" font-BasicSans tracking-[3px] text-codGray text-[30px] my-[40px]">
           Profile Details
         </h1>

@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { forwardRef, useEffect, useState } from "react";
+import ReactDatePicker from "react-datepicker";
 import InputText from "../../components/common/InputText";
-import InputSelect from '../../components/common/InputSelect';
-import { useNavigate } from 'react-router-dom';
+import InputSelect from "../../components/common/InputSelect";
+import { useNavigate } from "react-router-dom";
 import SideBanner from "../../components/common/SideBanner";
-import LoginFooter from '../../components/common/LoginFooter';
+import LoginFooter from "../../components/common/LoginFooter";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { registerSchema } from "../../../src/validations/auth";
 export default function Register() {
   const navigate = useNavigate();
+    const [startDate, setStartDate] = useState("");
+
   const {
     handleSubmit,
     control,
@@ -21,15 +24,32 @@ export default function Register() {
   });
 
   const onSubmit = async (data) => {
-    //  navigate("/");
+    //  navigate("/otp-verification");
   };
 
   const handleRegister = (e) => {
     handleSubmit(onSubmit)(e);
-    // navigate("/");
+     navigate("/otp-verification");
   };
 
-  const optionListGender=["Female","Male"];
+  const optionListGender = ["Female", "Male"];
+  const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
+    let setValue = value;
+    if (value === "") setValue = "Today";
+    return (
+      <div className="relative w-full">
+        <div className="relative">
+          <span
+            onClick={onClick}
+            ref={ref}
+            className="h-[46px] w-[100%] sm:w-[85%] flex items-center rounded-[6px] border-[2px] cursor-pointer border-opacity-80 p-2  text-placeholderGray font-basic-sans-regular text-[14px] px-2  border-shadeGray opacity-100  pl-[1rem] "
+          >
+            {setValue}
+          </span>
+        </div>
+      </div>
+    );
+  });
 
   return (
     <div className="grid grid-cols-5">
@@ -105,20 +125,18 @@ export default function Register() {
                   errorMessage={errors.gender?.message}
                 />
               </div>
-              <div>
-                <InputText
-                  name={"dateofbirth"}
-                  customLabelStyle="text-[14px]"
-                  noIcon={true}
-                  type="date"
-                  label="DOB"
-                  inputWidth={"w-[100%] sm:w-[85%]"}
-                  control={control}
-                  schema={registerSchema.dateofbirth}
-                  register={register}
-                  isValidationSet={true}
-                  setValue={setValue}
-                  errorMessage={errors.dateofbirth?.message}
+              <div className="relative w-full ">
+                <label className="text-[14px] text-lightGray font-BasicSans inline-block mb-[5px]">
+                  DOB
+                </label>
+                <ReactDatePicker
+                  className="test"
+                  dateFormat="dd-MM-yyyy"
+                  selected={startDate}
+                  minDate={new Date()}
+                  onChange={(date) => setStartDate(date)}
+                  customInput={<DateInputComponent />}
+                  closeOnScroll={true}
                 />
               </div>
               <div>

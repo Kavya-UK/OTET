@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import BrowseDoctors from "../home/BrowseDoctor";
 
-
-export default function Header({setDropShadow=false}) {
+export default function Header({ setDropShadow = false }) {
   const [browseFlag, setBrowseFlag] = useState(false);
-  const [showDropdown,setDropdown] =useState(false)
+  const [showDropdown, setDropdown] = useState(false);
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   return (
     <>
       {browseFlag && <BrowseDoctors closeModal={setBrowseFlag} />}
@@ -56,18 +55,18 @@ export default function Header({setDropShadow=false}) {
                 <div className="w-full z-40">
                   <div className="mx-auto w-full max-w-md">
                     <div>
-                      <div className="relative z-20">
+                      <div
+                        className="relative z-20"
+                        onClick={() => setDropdown(!showDropdown)}
+                      >
                         <button
                           className="flex w-full justify-between items-center text-darkBlack
  px-[0px] pt-[0px] text-left text-[0.75rem] leading-[1rem]  focus:outline-none font-bold z-40 "
                         >
-                          <span
-                            className="font-BasicSans cursor-pointer mr-[0.5rem] font-bold lg:text-base text-[0.75rem] leading-[1rem] tracking-[.15rem] "
-                            onClick={() => navigate("/login")}
-                          >
+                          <span className="font-BasicSans cursor-pointer mr-[0.5rem] font-bold lg:text-base text-[0.75rem] leading-[1rem] tracking-[.15rem] ">
                             LOGIN/SIGNUP
                           </span>
-                          <div onClick={() => setDropdown(!showDropdown)}>
+                          <div>
                             <img
                               className="h-[1.75rem]"
                               alt="user"
@@ -75,17 +74,23 @@ export default function Header({setDropShadow=false}) {
                             />
                           </div>
                         </button>
-                        {showDropdown && (
+                        {showDropdown&&
                           <div className="absolute right-0 -bottom-[110px] bg-white">
                             <div className="flex flex-col p-[10px] whitespace-nowrap">
                               <div className="flex flex-row justify-center items-center pb-[10px] border-b-[2px] border-b-gray-300">
                                 <div className=" font-BasicSans font-bold text-[15px] text-black pr-[8px]">
                                   Patients
                                 </div>
-                                <span className=" cursor-pointer text-black font-BasicSansLight  border-gray-800 hover:underline underline-offset-4 mr-[5px]" onClick={()=>navigate("/login")}>
+                                <span
+                                  className=" cursor-pointer text-black font-BasicSansLight  border-gray-800 hover:underline underline-offset-4 mr-[5px]"
+                                  onClick={() => navigate("/login")}
+                                >
                                   Log in
                                 </span>
-                                <span className=" cursor-pointer text-black font-BasicSansLight  border-gray-800 hover:underline underline-offset-4" onClick={()=>navigate("/register")}>
+                                <span
+                                  className=" cursor-pointer text-black font-BasicSansLight  border-gray-800 hover:underline underline-offset-4"
+                                  onClick={() => navigate("/register")}
+                                >
                                   Sign up
                                 </span>
                               </div>
@@ -99,7 +104,7 @@ export default function Header({setDropShadow=false}) {
                               </div>
                             </div>
                           </div>
-                        )}
+                        }
                       </div>
                     </div>
                   </div>

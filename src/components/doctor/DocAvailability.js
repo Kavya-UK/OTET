@@ -75,7 +75,11 @@ export default function DocAvailability() {
       // dispatch(fetchFeaturedDoctors({ paginate: 4, page: page }));
     }
   };
-
+  const getClassForDay = (inPerson, virtual) => {
+    if (inPerson?.value?.length >= 1 || virtual?.value?.length >= 1)
+      return " bg-Turquoise text-codGray cursor-default";
+    else return " bg-ashGray text-codGray cursor-default";
+  };
   useEffect(() => {
     const area = query.get("area");
     const specialty = query.get("specialty");
@@ -101,20 +105,27 @@ export default function DocAvailability() {
           return (
             <div
               key={items.doctor_name}
-              className="flex p-[40px] w-full justify-between"
+              className="flex p-[40px] w-full justify-between "
             >
               <div className="flex gap-10">
-                <div className="w-[250px] h-[250px] rounded-[20px] cursor-pointer">
+                <div
+                  onClick={() =>
+                    navigate(`/doctor-profile?doc_url=${items.seo_url}`)
+                  }
+                  className="w-[250px] h-[250px] rounded-[20px] cursor-pointer"
+                >
                   <img
                     className="w-full h-full object-contain rounded-[20px]"
-                    onClick={() =>
-                      navigate(`/doctor-profile?doc_url=${items.seo_url}`)
-                    }
                     src={require("../../assets/images/specialities/Doc1.png")}
                     alt="doctor"
                   />
                 </div>
-                <div className="mt-[20px]">
+                <div
+                  onClick={() =>
+                    navigate(`/doctor-profile?doc_url=${items.seo_url}`)
+                  }
+                  className="mt-[20px] cursor-pointer"
+                >
                   <h1 className=" font-HenrietteBold text-[30px] text-codGray font-semibold">
                     {items.doctor_name}
                   </h1>
@@ -157,19 +168,22 @@ export default function DocAvailability() {
                   </h1>
                 </div>
                 <div className="flex flex-row gap-4 mt-[20px]">
-                  {items.time_slots.InPerson.map((avail) => {
+                  {items.time_slots.InPerson.map((avail, i) => {
                     return (
                       <div
                         key={avail.date}
-                        className="flex flex-col rounded-[8px] bg-cyanBlue items-center p-[8px]"
+                        className={`flex flex-col rounded-[8px]  items-center p-[8px] ${getClassForDay(
+                          avail,
+                          items.time_slots?.Virtual?.[i]
+                        )}`}
                       >
                         <span className="inline-block font-BasicSansLight text-[15px]">
                           {avail.day.substring(0, 3)}
                         </span>
-                        <span className="inline-block font-BasicSans text-[15px] rounded-[8px] bg-cyanBlue">
+                        <span className="inline-block font-BasicSans text-[15px] rounded-[8px] ">
                           {avail.date.split("-")[2]}
                         </span>
-                        <span className="inline-block font-BasicSansLight text-[15px] rounded-[8px] bg-cyanBlue">
+                        <span className="inline-block font-BasicSansLight text-[15px] rounded-[8px] ">
                           {month[parseInt(avail.date.split("-")[1]) - 1]}
                         </span>
                       </div>
@@ -243,20 +257,20 @@ export default function DocAvailability() {
           </li>
         </ul>
       ) : (
-        <div className="relative h-full w-full">
+        <div className="relative h-full w-full -z-10">
           <div className="flex flex-col justify-center items-center">
             {isFeaturedDocLoading ? (
               ""
             ) : (
               <>
                 <img
-                  className="w-[250px] h-[400px] "
+                  className="w-[250px] h-[400px] -z-10"
                   src={require("../../assets/images/home/zerodoctor.png")}
                   alt="doctor"
                 />
                 <h2 className="text-[25px] font-BasicSansBold tracking-[3px] text-headingShade">
-                Sorry! No Doctors Found
-              </h2>
+                  Sorry! No Doctors Found
+                </h2>
               </>
             )}
           </div>

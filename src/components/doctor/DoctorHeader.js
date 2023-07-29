@@ -6,6 +6,7 @@ import { fetchSpeciality } from "../../redux/thunk/speciality.thunk";
 import { fetchConditions } from "../../redux/thunk/conditions.thunk";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation,useNavigate } from "react-router-dom";
+
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ReactComponent as Calendar } from "../../assets/images/home/Calendar.svg";
@@ -14,7 +15,8 @@ import { useSearchParams } from "react-router-dom";
 
 const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
   let setValue = value;
-  if (value === "") setValue = "Today";
+   if (new Date(value).setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0))
+     setValue = "Today";
   return (
     <div className="flex md:justify-between items-center w-full pl-[10px]">
       <Calendar
@@ -37,6 +39,7 @@ export default function DoctorHeader() {
   const specialityList = useSelector(
     (state) => state.speciality.specialityList
   );
+
   const areasList = useSelector((state) => state.locations.areas);
   const useQuery = () => new URLSearchParams(useLocation().search);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -70,6 +73,8 @@ export default function DoctorHeader() {
   const [startDate, setStartDate] = useState("");
   const [locId, setLocId] = useState("");
   const [specId, setSpecId] = useState("");
+  const [showDropdown, setDropdown] = useState(false);
+
 
   useEffect(() => {
     setAllList({
@@ -79,9 +84,9 @@ export default function DoctorHeader() {
     const area = query.get("area");
     const specialty = query.get("specialty");
     const date = query.get("date");
-    setStartDate(new Date(date));
-    setSpecValue(specialty?.split("_")[0]);
-    setLocValue(area?.split("_")[0]);
+    !startDate && setStartDate(new Date(date));
+    !specValue && setSpecValue(specialty?.split("_")[0]);
+    !locValue && setLocValue(area?.split("_")[0]);
   }, [specialityList, conditionsList]);
 
   const searchDocList = (e) => {
@@ -128,7 +133,7 @@ export default function DoctorHeader() {
         return cond;
       }
     });
-    setShowSpecDropdown(!!filterSpec.length);
+    setShowSpecDropdown(!!filterSpec.length || !!filterCond.length);
     setAllList({
       speciality: filterSpec,
       conditions: filterCond,
@@ -189,7 +194,7 @@ export default function DoctorHeader() {
                 onBlur={handleLocOnBlur}
                 onFocus={handleLocFocusIn}
                 onChange={handleLocSearch}
-                value={locValue||""}
+                value={locValue || ""}
                 type="text"
                 placeholder="Location"
                 className="text-codGray font-BasicSans h-[40px] text-[16px] w-full border-r outline-none bg-white px-[0.5rem]"
@@ -226,7 +231,7 @@ export default function DoctorHeader() {
                 onBlur={handleSpecOnBlur}
                 onFocus={handleSpecFocusIn}
                 onChange={handleSpecSearch}
-                value={specValue||""}
+                value={specValue || ""}
                 placeholder="Specialty"
                 type="text"
                 className="text-[16px] text-codGray font-BasicSans h-[40px] border-r w-full px-2 outline-none bg-white"
@@ -238,7 +243,11 @@ export default function DoctorHeader() {
               }`}
             >
               <ul className="">
-                {allList.speciality.length ? <li className="font-BasicSans text-eastBayLight">Speciality</li> : null}
+                {allList.speciality.length ? (
+                  <li className="font-BasicSans text-eastBayLight">
+                    Speciality
+                  </li>
+                ) : null}
                 {allList.speciality.length
                   ? allList.speciality.map((spec) => {
                       return (
@@ -257,25 +266,29 @@ export default function DoctorHeader() {
                       );
                     })
                   : null}
-                {allList.conditions.length ? <li className="font-BasicSans text-eastBayLight">Conditions</li> : null}
                 {allList.conditions.length ? (
-                  allList.conditions.map((spec) => {
-                    return (
-                      <li
-                        className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
-                        onClick={() =>
-                          handleSpecSelection(
-                            spec.medical_condition_name,
-                            spec.id
-                          )
-                        }
-                        key={spec.medical_condition_name}
-                      >
-                        {spec.medical_condition_name}
-                      </li>
-                    );
-                  })
+                  <li className="font-BasicSans text-eastBayLight">
+                    Conditions
+                  </li>
                 ) : null}
+                {allList.conditions.length
+                  ? allList.conditions.map((spec) => {
+                      return (
+                        <li
+                          className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
+                          onClick={() =>
+                            handleSpecSelection(
+                              spec.medical_condition_name,
+                              spec.id
+                            )
+                          }
+                          key={spec.medical_condition_name}
+                        >
+                          {spec.medical_condition_name}
+                        </li>
+                      );
+                    })
+                  : null}
               </ul>
             </div>
           </div>
@@ -285,7 +298,7 @@ export default function DoctorHeader() {
                 <DatePicker
                   className="bg-white font-Basicsans text-[1.3rem] text-codGray tracking-[5px] outline-none"
                   dateFormat="MMMM d, yyyy"
-                  selected={startDate}
+                  selected={startDate || new Date()}
                   minDate={new Date()}
                   onChange={(date) => setStartDate(date)}
                   customInput={<DateInputComponent />}
@@ -302,7 +315,10 @@ export default function DoctorHeader() {
           </button>
         </div>
       </div>
-      <div className="flex items-center cursor-pointer">
+      <div
+        className="flex items-center cursor-pointer"
+        onClick={() => setDropdown(!showDropdown)}
+      >
         <Link className="font-BasicSans tracking-[3.6px] font-semibold text-darkBlack sm:text-[12px] lg:text-[14px] xl:text-[20px] pr-[10px] relative top-[5px] lg:top-[3px] xl:top-[0px]">
           LOGIN/SIGNUP
         </Link>
@@ -312,6 +328,37 @@ export default function DoctorHeader() {
           className="inline-block xl:w-[36px] lg:w-[30px] xl:h-[36px] lg:h-[30px] w-[25px] h-[25px] relative bottom-[0px] lg:bottom-[3px]"
         />
       </div>
+      {showDropdown && (
+        <div className="absolute right-0 -bottom-[110px] bg-white">
+          <div className="flex flex-col p-[10px] whitespace-nowrap">
+            <div className="flex flex-row justify-center items-center pb-[10px] border-b-[2px] border-b-gray-300">
+              <div className=" font-BasicSans font-bold text-[15px] text-black pr-[8px]">
+                Patients
+              </div>
+              <span
+                className=" cursor-pointer text-black font-BasicSansLight  border-gray-800 hover:underline underline-offset-4 mr-[5px]"
+                onClick={() => navigate("/login")}
+              >
+                Log in
+              </span>
+              <span
+                className=" cursor-pointer text-black font-BasicSansLight  border-gray-800 hover:underline underline-offset-4"
+                onClick={() => navigate("/register")}
+              >
+                Sign up
+              </span>
+            </div>
+            <div className="flex flex-row justify-start items-center pt-[10px]">
+              <div className=" font-BasicSans font-bold text-[15px] text-black pr-[8px]">
+                Doctors
+              </div>
+              <span className=" cursor-pointer text-black font-BasicSansLight  border-gray-800 hover:underline underline-offset-4 ">
+                Log in
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

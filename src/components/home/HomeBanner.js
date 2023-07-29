@@ -10,7 +10,11 @@ import { useNavigate } from "react-router-dom";
 const DateInputComponent = forwardRef(
   ({ value, onClick, setDateIsOpen, dateIsOpen }, ref) => {
     let setValue = value;
-    if (value === "") setValue = "Today";
+  
+    if (
+      new Date(value).setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0)
+    )
+      setValue = "Today";
     return (
       <div className="flex md:justify-between items-center w-full pl-[10px]">
         <div className="flex">
@@ -19,11 +23,11 @@ const DateInputComponent = forwardRef(
               onClick();
               setDateIsOpen(true);
             }}
-            className="w-[15px] md:w-auto relative sm:top-[2px] lg:-top-[5px] mr-[20px] lg:mr-[15px] "
+            className="w-[15px] md:w-auto relative sm:top-[2px] lg:-top-[5px] mr-[20px] lg:mr-[15px]"
           />
 
           <button
-            className="font-Basicsans text-[20px] text-codGray tracking-[5.04px] outline-none ml-[10px]"
+            className="font-Basicsans text-[20px] text-codGray tracking-[5.04px] outline-none ml-[10px] "
             onClick={() => {
               onClick();
               setDateIsOpen(true);
@@ -176,10 +180,10 @@ export default function HomeBanner({}) {
         />
         EDICINE CONNECTING
       </h1>
-      <h3 className=" text-[30px] xl:text-[40px] font-PoppinsItalic text-black italic tracking-[5px] text-center">
+      <h3 className=" text-[30px] xl:text-[40px] font-PoppinsItalic text-black tracking-[5px] text-center">
         Mind. Body. Soul
       </h3>
-      <div className="flex items-center justify-center h-[300px]">
+      <div className="flex items-center justify-center h-[360px]">
         <div className="grid grid-cols-12 rounded-[20px] lg:rounded-[87px] h-[250px] md:h-[100px]  border-[1px] bg-white  mx-[10px] md:mx-[40px] xl:mx-[100px] w-full transition-all duration-[0.5s] ease-[ease]">
           <div className=" col-span-12 md:col-span-10 xl:col-span-11 flex items-center md:h-[100px] lg:justify-center">
             <div className=" grid grid-cols-3 w-full pl-[20px] md:pl-0">
@@ -297,9 +301,9 @@ export default function HomeBanner({}) {
               <div className="col-span-3 md:col-span-1 flex md:justify-end items-center relative top-[5px]">
                 <div className="text-[20px] w-full xl:w-[80%]">
                   <DatePicker
-                    className="bg-white font-Basicsans text-[1.3rem] text-codGray tracking-[5px] outline-none"
+                    className="font-Basicsans text-[1.3rem] text-codGray tracking-[5px] outline-none"
                     dateFormat="MMMM d, yyyy"
-                    selected={startDate}
+                    selected={startDate || new Date()}
                     minDate={new Date()}
                     onChange={(date) => {
                       setStartDate(date);

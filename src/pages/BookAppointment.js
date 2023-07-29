@@ -9,7 +9,8 @@ import { fetchConditions } from "../redux/thunk/conditions.thunk";
 import AppointmentHeader from "../components/home/AppointmentHeader";
 const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
   let setValue = value;
-  if (value === "") setValue = "Today";
+  if (new Date(value).setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0))
+    setValue = "Today";
   return (
     <div className="relative w-full">
       <div className="relative">
@@ -88,7 +89,7 @@ export default function BookAppointment() {
         return cond;
       }
     });
-    setShowSpecDropdown(!!filterSpec.length);
+    setShowSpecDropdown(!!filterSpec.length || !!filterCond.length);
     setAllList({
       speciality: filterSpec,
       conditions: filterCond,
@@ -217,7 +218,7 @@ export default function BookAppointment() {
               }`}
             >
               <ul className="">
-                <li className="font-BasicSans text-eastBayLight">Speciality</li>
+                {allList.speciality.length ? <li className="font-BasicSans text-eastBayLight">Speciality</li> : null}
                 {allList.speciality.length ? (
                   allList.speciality.map((spec) => {
                     return (
@@ -233,7 +234,7 @@ export default function BookAppointment() {
                     );
                   })
                 ) : null}
-                <li className="font-BasicSans text-eastBayLight">Conditions</li>
+                {allList.conditions.length ? <li className="font-BasicSans text-eastBayLight">Conditions</li> : null}
                 {allList.conditions.length ? (
                   allList.conditions.map((spec) => {
                     return (
@@ -258,7 +259,7 @@ export default function BookAppointment() {
               <ReactDatePicker
                 className="test"
                 dateFormat="MMMM d, yyyy"
-                selected={startDate}
+                selected={startDate || new Date()}
                 minDate={new Date()}
                 onChange={(date) => setStartDate(date)}
                 customInput={<DateInputComponent />}

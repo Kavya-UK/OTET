@@ -83,6 +83,7 @@ export default function DoctorProfile() {
   const onDaySelect = (inPerson, virtual) => {
     setSelectedSlot({});
     if (inPerson.value.length >= 1 || virtual.value.length >= 1) {
+      console.log(selectedDate);
       setSelectedDate(inPerson.date);
       setInPersonSlot(inPerson.value);
       setVirtualSlot(virtual.value);
@@ -110,10 +111,13 @@ export default function DoctorProfile() {
       setSlotError(true);
     } else {
       setSlotError(false);
-      navigate(`/schedule-appointment?doc_url=${doc_url}`);
+      navigate(
+        `/schedule-appointment?doc_url=${doc_url}&date=${selectedDate}&slot=${selectedSlot.type}_${selectedSlot.time}`
+      );
     }
   };
   const selectSlot = (time, type, selectedDate) => {
+   
     setSelectedSlot({ type, time: time.from, selectedDate });
   };
   return (
@@ -219,12 +223,12 @@ export default function DoctorProfile() {
                     return (
                       <span
                         onClick={() =>
-                          onDaySelect(day, doctorData?.time_slots?.Virtual?.[i])
+                          onDaySelect(day, doctorSlot?.Virtual?.[i])
                         }
                         key={day.date}
                         className={`font-BasicSans cursor-pointer  text-[12px] sm:text-[15px] text-center flex justify-center items-center  rounded h-[60px] w-[60px] ${getClassForDay(
                           day,
-                          doctorData?.time_slots?.Virtual?.[i]
+                          doctorSlot?.Virtual?.[i]
                         )}`}
                       >
                         {month[parseInt(day.date.split("-")[1]) - 1]}{" "}

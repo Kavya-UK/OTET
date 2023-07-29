@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchFeaturedSpeciality, fetchSpeciality } from "../thunk/speciality.thunk";
+import { fetchFeaturedSpeciality, fetchFooterSpeciality, fetchSpeciality } from "../thunk/speciality.thunk";
 
 const initialState = {
   specialityList: [],
   featuredSpecialityList: [],
+  footerSpecialityList:[],
 };
 
 export const specialitySlice = createSlice({
@@ -21,6 +22,9 @@ export const specialitySlice = createSlice({
     });
     builder.addCase(fetchSpeciality.fulfilled, (state, action) => {
       state.specialityList = [...action.payload];
+    });
+    builder.addCase(fetchFooterSpeciality.fulfilled, (state, action) => {
+      state.footerSpecialityList = [...action.payload];
     });
   },
 });

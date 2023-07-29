@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 export default function SideBar() {
   const navigate=useNavigate();
   return (
-    <div className="w-[250px] h-full bg-shadeBlue relative shadow-3xl">
+    <div className="w-[250px] h-[100vh] bg-shadeBlue relative shadow-3xl">
       <div className="flex justify-center items-center pt-[15px] cursor-pointer" onClick={()=>navigate("/")} >
         <img
           className="w-[140px] h-[140px]"

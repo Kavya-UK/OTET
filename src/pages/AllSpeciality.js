@@ -13,23 +13,28 @@ export default function AllSpeciality() {
    useEffect(() => {
      dispatch(fetchSpeciality());
    },[]);
+   useEffect(() => {
+     document.body.scrollTop = document.documentElement.scrollTop = 0;
+   }, []);
   return (
     <>
       <Header setDropShadow={true} />
       <div className="w-full h-[800px] bg-no-repeat pt-[200px]">
         <div className="text-center px-[90px] relative top-[-70px]">
-          <h1 className="text-codGray text-[40px] font-BasicSansBold tracking-[9px] font-semibold ">
-            Speciality
+          <h1 className="text-codGray text-[40px] font-BasicSans tracking-[9px] leading-[70px] font-semibold ">
+            Specialty
           </h1>
-          <p className="text-[18px] font-BasicSans text-eastBay ">
+          <p className="md:text-[18px] font-BasicSans text-eastBay mt-[25px]">
             Every medical specialist shares one common goal: to help patients
             get healthy or stay healthy. But each one has very specific skills
-            and competencies that make them an integral member of the medical
-            field. Browse through each specialty and select as per your need.
+            and <br className="hidden lg:block" />
+            competencies that make them an integral member of the medical field.
+            <br className="hidden lg:block" /> Browse through each specialty and
+            select as per your need.
           </p>
         </div>
         <div className="grid grid-cols-4 gap-4 my-[40px] px-[40px] sm:px-[70px] cursor-pointer">
-          {speciality.length>88 ? (
+          {speciality.length ? (
             speciality.map((items) => {
               return (
                 <SpecialityCard

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchBrowseDoctors } from "../../redux/thunk/browsedoctor.thunk";
+import Loader from "../common/Loader";
 
 export default function BrowseDoctors({ closeModal }) {
   const dispatch = useDispatch();
@@ -35,23 +36,29 @@ export default function BrowseDoctors({ closeModal }) {
           />
         </div>
         <div className="grid grid-cols-4 mt-[40px]">
-          {browsedoctors.map((list,i) => {
-            return (
-              <div
-                key={`city_${i}`}
-                className="col-span-1 bg-cyanBlue rounded-[18px] mx-[20px] cursor-pointer"
-              >
-                <span className="inline-block py-[15px] px-[20px] text-shadeBlue text-[20px]">
-                  <img
-                    className="w-[30px] h-[30px] inline-block mr-[10px]"
-                    src={require("../../assets/images/home/CityLocation.png")}
-                    alt="city"
-                  />
-                  {list.city_name}
-                </span>
-              </div>
-            );
-          })}
+          {browsedoctors.length ? (
+            browsedoctors.map((list, i) => {
+              return (
+                <div
+                  key={`city_${i}`}
+                  className="col-span-1 bg-cyanBlue rounded-[18px] mx-[20px] cursor-pointer"
+                >
+                  <span className="inline-block py-[15px] px-[20px] text-shadeBlue text-[20px]">
+                    <img
+                      className="w-[30px] h-[30px] inline-block mr-[10px]"
+                      src={require("../../assets/images/home/CityLocation.png")}
+                      alt="city"
+                    />
+                    {list.city_name}
+                  </span>
+                </div>
+              );
+            })
+          ) : (
+            <div className="col-span-4 flex justify-center items-center ">
+              <Loader className={"w-[300px] h-auto "} />
+            </div>
+          )}
         </div>
       </div>
     </div>

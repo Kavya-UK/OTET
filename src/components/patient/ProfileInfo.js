@@ -82,7 +82,7 @@ export default function ProfileInfo() {
           you have given your consent.
         </p>
         <div className='text-center mt-[30px]'>
-          <button className='text-white font-BasicSansBold text-[15px] tracking-[2px] bg-shadeBlue rounded-[100px] py-[12px] px-[20px]'>EDIT PROFILE</button>
+          <button className='text-white font-BasicSansBold text-[15px] tracking-[2px] bg-shadeBlue rounded-[100px] py-[12px] mb-[20px] px-[20px]'>EDIT PROFILE</button>
         </div>
       </div>
     </>

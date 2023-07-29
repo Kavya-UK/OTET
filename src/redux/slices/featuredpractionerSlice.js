@@ -26,6 +26,7 @@ const featuredpractionerSlice = createSlice({
     });
     builder.addCase(fetchFeaturedDoctors.pending, (state, action) => {
       state.isFeaturedDocLoading = true;
+      state.totalCount=0;
     });
     builder.addCase(fetchDoctorData.fulfilled, (state, action) => {
       state.doctorData = { ...action.payload };

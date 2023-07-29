@@ -1,13 +1,12 @@
 import React from 'react'
 
-export default function Loader() {
+export default function Loader({className}) {
   return (
     <div className=" w-full h-full flex justify-center items-center">
       <img
-        // className="h-[8rem] md:h-[10rem] tall:h-[13rem] lg:h-[15rem] cursor-pointer my-img"
         alt="Logo"
         src={require("../../assets/images/icons/Loader.gif")}
-        // className="w-[300px] h-[300px]"
+        className={className}
       />
     </div>
   );

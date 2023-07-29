@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Label from "./Label"
 import ErrorMessage from "./ErrorMessage";
 export default function InputSelect({
@@ -12,6 +12,8 @@ export default function InputSelect({
   errorMessage,
   ...otherProps
 }) {
+
+  const [openList,setOpenlist]=useState(false)
   return (
     <div className={`${inputWidth} relative`}>
       {label ? (

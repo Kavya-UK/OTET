@@ -14,7 +14,7 @@ export default function HomeCaurosal() {
   return (
     <Carousel
       showArrows={false}
-      itemsToShow={1}
+      // itemsToShow={1}
       renderPagination={({ pages, activePage, onClick }) => {
         return (
           <div direction="row">
@@ -38,7 +38,7 @@ export default function HomeCaurosal() {
         return (
           <div
             key={list.doctor_name}
-            className="grid grid-cols-3 gap-2 xl:ml-[60px]"
+            className="grid grid-cols-3 gap-4"
             onClick={() => navigate(`/doctor-profile?doc_url=${list.seo_url}`)}
           >
             <div className="col-span-1">

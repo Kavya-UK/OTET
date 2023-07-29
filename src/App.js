@@ -2,6 +2,8 @@ import "./App.css";
 import Routing from "./Routing";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
+import "./datePicker.css";
+
 function App() {
   return (
     <Provider store={store}>

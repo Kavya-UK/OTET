@@ -1,8 +1,20 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
-export default function SpecialityCard({ image,title,info}) {
+export default function SpecialityCard({ id, image, title, info }) {
+  const navigate=useNavigate()
+ 
+  const handleSearch = () => {
+    let url = "/doctor-listing?";
+      url = `${url}specialty=${title}_${id}`;
+      navigate(url);
+    
+  };
   return (
-    <div className="flex flex-col py-[30px] px-[20px] hover:shadow-[0_0_8px_5px_#E2F6F3] rounded-[20px] ">
+    <div
+      className="flex flex-col py-[30px] px-[20px] hover:shadow-[0_0_8px_5px_#E2F6F3] rounded-[20px] "
+      onClick={() => handleSearch()}
+    >
       <div>
         <img
           className="lg:h-[130px] lg:w-[130px] sm:h-[80px] sm:w-[80px]  h-[80px] w-[80px] "

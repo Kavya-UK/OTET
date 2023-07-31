@@ -3,9 +3,10 @@ import { fetchDiseases } from "../../redux/thunk/diseases.thunk";
 import { fetchFeaturedConditions } from "../../redux/thunk/conditions.thunk";
 import { useDispatch, useSelector } from "react-redux";
 import BufferLoader from "../common/Bufferloader";
+import { useNavigate } from "react-router-dom";
 
 export default function CommonDiseases() {
-
+ const navigate=useNavigate();
   const featuredConditionsList = useSelector(
     (state) => state.conditions.featuredConditionsList
   );
@@ -36,6 +37,11 @@ export default function CommonDiseases() {
     
   }, []);
 
+  const handleSearch = (id,title) => {
+    let url = "/doctor-listing?";
+    url = `${url}specialty=${title}_${id}`;
+    navigate(url);
+  };
   
   return (
     <div className="h-[300px] w-full bg-cyanBlue border-[1px] border-Grayish">
@@ -67,19 +73,27 @@ export default function CommonDiseases() {
                     />
                   </div>
                   {diseasesDropdown[ind] && (
-                    <div className="absolute z-10 bg-white w-full top-[50px] md:top-[64px] px-4 py-3 text-size-5 md:text-lg text-gray rounded-lg">
-                      {condition.length
-                        ? condition.map((dis) => {
-                            return (
-                              <h4
-                                key={dis.speciality_name}
-                                className="hover:bg-cyanBlue mt-1 text-grey tracking-[0.1rem] cursor-pointer"
-                              >
-                                {dis.speciality_name}
-                              </h4>
-                            );
-                          })
-                        : <BufferLoader/>}
+                    <div
+                      className="absolute z-10 bg-white w-full top-[50px] md:top-[64px] px-4 py-3 text-size-5 md:text-lg text-gray rounded-lg"
+                      
+                    >
+                      {condition.length ? (
+                        condition.map((dis) => {
+                          return (
+                            <h4
+                              key={dis.speciality_name}
+                              className="hover:bg-cyanBlue mt-1 text-grey tracking-[0.1rem] cursor-pointer"
+                              onClick={() =>
+                                handleSearch(dis.speciality_id,dis.speciality_name)
+                              }
+                            >
+                              {dis.speciality_name}
+                            </h4>
+                          );
+                        })
+                      ) : (
+                        <BufferLoader />
+                      )}
                     </div>
                   )}
                 </div>

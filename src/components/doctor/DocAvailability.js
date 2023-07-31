@@ -6,10 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Loader from "../common/Loader";
-
+import AuthenticationModal from "../common/AuthenticationModal"
 export default function DocAvailability() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
+
   const [page, setPage] = useState(1);
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
@@ -98,6 +100,13 @@ export default function DocAvailability() {
   }, []);
   return (
     <>
+      {/* {showModal && (
+        <AuthenticationModal
+          title="Authentication Required"
+          description="This action requires you to Login"
+          closeModal={() => setShowModal(false)}
+        />
+      )} */}
       {isFeaturedDocLoading ? (
         <Loader />
       ) : (
@@ -197,6 +206,7 @@ export default function DocAvailability() {
                       onClick={() =>
                         navigate(`/doctor-profile?doc_url=${items.seo_url}`)
                       }
+                      // onClick={() => setShowModal(true)}
                       className="rounded-[100px] bg-shadeBlue text-white py-[10px] px-[25px] font-BasicSansBold text-[15px] tracking-[0.8px]"
                     >
                       SCHEDULE AN APPOINTMENT

@@ -21,17 +21,16 @@ const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
     <div className="flex md:justify-between items-center w-full pl-[10px]">
       <Calendar
         onClick={onClick}
-        className="w-[15px] md:w-auto relative   "
+        className="w-[15px] lg:w-[20px] xl:w-[30px] relative   "
       />
 
       <button
-        className="text-codGray font-BasicSans h-[40px] text-[13px] w-full outline-none bg-white px-[0.5rem]"
+        className="text-codGray font-BasicSans h-[40px] text-[13px] outline-none bg-white px-[0.5rem] xl:w-[125px] w-[110px]  whitespace-nowrap relative top-[2px]"
         onClick={onClick}
         ref={ref}
       >
         {setValue}
       </button>
-      
     </div>
   );
 });
@@ -178,7 +177,7 @@ export default function DoctorHeader() {
     });
   };
   return (
-    <div className="flex flex-row justify-between items-center max-h-fit py-[5px] pl-[30px] pr-[50px] bg-white  drop-shadow-md">
+    <div className="flex flex-row justify-between items-center max-h-fit py-[5px] lg:pl-[30px] lg:pr-[50px] bg-white  drop-shadow-md">
       <div onClick={() => navigate("/")} className="cursor-pointer">
         <img
           className="w-[130px] h-[130px] "
@@ -187,7 +186,7 @@ export default function DoctorHeader() {
         />
       </div>
       <div>
-        <div className="flex items-center w-full border-[2px] rounded-[20px]  py-[0.5rem] relative">
+        <div className="hidden md:flex items-center border-[2px] rounded-[20px]  py-[0.5rem] relative w-[450px] lg:w-[550px]  xl:w-[650px]">
           <div className="w-[30%] relative">
             <div className="ml-3">
               <input
@@ -293,8 +292,8 @@ export default function DoctorHeader() {
             </div>
           </div>
           <div className="w-[30%]">
-            <div className="ml-3">
-              <div className="text-[20px] w-full xl:w-[80%]">
+            <div className="lg:ml-3">
+              <div className="text-[20px] w-full xl:w-[100%]">
                 <DatePicker
                   className="bg-white font-Basicsans text-[1.3rem] text-codGray tracking-[5px] outline-none"
                   dateFormat="MMMM d, yyyy"
@@ -319,13 +318,13 @@ export default function DoctorHeader() {
         className="flex items-center cursor-pointer"
         onClick={() => setDropdown(!showDropdown)}
       >
-        <Link className="font-BasicSans tracking-[3.6px] font-semibold text-darkBlack sm:text-[12px] lg:text-[14px] xl:text-[20px] pr-[10px] relative top-[5px] lg:top-[3px] xl:top-[0px]">
+        <Link className="font-BasicSans tracking-[1.5px] lg:tracking-[3.6px] font-semibold text-darkBlack text-[12px] sm:text-[12px] lg:text-[14px] xl:text-[20px] pr-[10px] relative top-[5px] lg:top-[3px] xl:top-[0px]">
           LOGIN/SIGNUP
         </Link>
         <img
           src={require("../../assets/images/home/User.png")}
           alt="user"
-          className="inline-block xl:w-[36px] lg:w-[30px] xl:h-[36px] lg:h-[30px] w-[25px] h-[25px] relative bottom-[0px] lg:bottom-[3px]"
+          className="inline-block xl:w-[36px] lg:w-[30px] xl:h-[36px] lg:h-[30px] w-[25px] h-[25px] relative -bottom-[3px] lg:bottom-[3px]"
         />
       </div>
       {showDropdown && (

@@ -98,3 +98,8 @@ input:checked + div svg {
   appearance: none;
   margin: 0;
 }
+
+
+.rec.rec-carousel-item.rec-carousel-item-1.rec-carousel-item-visible div:first-child div:first-child{
+  width: 100% !important;
+}

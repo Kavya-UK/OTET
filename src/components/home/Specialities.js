@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import SpecialityCard from "../common/SpecialityCard"
 import {useSelector} from "react-redux";
@@ -10,6 +10,7 @@ const speciality = useSelector(
   (state) => state.speciality.featuredSpecialityList
 );
 const FeatureSpeciality=speciality.slice(0,4)
+
 return (
   <div className="mt-[70px]">
     <h1 className="text-[30px] sm:text-[46px] xl:text-[42px] font-BasicSans font-bold md:leading-[70px] text-codGray tracking-[10px] text-center">
@@ -24,12 +25,13 @@ return (
     >
       See More
     </p>
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 my-[70px] px-[40px] sm:px-[70px] cursor-pointer">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 my-[70px] px-[40px] sm:px-[70px] cursor-pointer" >
       {FeatureSpeciality.length ? (
         FeatureSpeciality.map((items) => {
           return (
             <SpecialityCard
               key={items.id}
+              id={items.id}
               image={items.image}
               title={items.medical_speciality_name}
               info={items.description}

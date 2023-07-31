@@ -160,8 +160,7 @@ export default function DoctorFilter() {
             <h1 className=" font-BasicSansBold text-[15px] text-codGray tracking-[2px] font-bold my-[10px]">
               {list.title}
             </h1>
-            {list.value
-              .slice(
+            {list.value?.slice(
                 0,
                 listView[list.title]?.minlength
                   ? listView[list.title]?.minlength

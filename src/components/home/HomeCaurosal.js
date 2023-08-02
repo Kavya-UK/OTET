@@ -48,7 +48,7 @@ export default function HomeCaurosal() {
                 alt="doctor"
               />
             </div>
-            <div className="col-span-2 mt-[20px]">
+            <div className="col-span-2 mt-[0px] md:mt-[20px]">
               <h3 className=" font-HenrietteRegular font-bold text-[1.5rem] text-codGray">
                 {list.doctor_name}
               </h3>

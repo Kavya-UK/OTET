@@ -1,19 +1,27 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DeleteAccModal from "./DeleteAccModal";
+import PopupModal from "./DeleteAccModal";
 
 export default function SideBar() {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+  const[showSignoutModal,setSignoutModal]=useState(false)
 
  
   return (
     <>
       {showModal && (
-        <DeleteAccModal
+        <PopupModal
           title="Are you sure you want to delete your account?"
           description="Your account and all of its data will be permanently deleted."
           closeModal={() => setShowModal(false)}
+        />
+      )}
+      {showSignoutModal && (
+        <PopupModal
+          title="Logout?"
+          description="Are you sure you want to Logout?"
+          closeModal={() => setSignoutModal(false)}
         />
       )}
       <div className="w-[250px] h-[100vh] bg-shadeBlue relative shadow-3xl">
@@ -43,7 +51,10 @@ export default function SideBar() {
           >
             Delete Account
           </p>
-          <p className="text-white font-BasicSans text-[15px] py-[5px] hover:bg-white hover:text-shadeBlue pl-[30px] cursor-pointer">
+          <p
+            className="text-white font-BasicSans text-[15px] py-[5px] hover:bg-white hover:text-shadeBlue pl-[30px] cursor-pointer"
+            onClick={() => setSignoutModal(true)}
+          >
             Sign out
           </p>
         </div>

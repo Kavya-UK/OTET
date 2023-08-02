@@ -6,7 +6,7 @@ export default function OurProcess() {
       <h1 className=" font-BasicSans text-[36px] px-[15px] sm:px-[25px] lg:px-[40px] font-semibold xl:text-[44px] text-codGray tracking-[8px] mb-[20px] md:leading-[70px]">
         Our Process
       </h1>
-      <div className=" grid grid-cols-6 px-[15px] sm:px-[25px] lg:px-[40px] pt-[40px] pb-[60px] border-b-[2px] mb-[30px] gap-8">
+      <div className=" grid grid-cols-6 px-[15px] sm:px-[25px] lg:px-[40px] xl:pt-[40px] pb-[60px] border-b-[2px] mb-[30px] gap-8">
         <div className="col-span-6 lg:col-span-2 flex justify-center items-center lg:block">
           <img
             className="hidden lg:inline-block lg:w-auto"
@@ -14,7 +14,7 @@ export default function OurProcess() {
             alt="ourprocess"
           />
         </div>
-        <div className="col-span-6 lg:col-span-4 mt-[40px] lg:mt-[40px]">
+        <div className="col-span-6 lg:col-span-4 mt-[10px] lg:mt-[40px]">
           <h1 className=" font-BasicSans text-[22px] sm:text-[30px] xl:text-[38px] text-codGray lg:text-left text-center">
             Instant appointment with Holistic Practitioners
           </h1>

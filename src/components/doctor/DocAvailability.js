@@ -108,112 +108,121 @@ export default function DocAvailability() {
         />
       )} */}
       {isFeaturedDocLoading ? (
-        <Loader />
+        <div className="flex justify-start">
+          <Loader />
+        </div>
       ) : (
         featuredDoc.map((items) => {
           return (
             <div
               key={items.doctor_name}
-              className="flex p-[40px] w-full justify-between "
+              className="px-[20px] pt-[20px] md:px-[40px] md:pt-[40px] w-full"
             >
-              <div className="flex gap-10">
-                <div
-                  onClick={() =>
-                    navigate(`/doctor-profile?doc_url=${items.seo_url}`)
-                  }
-                  className="w-[250px] h-[250px] rounded-[20px] cursor-pointer"
-                >
-                  <img
-                    className="w-full h-full object-contain rounded-[20px]"
-                    src={require("../../assets/images/specialities/Doc1.png")}
-                    alt="doctor"
-                  />
-                </div>
-                <div
-                  onClick={() =>
-                    navigate(`/doctor-profile?doc_url=${items.seo_url}`)
-                  }
-                  className="mt-[20px] cursor-pointer"
-                >
-                  <h1 className=" font-HenrietteBold text-[30px] text-codGray font-semibold">
-                    {items.doctor_name}
-                  </h1>
-                  <span className="inline-block pr-[15px] font-BasicSans text-[20px] text-codGray">
-                    {items.medical_speciality}
-                  </span>
-                  <span className="font-BasicSans text-[20px] text-codGray">
-                    {items.country}
-                  </span>
-                  <p className="font-BasicSans text-[15px] text-codGray mt-[10px]">
-                    {items.education}
-                  </p>
-                  <div className="pt-[10px] flex items-center">
+              <div className="border-b-2 pb-[20px] transition-all duration-[0.3s] ease-[linear] flex flex-col xl:flex-row  w-full justify-between">
+                <div className="flex gap-5">
+                  <div
+                    onClick={() =>
+                      navigate(`/doctor-profile?doc_url=${items.seo_url}`)
+                    }
+                    className="w-[100px] h-[100px] md:w-[200px] md:h-[200px] rounded-[20px] cursor-pointer"
+                  >
                     <img
-                      className="inline-block w-[40px] h-[40px]"
-                      src={require("../../assets/images/specialities/Group 1849.png")}
-                      alt="group"
+                      className="transition-all duration-[0.3s] ease-[linear] w-full h-full object-contain rounded-[20px]"
+                      src={require("../../assets/images/specialities/Doc1.png")}
+                      alt="doctor"
                     />
-                    <span className="inline-block pl-[20px] text-[20px] font-BasicSans text-codGray">
-                      {items.languages_spoken.join(", ")}
-                    </span>
                   </div>
-                  <div className="pt-[10px] flex items-center">
-                    <img
-                      className="inline-block w-[40px] h-[40px]"
-                      src={require("../../assets/images/specialities/Group 1850.png")}
-                      alt="group"
-                    />
-                    <span className="inline-block pl-[20px] text-[20px] font-BasicSans text-codGray">
-                      {items.available_in.join(", ")}
+                  <div
+                    onClick={() =>
+                      navigate(`/doctor-profile?doc_url=${items.seo_url}`)
+                    }
+                    className="cursor-pointer"
+                  >
+                    <h1 className="transition-all duration-[0.3s] ease-[linear] font-HenrietteRegular text-[16px] md:text-[24px] text-codGray font-semibold">
+                      {items.doctor_name}
+                    </h1>
+                    <span className="transition-all duration-[0.3s] ease-[linear] inline-block pr-[15px] font-BasicSans text-[13px] md:text-[16px] text-codGray">
+                      {items.medical_speciality}
                     </span>
+                    <span className="transition-all duration-[0.3s] ease-[linear] font-BasicSans text-[13px] md:text-[16px] text-codGray">
+                      {items.country}
+                    </span>
+                    <p className="font-BasicSans text-[12px] md:text-[13px] text-codGray mt-[5px] md:mt-[10px]">
+                      {items.education}
+                    </p>
+                    <div className="md:pt-[10px] flex items-center">
+                      <img
+                        className="inline-block w-[20px] h-[20px] md:w-[40px] md:h-[40px]"
+                        src={require("../../assets/images/specialities/Group 1849.png")}
+                        alt="group"
+                      />
+                      <span className="inline-block pl-[10px] text-[13px] md:text-[16px] font-BasicSans text-codGray">
+                        {items.languages_spoken.join(", ")}
+                      </span>
+                    </div>
+                    <div className="md:pt-[10px] flex items-center">
+                      <img
+                        className="inline-block  w-[20px] h-[20px] md:w-[40px] md:h-[40px]"
+                        src={require("../../assets/images/specialities/Group 1850.png")}
+                        alt="group"
+                      />
+                      <span className="inline-block pl-[10px] text-[13px] md:text-[16px] font-BasicSans text-codGray">
+                        {items.available_in.join(", ")}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="flex flex-col">
-                <div>
-                  <h1 className="font-HenrietteBold text-[30px] text-codGray font-semibold">
-                    Availability
-                  </h1>
-                </div>
-                <div className="flex flex-row gap-4 mt-[20px]">
-                  {items.time_slots.InPerson.map((avail, i) => {
-                    return (
-                      <div
-                        key={avail.date}
-                        className={`flex flex-col rounded-[8px]  items-center p-[8px] ${getClassForDay(
-                          avail,
-                          items.time_slots?.Virtual?.[i]
-                        )}`}
+                <div className="xl:mt-[0px] mt-[20px] flex flex-col xl:pr-[40px]">
+                  <div>
+                    <h1 className="font-HenrietteRegular text-[16px] md:text-[24px] text-codGray font-semibold">
+                      Availability
+                    </h1>
+                  </div>
+                  <div className="transition-all duration-[0.3s] ease-[linear] flex flex-row flex-wrap gap-4 mt-[20px]">
+                    {items.time_slots.InPerson.map((avail, i) => {
+                      return (
+                        <>
+                          <div
+                            key={avail.date}
+                            className={`transition-all duration-[0.3s] ease-[linear] flex flex-col rounded-[8px] px-[15px] items-center p-[8px] ${getClassForDay(
+                              avail,
+                              items.time_slots?.Virtual?.[i]
+                            )}`}
+                          >
+                            <span className="inline-block font-BasicSansLight text-[12px] font-semibold">
+                              {avail.day.substring(0, 3)}
+                            </span>
+                            <span className="inline-block font-BasicSans text-[12px] rounded-[8px] font-semibold ">
+                              {avail.date.split("-")[2]}
+                            </span>
+                            <span className="inline-block font-BasicSansLight text-[12px] rounded-[8px] font-semibold ">
+                              {month[parseInt(avail.date.split("-")[1]) - 1]}
+                            </span>
+                          </div>
+                        </>
+                      );
+                    })}
+                  </div>
+
+                  <div className="">
+                    <div className="flex  xl:justify-between mt-[30px]">
+                      <button
+                        onClick={() =>
+                          navigate(`/doctor-profile?doc_url=${items.seo_url}`)
+                        }
+                        // onClick={() => setShowModal(true)}
+                        className="rounded-[100px] bg-shadeBlue text-white py-[5px] md:py-[10px] px-[8px] md:px-[25px] font-BasicSansBold  md:text-[13px] text-[10px] tracking-[0.8px]"
                       >
-                        <span className="inline-block font-BasicSansLight text-[15px]">
-                          {avail.day.substring(0, 3)}
-                        </span>
-                        <span className="inline-block font-BasicSans text-[15px] rounded-[8px] ">
-                          {avail.date.split("-")[2]}
-                        </span>
-                        <span className="inline-block font-BasicSansLight text-[15px] rounded-[8px] ">
-                          {month[parseInt(avail.date.split("-")[1]) - 1]}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                <div className="">
-                  <div className="flex justify-between mt-[30px]">
-                    <button
-                      onClick={() =>
-                        navigate(`/doctor-profile?doc_url=${items.seo_url}`)
-                      }
-                      // onClick={() => setShowModal(true)}
-                      className="rounded-[100px] bg-shadeBlue text-white py-[10px] px-[25px] font-BasicSansBold text-[15px] tracking-[0.8px]"
-                    >
-                      SCHEDULE AN APPOINTMENT
-                    </button>
-                    <Link className="text-[18px] font-BasicSans underline text-mustardYellow ml-[20px] relative top-[10px]">
-                      View More
-                    </Link>
+                        SCHEDULE AN APPOINTMENT
+                      </button>
+                      <Link
+                        to={`/doctor-profile?doc_url=${items.seo_url}`}
+                        className="text-[15px] font-BasicSans underline text-mustardYellow ml-[20px] relative md:top-[10px]"
+                      >
+                        View More
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>

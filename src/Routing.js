@@ -19,6 +19,8 @@ import NoConnectivity from './pages/NoConnectivity';
 import SiteUnderConstruction from './pages/SiteUnderConstruction';
 import NoAppointments from './pages/NoAppointments';
 import AppointmentSuccess from "./pages/AppointmentSuccess";
+import PatientAppointmentList from './pages/PatientAppointmentList';
+import Contact from './pages/Contact';
 const Routing=()=> {
   return (
     <Routes>
@@ -30,7 +32,6 @@ const Routing=()=> {
       <Route exact path="/" element={<Home />} />
       <Route exact path="/all-speciality" element={<AllSpeciality />} />
       <Route exact path="/about-us" element={<AboutUs />} />
-      <Route exact path="/browse-doctors" element={<BrowseDoctors />} />
       <Route exact path="/book-appointment" element={<BookAppointment />} />
       <Route exact path="/doctor-listing" element={<DoctorListing />} />
       <Route
@@ -57,7 +58,16 @@ const Routing=()=> {
         path="/appointment-success"
         element={<AppointmentSuccess />}
       />
-      
+      <Route
+        exact
+        path="/patient-appointment"
+        element={<PatientAppointmentList />}
+      />
+      <Route
+        exact
+        path="/contact-us"
+        element={<Contact />}
+      />
     </Routes>
   );
 }

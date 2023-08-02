@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { fetchFeaturedDoctors } from "../../redux/thunk/featuredDoctor.thunk";
 
-export default function DoctorFilter() {
+export default function DoctorFilter({ border, setShowFilter }) {
   const dispatch = useDispatch();
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
-
+  const area_selected = query.get("area");
+  const date_selected = query.get("date");
+  const specialty_selected = query.get("specialty");
   const days = [
     "Sunday",
     "Monday",
@@ -50,6 +52,10 @@ export default function DoctorFilter() {
       minlength: 5,
       showAll: false,
     },
+    Insurance: {
+      minlength: 5,
+      showAll: false,
+    },
   });
   const filterNames = {
     Language: "language_title",
@@ -71,23 +77,14 @@ export default function DoctorFilter() {
     setListView(listViewObj);
   };
   const doctorFilter = useSelector((state) => state.doctorfilter.filteredList);
+
   useEffect(() => {
-    dispatch(fetchDoctorFilter());
-  }, []);
-  useEffect(() => {
-    console.log(filteredLanguages);
-    console.log(filteredSpecialities);
-    console.log(filteredCondition);
-    console.log(filteredAppointment);
-    console.log(filteredInsurance);
-    const area = query.get("area");
-    const date = query.get("date");
-    const curdate = new Date(`${date}`);
+    const curdate = new Date(`${date_selected}`);
     var day = days[curdate.getDay()];
     const appointmentType =
       filteredAppointment.length === 2 || filteredAppointment.length === 0
         ? []
-        : filteredAppointment[0]
+        : filteredAppointment[0];
     const param = {
       paginate: 4,
       page: 1,
@@ -96,8 +93,8 @@ export default function DoctorFilter() {
       conditions: filteredCondition,
       insurance: filteredInsurance,
       appointment_type: appointmentType,
-      ...(area ? { serving_areas: area.split("_")[1] } : {}),
-      ...(date ? { time_slot_day: day } : {}),
+      ...(area_selected ? { serving_areas: area_selected.split("_")[1] } : {}),
+      ...(date_selected ? { time_slot_day: day } : {}),
     };
 
     dispatch(fetchFeaturedDoctors(param));
@@ -108,9 +105,45 @@ export default function DoctorFilter() {
     filteredAppointment,
     filteredInsurance,
   ]);
+  const checkDefaultChecked = (title, id) => {
+    console.log("CALLED", specialty_selected);
+    switch (title) {
+      case "Specialty":
+        if (id === specialty_selected.split("_")[0]) return true;
+        return false;
+      case "Conditions":
+        if (id === specialty_selected.split("_")[0]) return true;
+        return false;
+      default:
+        return false;
+    }
+  };
 
   const filterHandler = (key, title, id) => {
+    let filter = JSON.parse(localStorage.getItem("filter")) || {};
+    if (filter[title]) {
+      console.log("filter[title]", filter);
+      console.log(
+        "document.getElementById(id).checked",
+        document.getElementById(id).checked
+      );
+      if (document.getElementById(id).checked) {
+        filter[title].push(id);
+        console.log(filter);
+      } else {
+        var index = filter[title].indexOf(id);
+        if (index !== -1) {
+          filter[title].splice(index, 1);
+        }
+      }
+    } else {
+      filter[title] = [id];
+    }
+    localStorage.setItem("filter", JSON.stringify(filter));
+    // localStorage.getItem("filter");
     console.log(title);
+    console.log(id);
+    console.log(filter);
     console.log(document.getElementById(id).checked);
     switch (title) {
       case "Language":
@@ -136,31 +169,21 @@ export default function DoctorFilter() {
       default:
         break;
     }
-
-    // const area = query.get("area");
-    // const specialty = query.get("specialty");
-    // const date = query.get("date");
-    // const curdate = new Date(`${date}`);
-    // var day = days[curdate.getDay()];
-    // const param = {
-    //   paginate: 4,
-    //   page: 1,
-    //   ...(area ? { serving_areas: area.split("_")[1] } : {}),
-    //   ...(specialty ? { specialty: specialty.split("_")[1] } : {}),
-    //   ...(date ? { time_slot_day: day } : {}),
-    // };
-
-    // dispatch(fetchFeaturedDoctors(param));
   };
   return (
-    <div className="pl-[10px] border-r-2">
+    <div
+      className={`pb-[50px] pl-[10px] md:h-[98%] ${
+        border ? "border-r-2" : " "
+      }`}
+    >
       {doctorFilter.map((list) => {
         return (
           <div key={list.title}>
             <h1 className=" font-BasicSansBold text-[15px] text-codGray tracking-[2px] font-bold my-[10px]">
               {list.title}
             </h1>
-            {list.value?.slice(
+            {list.value
+              ?.slice(
                 0,
                 listView[list.title]?.minlength
                   ? listView[list.title]?.minlength
@@ -184,6 +207,12 @@ export default function DoctorFilter() {
                                 : names
                             )
                           }
+                          // checked={checkDefaultChecked(
+                          //   list.title,
+                          //   filterNames[list.title]
+                          //     ? names[filterNames[list.title]]
+                          //     : names
+                          // )}
                           id={
                             filterNames[list.title]
                               ? names[filterNames[list.title]]
@@ -220,6 +249,14 @@ export default function DoctorFilter() {
           </div>
         );
       })}
+      <div className="md:hidden mt-[20px] flex justify-center">
+        <button
+          onClick={() => setShowFilter(false)}
+          className=" rounded-[100px] bg-shadeBlue text-white  font-BasicSans px-[20px] py-[10px] text-[14px] tracking-[0.8px]"
+        >
+          Apply Filter
+        </button>
+      </div>
     </div>
   );
 }

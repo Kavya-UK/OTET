@@ -47,6 +47,7 @@ module.exports = {
         headingShade: "#707070",
         borderColor: "#65B3B3",
         bgColor: "#EBFEFE",
+        lightestGray: "#B7B7B7",
       },
       boxShadow: {
         "3xl": "0px 3px 6px #00000029",

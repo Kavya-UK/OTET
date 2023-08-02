@@ -25,7 +25,7 @@ const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
       />
 
       <button
-        className="text-codGray font-BasicSans h-[40px] text-[13px] outline-none bg-white px-[0.5rem] xl:w-[125px] w-[110px]  whitespace-nowrap relative top-[2px]"
+        className="flex items-center justify-start text-codGray font-BasicSans h-[40px] text-[13px] outline-none bg-white px-[0.5rem] xl:w-[125px] w-[110px]  whitespace-nowrap relative top-[2px]"
         onClick={onClick}
         ref={ref}
       >
@@ -83,7 +83,9 @@ export default function DoctorHeader() {
     const area = query.get("area");
     const specialty = query.get("specialty");
     const date = query.get("date");
-    !startDate && setStartDate(new Date(date));
+    !startDate && date
+      ? setStartDate(new Date(date))
+      : setStartDate(new Date());
     !specValue && setSpecValue(specialty?.split("_")[0]);
     !locValue && setLocValue(area?.split("_")[0]);
   }, [specialityList, conditionsList]);
@@ -200,7 +202,7 @@ export default function DoctorHeader() {
               />
             </div>
             <div
-              className={`absolute top-[80px] left-0 w-[300px] h-[300px] bg-white overflow-auto shadow-lg ring-1 ring-black ring-opacity-5 pl-[20px] pt-[20px] rounded-[20px]  ${
+              className={`z-20 absolute top-[80px] left-0 w-[300px] h-[300px] bg-white overflow-auto shadow-lg ring-1 ring-black ring-opacity-5 pl-[20px] pt-[20px] rounded-[20px]  ${
                 showAreasDropdown ? " block " : " hidden "
               }`}
             >
@@ -237,7 +239,7 @@ export default function DoctorHeader() {
               />
             </div>
             <div
-              className={`absolute top-[80px] left-0 w-[500px] h-[300px] bg-white overflow-auto shadow-lg ring-1 ring-black ring-opacity-5 pl-[20px] pt-[20px] rounded-[20px]  ${
+              className={` z-50 absolute top-[80px] left-0 w-[500px] h-[300px] bg-white overflow-auto shadow-lg ring-1 ring-black ring-opacity-5 pl-[20px] pt-[20px] rounded-[20px]  ${
                 showSpecDropdown ? " block " : " hidden "
               }`}
             >

@@ -27,25 +27,25 @@ export default function BrowseDoctors({ closeModal }) {
         className="w-[80%] h-[300px] mt-[20px] bg-white border-[1px] pb-[20px] rounded-[18px] relative top-[10%]"
       >
         <div className="bg-cyanBlue px-[15px] py-[15px] rounded-[18px] flex justify-between">
-          <h3 className=" font-BasicSans text-[28px] text-codGray tracking-[2px] font-bold">
+          <h3 className=" font-BasicSans text-[18px] md:text-[28px] text-codGray tracking-[2px] font-bold">
             Browse Doctors
           </h3>
           <RxCross2
             onClick={() => closeModal(false)}
-            className="text-[30px] relative top-[6px] cursor-pointer"
+            className="text-[18px] md:text-[30px] relative top-[6px] cursor-pointer"
           />
         </div>
-        <div className="grid grid-cols-4 mt-[40px]">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-[40px]">
           {browsedoctors.length ? (
             browsedoctors.map((list, i) => {
               return (
                 <div
                   key={`city_${i}`}
-                  className="col-span-1 bg-cyanBlue rounded-[18px] mx-[20px] cursor-pointer"
+                  className="col-span-1  bg-cyanBlue rounded-[18px] mx-[20px] cursor-pointer"
                 >
-                  <span className="inline-block py-[15px] px-[20px] text-shadeBlue text-[20px]">
+                  <span className="inline-block py-[15px] px-[20px] text-shadeBlue text-[12px] lg:text-[18px]">
                     <img
-                      className="w-[30px] h-[30px] inline-block mr-[10px]"
+                      className="w-[20px] h-[20px] lg:w-[30px] lg:h-[30px] inline-block mr-[10px]"
                       src={require("../../assets/images/home/CityLocation.png")}
                       alt="city"
                     />

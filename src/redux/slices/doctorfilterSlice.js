@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 import { fetchDoctorFilter } from "../thunk/doctorfilter.thunk";
 
 const initialState = {
-filteredList:[]
+filteredList:[],
+isFilterLoading: true
 }
 
 const doctorfilterSlice = createSlice({
@@ -12,6 +13,10 @@ const doctorfilterSlice = createSlice({
   extraReducers:(builder)=>{
     builder.addCase(fetchDoctorFilter.fulfilled, (state, action) => {
       state.filteredList = [...action.payload];
+      state.isFilterLoading = false;
+    });
+    builder.addCase(fetchDoctorFilter.pending, (state, action) => {
+      state.isFilterLoading = true
     });
   }
 });

@@ -21,9 +21,7 @@ export default function Home() {
     dispatch(fetchSpeciality());
     dispatch(fetchConditions());
   }, []);
-  useEffect(() => {
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
-  }, []);
+
   return (
     <>
       <Header />

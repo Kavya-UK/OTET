@@ -1,25 +1,22 @@
 import React, { useEffect } from "react";
-import Header from '../components/common/Header'
-import SpecialityCard from '../components/common/SpecialityCard';
-import { fetchSpeciality } from '../redux/thunk/speciality.thunk';
+import Header from "../components/common/Header";
+import SpecialityCard from "../components/common/SpecialityCard";
+import { fetchSpeciality } from "../redux/thunk/speciality.thunk";
 import { useDispatch, useSelector } from "react-redux";
 import Footer from "../components/common/Footer";
 import Loader from "../components/common/Loader";
 
-
 export default function AllSpeciality() {
-  const speciality=useSelector((state)=>state.speciality.specialityList);
-  const dispatch=useDispatch();
-   useEffect(() => {
-     dispatch(fetchSpeciality());
-   },[]);
-   useEffect(() => {
-     document.body.scrollTop = document.documentElement.scrollTop = 0;
-   }, []);
+  const speciality = useSelector((state) => state.speciality.specialityList);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchSpeciality());
+  }, []);
+
   return (
     <>
       <Header setDropShadow={true} />
-      <div className="w-full h-[800px] bg-no-repeat pt-[200px]">
+      <div className="w-full  pt-[100px] lg:pt-[200px]">
         <div className="text-center px-[90px] relative top-[-70px]">
           <h1 className="text-codGray text-[40px] font-BasicSans tracking-[9px] leading-[70px] font-semibold ">
             Specialty
@@ -33,12 +30,13 @@ export default function AllSpeciality() {
             select as per your need.
           </p>
         </div>
-        <div className="grid grid-cols-4 gap-4 my-[40px] px-[40px] sm:px-[70px] cursor-pointer">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 my-[20px] lg:my-[40px] px-[40px] sm:px-[70px] cursor-pointer">
           {speciality.length ? (
             speciality.map((items) => {
               return (
                 <SpecialityCard
                   key={items.id}
+                  id={items.id}
                   image={items.image}
                   title={items.medical_speciality_name}
                   info={items.description}

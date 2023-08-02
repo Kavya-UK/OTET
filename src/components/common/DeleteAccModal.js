@@ -1,8 +1,6 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
-export default function DeleteAccModal({ title, description, closeModal }) {
-  const navigate = useNavigate();
+export default function PopupModal({ title, description, closeModal, className}) {
   return (
     <div className=" bg-[#00000096]  absolute h-[100vh] w-full z-40">
       <div className="h-[300px] z-50 w-[450px] opacity-100 rounded-[10px] border-[1px] bg-white absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]">

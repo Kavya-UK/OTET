@@ -180,14 +180,14 @@ export default function HomeBanner({}) {
         />
         EDICINE CONNECTING
       </h1>
-      <h3 className=" text-[30px] xl:text-[40px] font-PoppinsItalic text-black tracking-[5px] text-center">
+      <h3 className=" text-[14px] sm:text-[18px] lg:text-[32px] xl:text-[40px] font-PoppinsItalic text-black tracking-[5px] text-center">
         Mind. Body. Soul
       </h3>
       <div className="flex items-center justify-center h-[360px]">
         <div className="grid grid-cols-12 rounded-[20px] lg:rounded-[87px] h-[250px] md:h-[100px]  border-[1px] bg-white  mx-[10px] md:mx-[40px] xl:mx-[100px] w-full transition-all duration-[0.5s] ease-[ease]">
           <div className=" col-span-12 md:col-span-10 xl:col-span-11 flex items-center md:h-[100px] lg:justify-center">
             <div className=" grid grid-cols-3 w-full pl-[20px] md:pl-0">
-              <div className="col-span-3 md:col-span-1 flex justify-between items-center relative md:pl-[20px] lg:pl-[60px]">
+              <div className="col-span-3 md:col-span-1 flex justify-between items-center relative md:pl-[20px] lg:pl-[60px] md:border-r">
                 <input
                   onBlur={handleLocOnBlur}
                   onFocus={handleLocFocusIn}
@@ -223,14 +223,14 @@ export default function HomeBanner({}) {
                   </ul>
                 </div>
               </div>
-              <div className="col-span-3 md:col-span-1 flex md:justify-around items-center relative">
+              <div className="col-span-3 md:col-span-1 flex md:justify-around items-center relative md:border-r">
                 <input
                   onBlur={handleSpecOnBlur}
                   onFocus={handleSpecFocusIn}
                   onChange={handleSpecSearch}
                   value={specValue}
                   className="outline-none w-[80%] p-[10px] font-BasicSans text-[1.3rem] text-codGray tracking-[5px] placeholder:text-gray-800 focus:placeholder:text-gray-400 placeholder:font-medium bg-white"
-                  placeholder="Speciality"
+                  placeholder="Speciality/Condition"
                   type="text"
                 />
                 <div>

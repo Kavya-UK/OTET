@@ -157,15 +157,15 @@ export default function ScheduleAppointmentForm() {
     <>
       <div>
         <Header setDropShadow={true} />
-        <h1 className=" font-BasicSans text-center font-semibold text-codGray text-[18px] sm:text-[30px] tracking-[5px] pt-[150px] ">
+        <h1 className=" font-BasicSans text-center font-semibold text-codGray text-[18px] sm:text-[30px] tracking-[5px] pt-[50px] md:pt-[150px] ">
           Book an appointment
         </h1>
-        <p className="text-eastBay font-BasicSansLight text-[1.1rem] text-center pt-[20px]">
+        <p className="text-eastBay font-BasicSansLight text-[16px] text-center pt-[20px]">
           Fill out the below details and select the date and time to quickly
           book an appointment.
         </p>
         <div className="grid grid-cols-3 mt-[70px]">
-          <div className="col-span-1 col-start-2">
+          <div className="col-span-3 px-[40px] md:px-[140px] xl:px-0 xl:col-span-1 xl:col-start-2">
             <div className="flex gap-6 flex-row ">
               <div>
                 <img
@@ -175,13 +175,13 @@ export default function ScheduleAppointmentForm() {
                 />
               </div>
               <div>
-                <p className="font-HenrietteBold text-[22px] text-codGray pt-[10px]">
+                <p className="font-HenrietteBold text-[18px] md:text-[22px] text-codGray pt-[10px]">
                   {doctorData.doctor_name}
                 </p>
-                <p className="font-BasicSans text-[1.1rem] text-codGray">
+                <p className="font-BasicSans text-[14px] md:text-[16px] text-codGray">
                   {doctorData.country?.[0]}
                 </p>
-                <p className="font-BasicSans text-[15px] text-codGray pt-[10px]">
+                <p className="font-BasicSans text-[14px] md:text-[16px] text-codGray pt-[10px]">
                   {doctorData.education?.[0]}
                 </p>
               </div>
@@ -217,27 +217,29 @@ export default function ScheduleAppointmentForm() {
                       }`}
                     />
                   </div>
-                  {doctorData?.insurance_company?.length ? <div
-                    className={`absolute top-[45px] left-0 w-[100%] h-[100px] bg-white overflow-auto shadow-lg ring-1 ring-black ring-opacity-5 pl-[20px] pt-[20px] rounded-[10px]  ${
-                      showInsurance ? " block z-20" : " hidden "
-                    }`}
-                  >
-                    <ul className="">
-                      {doctorData?.insurance_company?.length
-                        ? doctorData.insurance_company.map((inc) => {
-                            return (
-                              <li
-                                className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none hover:bg-cyanBlue  active-dropdown-item"
-                                onClick={() => setselectedInc(inc)}
-                                key={inc}
-                              >
-                                {inc}
-                              </li>
-                            );
-                          })
-                        : null}
-                    </ul>
-                  </div> : null}
+                  {doctorData?.insurance_company?.length ? (
+                    <div
+                      className={`absolute top-[45px] left-0 w-[100%] h-[100px] bg-white overflow-auto shadow-lg ring-1 ring-black ring-opacity-5 pl-[20px] pt-[20px] rounded-[10px]  ${
+                        showInsurance ? " block z-20" : " hidden "
+                      }`}
+                    >
+                      <ul className="">
+                        {doctorData?.insurance_company?.length
+                          ? doctorData.insurance_company.map((inc) => {
+                              return (
+                                <li
+                                  className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none hover:bg-cyanBlue  active-dropdown-item"
+                                  onClick={() => setselectedInc(inc)}
+                                  key={inc}
+                                >
+                                  {inc}
+                                </li>
+                              );
+                            })
+                          : null}
+                      </ul>
+                    </div>
+                  ) : null}
                 </div>
               </div>
               <div>
@@ -271,25 +273,27 @@ export default function ScheduleAppointmentForm() {
                       }`}
                     />
                   </div>
-                  {doctorData?.medical_condition?.length ? <div
-                    className={`absolute top-[45px] left-0 w-[100%] h-[100px] bg-white overflow-auto shadow-lg ring-1 ring-black ring-opacity-5 pl-[20px] pt-[20px] rounded-[10px]  ${
-                      showCondition ? " block z-20" : " hidden "
-                    }`}
-                  >
-                    <ul className="">
-                      {doctorData.medical_condition.map((cond) => {
-                            return (
-                              <li
-                                className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none hover:bg-cyanBlue  active-dropdown-item"
-                                onClick={() => setselectedCond(cond)}
-                                key={cond}
-                              >
-                                {cond}
-                              </li>
-                            );
-                          })}
-                    </ul>
-                  </div> : null }
+                  {doctorData?.medical_condition?.length ? (
+                    <div
+                      className={`absolute top-[45px] left-0 w-[100%] h-[100px] bg-white overflow-auto shadow-lg ring-1 ring-black ring-opacity-5 pl-[20px] pt-[20px] rounded-[10px]  ${
+                        showCondition ? " block z-20" : " hidden "
+                      }`}
+                    >
+                      <ul className="">
+                        {doctorData.medical_condition.map((cond) => {
+                          return (
+                            <li
+                              className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none hover:bg-cyanBlue  active-dropdown-item"
+                              onClick={() => setselectedCond(cond)}
+                              key={cond}
+                            >
+                              {cond}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  ) : null}
                 </div>
               </div>
               <div className="">

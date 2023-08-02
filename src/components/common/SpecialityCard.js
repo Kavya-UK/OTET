@@ -26,7 +26,7 @@ export default function SpecialityCard({ id, image, title, info }) {
           }}
         />
       </div>
-      <h3 className="text-[12px] sm:text-[16px] lg:text-[18px] xl:text-[24px] font-BasicSansBold text-codGray font-bold tracking-[5.94px] mt-[20px] min-h-[40px] sm:min-h-[50px] lg:min-h-[110px]">
+      <h3 className="text-[16px] lg:text-[18px] xl:text-[24px] font-BasicSans text-codGray font-bold tracking-[2px] md:tracking-[2px] mt-[20px] min-h-[40px] sm:min-h-[50px] lg:min-h-[110px]">
         {title}
       </h3>
       <p className=" hidden md:block md:text-[1rem] lg:text-[1.18rem] h-full w-full leading-7 font-BasicSans text-eastBay md:pr-5">

@@ -12,20 +12,20 @@ const speciality = useSelector(
 const FeatureSpeciality=speciality.slice(0,4)
 
 return (
-  <div className="mt-[70px]">
-    <h1 className="text-[30px] sm:text-[46px] xl:text-[42px] font-BasicSans font-bold md:leading-[70px] text-codGray tracking-[10px] text-center">
+  <div className="mt-[30px] md:mt-[70px]">
+    <h1 className="text-[18px] sm:text-[24px] lg:text-[36px] xl:text-[48px] font-BasicSans font-bold md:leading-[70px] text-codGray tracking-[10px] text-center">
       Holistic fields
     </h1>
-    <p className="text-[24px] lg:text-[33px] font-BasicSans text-codGray tracking-[5.94px] font-bold text-center mt-[20px]">
+    <p className="text-[14px] sm:text-[18px] lg:text-[26px] xl:text-[36px] font-BasicSans text-codGray tracking-[5.94px] font-bold text-center mt-[20px]">
       15 + Specialities
     </p>
     <p
-      className="text-mustardYellow text-[18px] sm:text-[15px] lg:text-[20px] cursor-pointer font-BasicSans tracking-[4px] flex justify-end items-end mr-[30px]"
+      className="text-mustardYellow text-[16px] mt-[20px] sm:mt-0 lg:text-[20px] cursor-pointer font-BasicSans tracking-[4px] flex justify-end items-end mr-[30px]"
       onClick={() => navigate("/all-speciality")}
     >
       See More
     </p>
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 my-[70px] px-[40px] sm:px-[70px] cursor-pointer" >
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 my-[30px] md:my-[70px] px-[40px] sm:px-[70px] cursor-pointer">
       {FeatureSpeciality.length ? (
         FeatureSpeciality.map((items) => {
           return (

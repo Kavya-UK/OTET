@@ -44,6 +44,11 @@ dispatch(fetchFooterSpeciality());
       document.body.scrollTop = document.documentElement.scrollTop = 0;
     }
   }
+   const handleSpecialitySearch = (title, id) => {
+     let url = "/doctor-listing?";
+     url = `${url}specialty=${title}_${id}`;
+     navigate(url);
+   };
   return (
     <div className="bg-cyanBlue py-[40px] px-[40px]">
       <div className="hidden sm:grid grid-cols-5 gap-9 mt-[40px]">
@@ -118,8 +123,10 @@ dispatch(fetchFooterSpeciality());
           {specialityFooterList.map((spec) => {
             return (
               <Link
+                to={`/doctor-listing?specialty=${spec.medical_speciality_name}_${spec.id}`}
                 key={spec.medical_speciality_name}
                 className="block font-medium font-BasicSans text-black tracking-[3.6px] pb-[10px]"
+                
               >
                 {spec.medical_speciality_name}
               </Link>

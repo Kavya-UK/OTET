@@ -7,6 +7,7 @@ import { fetchLocation } from "../redux/thunk/location.thunk";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchConditions } from "../redux/thunk/conditions.thunk";
 import AppointmentHeader from "../components/home/AppointmentHeader";
+import HeaderContainer from "./container/HeaderContainer";
 const DateInputComponent = forwardRef(({ value, onClick }, ref) => {
   let setValue = value;
   if (new Date(value).setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0))
@@ -129,8 +130,7 @@ export default function BookAppointment() {
   };
 
   return (
-    <>
-      <AppointmentHeader />
+    <HeaderContainer showAppointmentHeader={true}>
       <div className="relative flex items-center w-full justify-center">
         <div className="block w-[50rem] h-[20rem] rounded-br-full rounded-bl-full -z-10 bg-blueish absolute left-[50%] top-0 -translate-x-1/2"></div>
         <div className="w-[550px] space-y-4 bg-white my-[80px] rounded-[10px] px-[25px] py-[50px] drop-shadow-md">
@@ -218,38 +218,46 @@ export default function BookAppointment() {
               }`}
             >
               <ul className="">
-                {allList.speciality.length ? <li className="font-BasicSans text-eastBayLight">Speciality</li> : null}
                 {allList.speciality.length ? (
-                  allList.speciality.map((spec) => {
-                    return (
-                      <li
-                        className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
-                        onClick={() =>
-                          handleSpecSelection(spec.medical_speciality_name)
-                        }
-                        key={spec.medical_speciality_name}
-                      >
-                        {spec.medical_speciality_name}
-                      </li>
-                    );
-                  })
+                  <li className="font-BasicSans text-eastBayLight">
+                    Speciality
+                  </li>
                 ) : null}
-                {allList.conditions.length ? <li className="font-BasicSans text-eastBayLight">Conditions</li> : null}
+                {allList.speciality.length
+                  ? allList.speciality.map((spec) => {
+                      return (
+                        <li
+                          className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
+                          onClick={() =>
+                            handleSpecSelection(spec.medical_speciality_name)
+                          }
+                          key={spec.medical_speciality_name}
+                        >
+                          {spec.medical_speciality_name}
+                        </li>
+                      );
+                    })
+                  : null}
                 {allList.conditions.length ? (
-                  allList.conditions.map((spec) => {
-                    return (
-                      <li
-                        className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
-                        onClick={() =>
-                          handleSpecSelection(spec.medical_condition_name)
-                        }
-                        key={spec.medical_condition_name}
-                      >
-                        {spec.medical_condition_name}
-                      </li>
-                    );
-                  })
+                  <li className="font-BasicSans text-eastBayLight">
+                    Conditions
+                  </li>
                 ) : null}
+                {allList.conditions.length
+                  ? allList.conditions.map((spec) => {
+                      return (
+                        <li
+                          className="font-BasicSans relative cursor-default hover:cursor-pointer pt-[5px] select-none text-primary hover:bg-cyanBlue  active-dropdown-item"
+                          onClick={() =>
+                            handleSpecSelection(spec.medical_condition_name)
+                          }
+                          key={spec.medical_condition_name}
+                        >
+                          {spec.medical_condition_name}
+                        </li>
+                      );
+                    })
+                  : null}
               </ul>
             </div>
           </div>
@@ -257,7 +265,7 @@ export default function BookAppointment() {
           <div className="flex flex-col items-start  font-basic-sans-regular pb-[20px]">
             <div className="relative w-full ">
               <ReactDatePicker
-                className="test"
+                className="test relative"
                 dateFormat="MMMM d, yyyy"
                 selected={startDate || new Date()}
                 minDate={new Date()}
@@ -305,7 +313,6 @@ export default function BookAppointment() {
           </div>
         </div>
       </div>
-      <Footer />
-    </>
+    </HeaderContainer>
   );
 }

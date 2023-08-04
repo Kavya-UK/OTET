@@ -350,7 +350,9 @@ export default function DoctorProfile() {
             </div>
           </>
         ) : (
-          <Loader />
+          <div className="relative top-[-80px]">
+            <Loader />
+          </div>
         )}
       </div>
     </>

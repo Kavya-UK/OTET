@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
+import HeaderContainer from "./container/HeaderContainer";
 
 export default function AboutUs() {
   return (
-    <>
-      <Header setDropShadow={true} />
+    <HeaderContainer showHomeHeader={true} setDropShadow={true}>
       <div className="h-[550px] w-full hidden sm:block  relative">
         <img
           className="absolute -z-10 w-full h-full object-cover"
@@ -222,7 +222,6 @@ export default function AboutUs() {
           </div>
         </div>
       </div>
-      <Footer />
-    </>
+    </HeaderContainer>
   );
 }

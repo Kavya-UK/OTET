@@ -6,7 +6,7 @@ export const fetchLocation = createAsyncThunk("location", async (data) => {
   try {
     
     const response = await axios.post(
-      `${BASE_URL}/patient/master/areas`,
+      `/patient/master/areas`,
       data,
       { headers: headersprops, auth: authUser }
     );

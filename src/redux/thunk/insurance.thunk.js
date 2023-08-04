@@ -5,7 +5,7 @@ import { BASE_URL, headersprops, authUser } from "../constant";
 export const fetchInsurance = createAsyncThunk("insurance", async (data) => {
   try {
     const response = await axios.post(
-      `${BASE_URL}/patient/master/insurance`,
+      `/patient/master/insurance`,
       data,
       { headers: headersprops, auth: authUser }
     );

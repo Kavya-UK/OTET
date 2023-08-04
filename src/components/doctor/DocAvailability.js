@@ -108,7 +108,7 @@ export default function DocAvailability() {
         />
       )} */}
       {isFeaturedDocLoading ? (
-        <div className="flex justify-start">
+        <div className="flex justify-start relative -top-[80px]">
           <Loader />
         </div>
       ) : (

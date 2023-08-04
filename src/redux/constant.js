@@ -1,4 +1,4 @@
-export const BASE_URL = "http://skyonliners.com/demo/holmeddoc";
+export const BASE_URL = "";
 
 export const headersprops = {
   "Content-Type": "multipart/form-data",

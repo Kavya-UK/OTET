@@ -3,6 +3,7 @@ import Routing from "./Routing";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
 import "./datePicker.css";
+import "./handlers/axiosInterceptors";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 function App() {

@@ -182,7 +182,7 @@ export default function DoctorHeader() {
     <div className="flex flex-row justify-between items-center max-h-fit py-[5px] lg:pl-[30px] lg:pr-[50px] bg-white  drop-shadow-md">
       <div onClick={() => navigate("/")} className="cursor-pointer">
         <img
-          className="w-[130px] h-[130px] "
+          className="h-[96px] md:w-[130px] md:h-[130px] "
           src={require("../../assets/images/home/Logo.png")}
           alt="logo"
         />
@@ -317,7 +317,7 @@ export default function DoctorHeader() {
         </div>
       </div>
       <div
-        className="flex items-center cursor-pointer"
+        className="hidden md:flex items-center cursor-pointer"
         onClick={() => setDropdown(!showDropdown)}
       >
         <Link className="font-BasicSans tracking-[1.5px] lg:tracking-[3.6px] font-semibold text-darkBlack text-[12px] sm:text-[12px] lg:text-[14px] xl:text-[20px] pr-[10px] relative top-[5px] lg:top-[3px] xl:top-[0px]">

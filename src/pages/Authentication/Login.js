@@ -7,8 +7,12 @@ import LoginFooter from "../../components/common/LoginFooter";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { loginSchema } from "../../validations/auth.js";
+import { userLogin } from '../../redux/thunk/user.thunk';
+import { useDispatch } from 'react-redux';
+
  const Login=()=> {
   const navigate= useNavigate();
+  const dispatch = useDispatch();
 
 const {
   handleSubmit,
@@ -22,7 +26,11 @@ const {
 });
 
  const onSubmit = async (data) => {
-   navigate("/");
+  console.log(data);
+   navigate("/my-appointments");
+  const loginData = {phone: data.phoneNumber, password: data.password}
+  dispatch(userLogin(loginData));
+
  };
 
  const handleLogin = (e) => {

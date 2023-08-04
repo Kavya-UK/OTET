@@ -8,18 +8,16 @@ import ChangePassword from "./pages/Authentication/ChangePassword";
 import Home from "./pages/Home"
 import AboutUs from './pages/AboutUs';
 import AllSpeciality from './pages/AllSpeciality';
-import BrowseDoctors from "./components/home/BrowseDoctor";
 import BookAppointment from './pages/BookAppointment';
 import DoctorListing from "./pages/DoctorListing"
 import DoctorsProfileContainer from "./pages/DoctorsProfile";
 import ScheduleAppointmentForm from './components/appointments/ScheduleAppointment';
-import PatientProfile from './pages/PatientProfile';
-import UpdatePatientProfile from './pages/UpdatePatientProfile';
+import MyProfile from './pages/MyProfile';
+import UpdateMyProfile from './pages/UpdateMyProfile';
 import NoConnectivity from './pages/NoConnectivity';
 import SiteUnderConstruction from './pages/SiteUnderConstruction';
-import NoAppointments from './pages/NoAppointments';
 import AppointmentSuccess from "./pages/AppointmentSuccess";
-import PatientAppointmentList from './pages/PatientAppointmentList';
+import MyAppointmentList from './pages/MyAppointmentList';
 import Contact from './pages/Contact';
 const Routing=()=> {
   return (
@@ -44,30 +42,21 @@ const Routing=()=> {
         path="/schedule-appointment"
         element={<ScheduleAppointmentForm />}
       />
-      <Route exact path="/patient-profile" element={<PatientProfile />} />
-      <Route exact path="/profile-edit" element={<UpdatePatientProfile />} />
+      <Route exact path="/my-profile" element={<MyProfile />} />
+      <Route exact path="/myprofile-edit" element={<UpdateMyProfile />} />
       <Route exact path="/no-internet" element={<NoConnectivity />} />
       <Route
         exact
         path="/site-underconstruction"
         element={<SiteUnderConstruction />}
       />
-      <Route exact path="/no-appointment" element={<NoAppointments />} />
       <Route
         exact
         path="/appointment-success"
         element={<AppointmentSuccess />}
       />
-      <Route
-        exact
-        path="/patient-appointment"
-        element={<PatientAppointmentList />}
-      />
-      <Route
-        exact
-        path="/contact-us"
-        element={<Contact />}
-      />
+      <Route exact path="/my-appointments" element={<MyAppointmentList />} />
+      <Route exact path="/contact-us" element={<Contact />} />
     </Routes>
   );
 }

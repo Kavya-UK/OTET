@@ -8,7 +8,7 @@ export const fetchConditions = createAsyncThunk(
     
     try {
       const response = await axios.post(
-        `${BASE_URL}/patient/master/condition`,
+        `/patient/master/condition`,
         {"paginate":100},
         { headers: headersprops, auth: authUser }
       );
@@ -24,7 +24,7 @@ export const fetchFeaturedConditions = createAsyncThunk(
     
     try {
       const response = await axios.post(
-        `${BASE_URL}/patient/master/condition`,
+        `/patient/master/condition`,
         { paginate: 4, featured: "1" },
         { headers: headersprops, auth: authUser }
       );

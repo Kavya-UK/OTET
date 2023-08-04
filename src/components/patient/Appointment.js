@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Appointment() {
+export default function Appointments() {
   return (
     <>
       <div className="text-center mt-[170px]">

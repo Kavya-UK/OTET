@@ -9,7 +9,7 @@ export const fetchFeaturedSpeciality = createAsyncThunk(
     bodyFormData.append("featured", "1");
     try {
       const response = await axios.post(
-        `${BASE_URL}/patient/master/speciality`,
+        `/patient/master/speciality`,
           bodyFormData,
         { headers: headersprops, auth: authUser }
       );
@@ -22,7 +22,7 @@ export const fetchFeaturedSpeciality = createAsyncThunk(
 export const fetchSpeciality = createAsyncThunk("allSpeciality", async () => {
 try {
     const response = await axios.post(
-      `${BASE_URL}/patient/master/speciality`,
+      `/patient/master/speciality`,
       {},
       { headers: headersprops, auth: authUser }
     );
@@ -41,7 +41,7 @@ export const fetchFooterSpeciality = createAsyncThunk(
 
     try {
       const response = await axios.post(
-        `${BASE_URL}/patient/master/speciality`,
+        `/patient/master/speciality`,
         bodyFormData,
         { headers: headersprops, auth: authUser }
       );

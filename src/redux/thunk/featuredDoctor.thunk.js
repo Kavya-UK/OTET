@@ -4,7 +4,7 @@ import { BASE_URL, headersprops, authUser } from "../constant";
 
 export const fetchFeaturedDoctors = createAsyncThunk("featuredDoctors", async (data) => {
   try {
-    const response = await axios.post(`${BASE_URL}/patient/doctors`, data, {
+    const response = await axios.post(`/patient/doctors`, data, {
       headers: headersprops,
       auth: authUser,
     });
@@ -19,7 +19,18 @@ export const fetchFeaturedDoctors = createAsyncThunk("featuredDoctors", async (d
 
 export const fetchDoctorData = createAsyncThunk("doctorData", async (data) => {
   try {
-    const response = await axios.post(`${BASE_URL}/patient/doctors/${data.url}`, {}, {
+    const response = await axios.post(`/patient/doctors/${data.url}`, {}, {
+      headers: headersprops,
+      auth: authUser,
+    });
+    return response?.data?.data?.result?.[0]
+  } catch (err) {
+    return err.message;
+  }
+});
+export const fetchDoctorDataById = createAsyncThunk("doctorDataById", async (data) => {
+  try {
+    const response = await axios.post(`/patient/doctors`, data, {
       headers: headersprops,
       auth: authUser,
     });
@@ -31,7 +42,7 @@ export const fetchDoctorData = createAsyncThunk("doctorData", async (data) => {
 export const fetchDoctorSlot = createAsyncThunk("slotAvailability", async (data) => {
   try {
     const response = await axios.post(
-      `${BASE_URL}/patient/slot_availability`,
+      `/patient/slot_availability`,
       {...data},
       {
         headers: headersprops,

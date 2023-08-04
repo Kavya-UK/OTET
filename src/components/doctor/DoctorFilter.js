@@ -96,8 +96,14 @@ export default function DoctorFilter({ border, setShowFilter }) {
       ...(area_selected ? { serving_areas: area_selected.split("_")[1] } : {}),
       ...(date_selected ? { time_slot_day: day } : {}),
     };
-
-    dispatch(fetchFeaturedDoctors(param));
+    const filterLength =
+      filteredCondition.length +
+      filteredSpecialities.length +
+      filteredLanguages.length +
+      filteredInsurance.length +
+      filteredAppointment.length;
+      console.log(filterLength);
+    if (filterLength) dispatch(fetchFeaturedDoctors(param));
   }, [
     filteredLanguages,
     filteredSpecialities,
@@ -141,10 +147,10 @@ export default function DoctorFilter({ border, setShowFilter }) {
     }
     localStorage.setItem("filter", JSON.stringify(filter));
     // localStorage.getItem("filter");
-    console.log(title);
-    console.log(id);
-    console.log(filter);
-    console.log(document.getElementById(id).checked);
+    // console.log(title);
+    // console.log(id);
+    // console.log(filter);
+    // console.log(document.getElementById(id).checked);
     switch (title) {
       case "Language":
         setFilteredLanguages([...setFilteredValue(id, key, filteredLanguages)]);

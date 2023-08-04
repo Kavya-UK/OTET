@@ -11,16 +11,16 @@ export default function AppointmentHeader({ setDropShadow = true }) {
     <>
       {showBrowse && <BrowseDoctors closeModal={setShowBrowse} />}
 
-      <div className=" py-[10px] xl:pl-[50px] lg:pl-[30px] pl-[10px] xl:pr-[30px] lg:pr-[15px] pr-[10px] sm:flex hidden justify-between items-center header-main">
+      <div className=" py-[10px] xl:pl-[50px] lg:pl-[30px] pl-[10px] xl:pr-[30px] lg:pr-[15px] pr-[10px] flex justify-between items-center header-main">
         <div className="cursor-pointer" onClick={() => navigate("/")}>
           <img
-            className="w-[120px] h-[120px] "
+            className="h-[96px] md:h-[120px] cursor-pointer "
             src={require("../../assets/images/home/Logo.png")}
             alt="logo"
           />
         </div>
 
-        <div className="flex flex-row justify-between items-center">
+        <div className="md:flex hidden flex-row justify-between items-center">
           <div onClick={() => navigate("/book-appointment")}>
             <Link className="border-r-[1px] border-hexGray pr-[20px] font-BasicSans font-bold lg:text-base text-[0.75rem] leading-[1rem] cursor-pointer tracking-[.15rem] text-darkBlack ">
               MAKE AN APPOINTMENT

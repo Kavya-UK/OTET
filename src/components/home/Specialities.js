@@ -12,11 +12,11 @@ const speciality = useSelector(
 const FeatureSpeciality=speciality.slice(0,4)
 
 return (
-  <div className="mt-[30px] md:mt-[70px]">
-    <h1 className="text-[18px] sm:text-[24px] lg:text-[36px] xl:text-[48px] font-BasicSans font-bold md:leading-[70px] text-codGray tracking-[10px] text-center">
+  <div className="mt-[30px] lg:mt-[70px]">
+    <h1 className="text-[18px] sm:text-[24px] lg:text-[36px] xl:text-[48px] font-BasicSans font-bold md:leading-[70px] text-codGray tracking-[3px] md:tracking-[6px] text-center">
       Holistic fields
     </h1>
-    <p className="text-[14px] sm:text-[18px] lg:text-[26px] xl:text-[36px] font-BasicSans text-codGray tracking-[5.94px] font-bold text-center mt-[20px]">
+    <p className="text-[14px] sm:text-[18px] lg:text-[25px] xl:text-[28px] font-BasicSans text-codGray font-bold text-center mt-[10px] md:mt-[20px] tracking-[2px] md:tracking-[4px]">
       15 + Specialities
     </p>
     <p

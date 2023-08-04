@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/common/Header";
 import HomeBanner from "../components/home/HomeBanner";
 import Specialities from "../components/home/Specialities";
@@ -14,7 +14,11 @@ import {
   fetchSpeciality,
 } from "../redux/thunk/speciality.thunk";
 import { fetchConditions } from "../redux/thunk/conditions.thunk";
+import MobileHeader from "../components/common/MobileHeader";
+import HeaderContainer from "./container/HeaderContainer";
 export default function Home() {
+  const [showHeader, setShowHeader] = useState(false);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchFeaturedSpeciality());
@@ -23,8 +27,7 @@ export default function Home() {
   }, []);
 
   return (
-    <>
-      <Header />
+    <HeaderContainer showHomeHeader={true}>
       <HomeBanner />
       <Specialities />
       <CommonDiseases />
@@ -32,7 +35,6 @@ export default function Home() {
       <OurProcess />
       <ListPractise />
       <DownloadApp />
-      <Footer />
-    </>
+    </HeaderContainer>
   );
 }

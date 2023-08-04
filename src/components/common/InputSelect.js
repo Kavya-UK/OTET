@@ -38,7 +38,7 @@ export default function InputSelect({
           : null)}
         type={type}
         defaultValue={""}
-        className="select-dropdown border-[2px] opacity-100 rounded-[5px] border-shadeGray active:border-shadeGray hover:border-shadeGray outline-none py-[10px] pl-[15px] bg-white w-full placeholder-placeholderGray placeholder:font-BasicSansLight text-[15px]"
+        className="select-dropdown border-[2px] opacity-100 rounded-[5px] border-shadeGray active:border-shadeGray hover:border-shadeGray outline-none py-[10px] pl-[15px] bg-white w-full placeholder-placeholderGray placeholder:font-BasicSansLight placeholder:text-[15px] text-[15px]"
       >
         <option
           value=""

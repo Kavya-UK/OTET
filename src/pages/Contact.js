@@ -1,10 +1,10 @@
 import React from 'react'
 import Header from '../components/common/Header'
+import HeaderContainer from './container/HeaderContainer';
 
 export default function Contact() {
   return (
-    <>
-      <Header setDropShadow={true} />
+    <HeaderContainer showHomeHeader={true} setDropShadow={true}>
       <div className="h-[380px] w-full relative flex justify-center items-center mb-[20px]">
         <img
           className="w-full h-full absolute object-cover"
@@ -71,6 +71,6 @@ export default function Contact() {
           <div className="w-[150px] h-[100px] border-[1px] border-gray-300 "></div>
         </div>
       </div>
-    </>
+    </HeaderContainer>
   );
 }
